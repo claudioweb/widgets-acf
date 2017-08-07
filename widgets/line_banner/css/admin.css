@@ -1,0 +1,9 @@
+.acf-field-the-contents .layout[data-layout='line_banner'] {
+	width:96.5% !important;
+	height:auto;
+}
+
+.wp-picker-holder {
+	position: absolute;
+	z-index: 99;
+}

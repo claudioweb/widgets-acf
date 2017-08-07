@@ -1,0 +1,89 @@
+#wp-admin-bar-new-content, #wp-admin-bar-comments, .user-profile-picture {
+	display: none;
+}
+.acf-field-the-contents .acf-flexible-content .layout {
+	margin: 10px 0 0 0 !important;
+	float: left;
+	margin-left:1.5% !important;
+	/*z-index:80;*/
+}
+
+.acf-field-the-contents .acf-flexible-content .acf-actions {
+	padding-top:15px;
+}
+
+.acf-field-the-contents  .acf-flexible-content .layout .acf-fc-layout-handle {
+	background:#ddd;
+}
+
+.acf-field-the-contents.column_1 .acf-flexible-content .values .layout {
+	width: 96%;
+	float:none;
+}
+
+.acf-field-the-contents.column_2 .acf-flexible-content .values .layout {
+	width: 48%;
+}
+
+.acf-field-the-contents.column_3 .acf-flexible-content .values .layout {
+	width: 31%;
+}
+
+.acf-field-the-contents.column_4 .acf-flexible-content .values .layout {
+	width: 23%;
+}
+
+.acf-field-the-contents.column_5 .acf-flexible-content .values .layout {
+	width: 18%;
+}
+
+.acf-field-the-contents.column_6 .acf-flexible-content .values .layout {
+	width: 14%;
+}
+
+.post-type-sidebars #acf-group_widgets_ativo {
+	width:63%;
+	margin-left:37%;
+}
+
+.acf-field-the-contents .acf-actions {
+	clear:left;
+}
+
+.acf-field-the-contents .layout .acf-fields {
+	height: 260px;
+	overflow-y: auto;
+}
+
+#poststuff, #edittag {
+	display: none;
+}
+
+div[data-key='field_tamanho_da_grid'] .acf-table .acf-field[data-name='tamanhos_grid'] ul li {
+	float:left;
+	margin-right:30px;
+}
+
+div[data-key='field_tamanho_da_grid'] .acf-table .acf-field[data-name='tamanhos_grid'] ul li {
+	float:left;
+}
+
+div[data-key='field_tamanho_da_grid'] .acf-table .acf-label, div[data-key='field_tamanho_da_grid'] .acf-table .acf-input {
+	width:100% !important;
+}
+
+div[data-key='field_tamanho_da_grid'] .acf-table .acf-fields.-left > .acf-field:before {
+	width:100% !important;
+	height:50px;
+}
+div[data-key='field_tamanho_da_grid'] .acf-table .acf-label label{
+    margin-top: -10px;
+ }
+
+div[data-key='field_tamanho_da_grid'] .acf-table .acf-field-text {
+	display: none;
+}
+
+.acf-flexible-content .acf-field-text {
+	display: block !important;
+}
