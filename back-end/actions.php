@@ -79,17 +79,9 @@ Class AcfAction {
 				}
 			}
 
-			$acf_base['location'][][] = array(
-				'param'=>'post_type',
-				'operator'=>'==',
-				'value'=>'sidebars'
-				);
 
 			$acf_base['fields'][0]['sub_fields'][2]['wrapper']['class'] = 'column_3';
 
-			if(get_post_type($_GET['post'])=='sidebars' || $_GET['post_type']=='sidebars'){
-				$acf_base['fields'][0]['sub_fields'][2]['wrapper']['class'] = 'column_1';
-			}
 
 			if(!empty($_GET['taxonomy'])){
 

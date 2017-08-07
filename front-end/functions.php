@@ -12,9 +12,6 @@ Class TemplatesWidgets {
 
 			$layout_widget = $w_content['layout'];
 			$fields = $w_content['content'];
-			if(!empty($attr['sidebar'])){
-				$column_is = 'is-12';
-			}
 
 			if(!empty($attr['column'])){
 				$column_is = 'is-'.$attr['column'];

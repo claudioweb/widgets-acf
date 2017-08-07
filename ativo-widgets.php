@@ -23,10 +23,6 @@ class AtivoWidgets {
 
 	static function add_admin_menu() {
 
-		$especialistas = Especialistas::disabled_menu();
-
-		if($especialistas==false){
-
 			$plugin_nome = 'Widgets ACF';
 
 			$parent = acf_add_options_page(array(
@@ -41,7 +37,6 @@ class AtivoWidgets {
 			// 	'parent_slug' 	=> $parent['menu_slug'],
 			// 	));
 
-		}
 		add_theme_support('post-thumbnails');
 		add_image_size( 'size_widget', 350, 350, array( 'center', 'center' ) );
 		add_image_size( 'size_widget_thumb', 160, 120, array( 'center', 'center' ) );
@@ -66,10 +61,6 @@ function AtivoWidgets_init() {
 
 	global $acf_action, $widgets, $actions;
 
-
-	require("back-end/especialistas/functions.php");
-	$especialistas = new Especialistas();
-
 	$widgets = new AtivoWidgets();
 	$plugin_nome = $widgets::add_admin_menu();
 	require("back-end/functions.php");
@@ -79,9 +70,6 @@ function AtivoWidgets_init() {
 	require("back-end/actions.php");
 	require("back-end/painel.php");
 	$acf_action = new AcfAction();
-	
-	require("back-end/sidebars/functions.php");
-	$sidebars = new Sidebars();
 
 	require("front-end/actions.php");
 	$actions = new ActionWidgets();

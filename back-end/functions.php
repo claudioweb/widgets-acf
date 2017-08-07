@@ -36,20 +36,6 @@ Class WidgetsAdmin {
 		return $all_pages;
 	}
 
-	static function get_sidebars(){
-
-		$pages = get_posts(array('post_type'=>'sidebars','posts_per_page'=>'-1'));
-
-		$all_pages = array();
-
-		foreach ($pages as $key => $page) {
-			$all_pages[$page->ID] = $page->post_title;
-		}
-
-		return $all_pages;
-	}
-
-
 	static function get_taxonomies(){
 		
 		$all_taxonomies = get_taxonomies();
