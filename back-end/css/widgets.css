@@ -59,28 +59,28 @@
 	display: none;
 }
 
-div[data-key='field_tamanho_da_grid'] .acf-table .acf-field[data-name='tamanhos_grid'] ul li {
+div[data-key='field_linha_widgets'] .acf-table .acf-field[data-name='tamanho-grid'] ul li {
 	float:left;
 	margin-right:30px;
 }
 
-div[data-key='field_tamanho_da_grid'] .acf-table .acf-field[data-name='tamanhos_grid'] ul li {
+div[data-key='field_linha_widgets'] .acf-table .acf-field[data-name='tamanho-grid'] ul li {
 	float:left;
 }
 
-div[data-key='field_tamanho_da_grid'] .acf-table .acf-label, div[data-key='field_tamanho_da_grid'] .acf-table .acf-input {
+div[data-key='field_linha_widgets'] .acf-table .acf-label, div[data-key='field_linha_widgets'] .acf-table .acf-input {
 	width:100% !important;
 }
 
-div[data-key='field_tamanho_da_grid'] .acf-table .acf-fields.-left > .acf-field:before {
+div[data-key='field_linha_widgets'] .acf-table .acf-fields.-left > .acf-field:before {
 	width:100% !important;
 	height:50px;
 }
-div[data-key='field_tamanho_da_grid'] .acf-table .acf-label label{
+div[data-key='field_linha_widgets'] .acf-table .acf-label label{
     margin-top: -10px;
  }
 
-div[data-key='field_tamanho_da_grid'] .acf-table .acf-field-text {
+div[data-key='field_linha_widgets'] .acf-table .acf-field-text {
 	display: none;
 }
 

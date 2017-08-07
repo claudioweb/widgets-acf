@@ -8,9 +8,9 @@ Class AcfWidget {
 			'title' => 'Widgets',
 			'fields' => array (
 				array (
-					'key' => 'field_tamanho_da_grid',
-					'label' => 'tamanho da grid',
-					'name' => 'tamanho_da_grid',
+					'key' => 'field_linha_widgets',
+					'label' => 'Linha widgets',
+					'name' => 'linha-widgets',
 					'type' => 'repeater',
 					'instructions' => '',
 					'required' => 0,
@@ -24,12 +24,12 @@ Class AcfWidget {
 					'min' => 1,
 					'max' => 0,
 					'layout' => 'row',
-					'button_label' => 'Adicionar Grid',
+					'button_label' => 'Adicionar Linha',
 					'sub_fields' => array (
 						array(
-							'key' => 'field_tamanhos_grid',
+							'key' => 'field_tamanho_grid',
 							'label' => 'Tamanhos',
-							'name' => 'tamanhos_grid',
+							'name' => 'tamanho-grid',
 							'type' => 'radio',
 							'instructions' => '',
 							'required' => 0,
