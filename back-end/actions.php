@@ -1,9 +1,12 @@
 <?php
-require("acf/widgets_base.php");
+
+// Cria e define a grid de widget via ADM
 
 Class AcfAction {
 
 	public function __construct() {
+
+		require("acf/widgets_base.php");
 
 		return $this->set_widgets_list();
 	}
@@ -18,9 +21,10 @@ Class AcfAction {
 
 			$widget_adm = $this->get_pages_selected();
 
-				
+
 			Painel::field_color($widget_adm['taxonomy']);
 
+			// Define widget em post_type selecionados
 			if(!empty($widget_adm['post_type'])){
 				foreach ($widget_adm['post_type'] as $key => $page) {
 
@@ -32,8 +36,8 @@ Class AcfAction {
 
 					$posts = get_post(array('post_type'=>$page,'posts_per_page'=>-1));
 					foreach ($posts as $key => $post) {
-						if($post->post_content!='[ativo_widget]'){
-							$my_post = array('ID' => $post->ID, 'post_content' => '[ativo_widget]');
+						if($post->post_content!='[acf_widgets]'){
+							$my_post = array('ID' => $post->ID, 'post_content' => '[acf_widgets]');
 							wp_update_post($my_post);
 						}
 					}
@@ -41,6 +45,7 @@ Class AcfAction {
 				}
 			}
 
+			// Define widget em  paginas selecionadas
 			if(!empty($widget_adm['page'])){
 				foreach ($widget_adm['page'] as $key => $page) {
 
@@ -51,14 +56,15 @@ Class AcfAction {
 						);
 
 					$post = get_post($page);
-					if($post->post_content!='[ativo_widget]'){
-						$my_post = array('ID' => $post->ID, 'post_content' => '[ativo_widget]');
+					if($post->post_content!='[acf_widgets]'){
+						$my_post = array('ID' => $post->ID, 'post_content' => '[acf_widgets]');
 						wp_update_post($my_post);
 					}
 
 				}
 			}
 
+			// Define widget em categorias selecionadas
 			if(!empty($widget_adm['taxonomy'])){
 				foreach ($widget_adm['taxonomy'] as $key => $page) {
 
@@ -71,34 +77,22 @@ Class AcfAction {
 					$terms = get_terms( $page, array('hide_empty' => false) );
 
 					foreach ($terms as $key => $term) {
-						if($term->description!='[ativo_widget]'){
-							$my_term = wp_update_term($term->term_id,$page,array('name' => $term->name,'description'=>'[ativo_widget]'));
+						if($term->description!='[acf_widgets]'){
+							$my_term = wp_update_term($term->term_id,$page,array('name' => $term->name,'description'=>'[acf_widgets]'));
 						}
 					}
 
 				}
 			}
 
-
 			$acf_base['fields'][0]['sub_fields'][2]['wrapper']['class'] = 'column_3';
 
-
-			if(!empty($_GET['taxonomy'])){
-
-				$acf_base['fields'][0]['sub_fields'][2]['wrapper']['class'] = 'column_2';
-				$acf_base['fields'][0]['sub_fields'][2]['required'] = 1;
-				$acf_base['fields'][0]['sub_fields'][2]['max'] = 2;
-			}
-
-			// var_dump($acf_base['fields'][0]['sub_fields']);
 			foreach ($directory_widgets as $key => $widget) {
 				$widget['sub_fields'][] = $this->set_mobile_fields($widget['key']);
 				$acf_base['fields'][0]['sub_fields'][2]['layouts'][] = $widget;
 			}
 
-
 			$layouts_widget = acf_add_local_field_group($acf_base);
-
 
 			if($layouts_widget){
 				return true;
@@ -112,22 +106,25 @@ Class AcfAction {
 
 	public function get_pages_selected(){
 
-		$posttypes_admin = get_field('type_widget_ativo','options');
-		$pages_admin = get_field('page_widget_ativo','options');
-		$taxonomies_admin = get_field('tax_widget_ativo','options');
+		$posttypes_admin = get_field('type_widget_acf','options');
+		$pages_admin = get_field('page_widget_acf','options');
+		$taxonomies_admin = get_field('tax_widget_acf','options');
 
-		return array(
-			'post_type' => $posttypes_admin,
-			'page' => $pages_admin,
-			'taxonomy' => $taxonomies_admin
-			);
+		$pgs = array();
+
+		$pgs['post_type'] = $posttypes_admin;
+		$pgs['page'] = $pages_admin;
+		$pgs['taxonomy'] = $taxonomies_admin;
+
+		return $pgs;
 	}
 
 	public function set_mobile_fields($prefixed_widget=null){
+
 		$sub_fields = array (
 			'key' => 'field_radio_mobile_'.$prefixed_widget,
 			'label' => 'Exibir Mobile?',
-			'name' => 'radio_mobile',
+			'name' => 'mobile',
 			'type' => 'radio',
 			'instructions' => '',
 			'required' => 0,
@@ -137,14 +134,15 @@ Class AcfAction {
 				'class' => '',
 				'id' => '',
 				),
-			'choices' => array(''=>'Sim','is-hidden-mobile'=>'Não'),
+			'choices' => array(1=>'Sim',0=>'Não'),
 			'allow_null' => 0,
 			'other_choice' => 0,
 			'save_other_choice' => 0,
-			'default_value' => 'show_widget_ativo',
+			'default_value' => '',
 			'layout' => 'horizontal',
 			'return_format' => 'value',
 			);
+
 		return $sub_fields;
 	}
 
@@ -155,10 +153,35 @@ Class AcfAction {
 		$widgets = array();
 
 		foreach ($dir as $fileinfo) {
+
 			if ($fileinfo->isDir() && !$fileinfo->isDot()) {
+
 				require($path."/".$fileinfo->getFilename()."/functions.php");
 
-				$widgets[] = call_user_func(array($fileinfo->getFilename(),'set_fields'));
+				$widgets[] = call_user_func(array($fileinfo->getFilename(),'fields'));
+			}
+		}
+
+		// get widgets theme
+		$widgets = AcfAction::get_folders_widgets_theme($widgets);
+
+		return $widgets;
+	}
+
+	public function get_folders_widgets_theme($widgets){
+		$path =  get_template_directory()."/widgets-acf";
+
+		if(is_dir($path)){
+			$dir = new DirectoryIterator($path);
+
+			foreach ($dir as $fileinfo) {
+
+				if ($fileinfo->isDir() && !$fileinfo->isDot()) {
+
+					require($path."/".$fileinfo->getFilename()."/functions.php");
+
+					$widgets[] = call_user_func(array($fileinfo->getFilename(),'fields'));
+				}
 			}
 		}
 

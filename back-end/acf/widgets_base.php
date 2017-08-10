@@ -4,7 +4,7 @@ Class AcfWidget {
 	static function get_base(){
 
 		$base_fields = array (
-			'key' => 'group_widgets_ativo',
+			'key' => 'group_widgets_acf',
 			'title' => 'Widgets',
 			'fields' => array (
 				array (

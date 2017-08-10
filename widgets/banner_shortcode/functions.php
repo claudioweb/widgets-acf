@@ -1,7 +1,7 @@
 <?php
 Class banner_shortcode {
 
-	static function set_fields(){
+	static function fields(){
 
 		$fields = array (
 			'key' => 'banner_shortcode_key',

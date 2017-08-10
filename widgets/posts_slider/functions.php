@@ -1,7 +1,7 @@
 <?php
 Class posts_slider {
 
-	static function set_fields(){
+	static function fields(){
 
 		$fields = array (
 			'key' => 'posts_slider_key',
@@ -19,7 +19,7 @@ Class posts_slider {
 					'conditional_logic' => 0,
 					'wrapper' => array (
 						'width' => '',
-						'class' => '',
+						'class' => 'fa fa-sliders',
 						'id' => '',
 						),
 					'choices' => posts_slider::get_posts(),

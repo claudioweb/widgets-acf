@@ -38,7 +38,25 @@
 }
 
 .acf-field-the-contents.column_6 .acf-flexible-content .values .layout {
-	width: 14%;
+	width: 15%;
+}
+
+.acf-field-the-contents .acf-flexible-content .values .layout {
+	height:155px;
+	overflow: hidden;
+	opacity: 1 !important;
+}
+
+.acf-field-the-contents .acf-flexible-content .values .layout .acf-fc-layout-handle {
+	height:100%;
+	position: absolute;
+	z-index: 9;
+	width: 100%;
+	background:transparent;
+}
+
+.acf-field-the-contents .acf-flexible-content .values .layout .acf-fc-layout-controlls {
+	z-index: 9;
 }
 
 .acf-field-the-contents .acf-actions {
@@ -48,37 +66,44 @@
 .acf-field-the-contents .layout .acf-fields {
 	height: 260px;
 	overflow-y: auto;
+	display: block !important;
 }
 
 #poststuff, #edittag {
 	display: none;
 }
 
-div[data-key='field_linha_widgets'] .acf-table .acf-field[data-name='tamanho-grid'] ul li {
+[data-key='field_linha_widgets'] .acf-table .acf-field[data-name='tamanho-grid'] ul li {
 	float:left;
 	margin-right:30px;
 }
 
-div[data-key='field_linha_widgets'] .acf-table .acf-field[data-name='tamanho-grid'] ul li {
+[data-key='field_linha_widgets'] .acf-table .acf-field[data-name='tamanho-grid'] ul li {
 	float:left;
 }
 
-div[data-key='field_linha_widgets'] .acf-table .acf-label, div[data-key='field_linha_widgets'] .acf-table .acf-input {
+[data-key='field_linha_widgets'] .acf-table .acf-label, [data-key='field_linha_widgets'] .acf-table .acf-input {
 	width:100% !important;
 }
 
-div[data-key='field_linha_widgets'] .acf-table .acf-fields.-left > .acf-field:before {
+[data-key='field_linha_widgets'] .acf-table .acf-fields.-left > .acf-field:before {
 	width:100% !important;
 	height:50px;
 }
-div[data-key='field_linha_widgets'] .acf-table .acf-label label{
-    margin-top: -10px;
- }
 
-div[data-key='field_linha_widgets'] .acf-table .acf-field-text {
+[data-key='field_linha_widgets'] .acf-table .acf-label label{
+	margin-top: -10px;
+}
+
+[data-key='field_linha_widgets'] .acf-table .acf-field-text {
 	display: none;
 }
 
 .acf-flexible-content .acf-field-text {
 	display: block !important;
+}
+
+#wpbody #edittag {
+	width: 100% !important;
+	max-width: inherit !important;
 }

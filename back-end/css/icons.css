@@ -1,0 +1,24 @@
+@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+
+[data-key='field_linha_widgets'] .fa {
+	width: 100%;
+	text-align: center;
+	padding-top: 50px !important;
+}
+
+[data-key='field_linha_widgets'] .layout .acf-field {
+	background:#ddd;
+	border:0 none !important;
+}
+
+[data-key='field_linha_widgets'] .fa:before {
+	font-size:90px;
+}
+
+[data-key='field_linha_widgets'] .layout .acf-label, [data-key='field_linha_widgets'] .layout .acf-input {
+	display: none;
+}
+
+[data-key='field_linha_widgets'] [data-event='collapse-layout'], [data-key='field_linha_widgets'] [data-event='add-layout'] {
+	display: none !important;
+}

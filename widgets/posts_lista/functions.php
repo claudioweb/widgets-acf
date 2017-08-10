@@ -1,7 +1,7 @@
 <?php
 Class posts_lista {
 
-	static function set_fields(){
+	static function fields(){
 
 		$fields = array (
 			'key' => 'posts_lista_key',
@@ -19,12 +19,11 @@ Class posts_lista {
 					'conditional_logic' => 0,
 					'wrapper' => array (
 						'width' => '',
-						'class' => '',
+						'class' => 'fa fa-list-ul',
 						'id' => '',
 						),
 					'choices' => posts_lista::get_posts(),
-					'default_value' => array (
-						),
+					'default_value' => array (),
 					'allow_null' => 0,
 					'multiple' => 1,
 					'ui' => 1,
@@ -62,7 +61,7 @@ Class posts_lista {
 		foreach ($posts as $key => $post) {
 			$term = '';
 			$term = wp_get_post_terms($post->ID,'category');
-		
+
 			$post->color = get_field('cor_padrao',$term[0]);
 
 			$post->term_id = $term[0]->term_id;

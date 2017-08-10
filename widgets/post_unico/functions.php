@@ -1,7 +1,7 @@
 <?php
 Class post_unico {
 
-	static function set_fields(){
+	static function fields(){
 
 		$fields = array (
 			'key' => 'post_unico_key',
@@ -19,7 +19,7 @@ Class post_unico {
 					'conditional_logic' => 0,
 					'wrapper' => array (
 						'width' => '',
-						'class' => '',
+						'class' => 'fa fa-picture-o',
 						'id' => '',
 						),
 					'choices' => post_unico::get_posts(),

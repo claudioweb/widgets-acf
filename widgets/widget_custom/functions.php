@@ -2,7 +2,7 @@
 
 Class widget_custom {
 	
-	static function set_fields(){
+	static function fields(){
 
 		$fields = array (
 			'key' => 'widget_custom_key',

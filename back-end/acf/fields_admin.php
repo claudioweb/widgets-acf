@@ -10,9 +10,9 @@ if( function_exists('acf_add_local_field_group') ){
 		'title' => 'Widget config',
 		'fields' => array (
 			array (
-				'key' => 'widget_type_widget_ativo',
+				'key' => 'widget_type_widget_acf',
 				'label' => 'Post type',
-				'name' => 'type_widget_ativo',
+				'name' => 'type_widget_acf',
 				'type' => 'select',
 				'instructions' => 'Widgets em todos os posts',
 				'required' => 0,
@@ -33,9 +33,9 @@ if( function_exists('acf_add_local_field_group') ){
 				'placeholder' => '',
 				),
 			array (
-				'key' => 'widget_page_widget_ativo',
+				'key' => 'widget_page_widget_acf',
 				'label' => 'Páginas',
-				'name' => 'page_widget_ativo',
+				'name' => 'page_widget_acf',
 				'type' => 'select',
 				'instructions' => 'Widgets em página especifica',
 				'required' => 0,
@@ -56,9 +56,9 @@ if( function_exists('acf_add_local_field_group') ){
 				'placeholder' => '',
 				),
 			array (
-				'key' => 'widget_tax_widget_ativo',
+				'key' => 'widget_tax_widget_acf',
 				'label' => 'Tipo de Categoria (taxonomy)',
-				'name' => 'tax_widget_ativo',
+				'name' => 'tax_widget_acf',
 				'type' => 'select',
 				'instructions' => 'Categoria que terá MetaBox de Widgets',
 				'required' => 0,

@@ -3,7 +3,8 @@ jQuery(function(){
 	jQuery('.acf-field-the-contents').parent().parent().parent().parent().parent().find('.postarea').hide();
 	jQuery('.acf-field-the-contents').parent().parent().parent().parent().parent().find('#pageparentdiv').hide();
 	jQuery('.acf-field-the-contents').parent().parent().parent().parent().parent().find('#postimagediv').hide();
-	jQuery('#poststuff').fadeIn(function(){
+
+	jQuery('#poststuff, #edittag').fadeIn(function(){
 		set_column_load();
 		set_column();
 	});
@@ -16,8 +17,8 @@ jQuery(function(){
 		}
 	});
 
-	jQuery('.acf-field-the-contents').parent().parent().parent().find('.term-description-wrap').hide();
-	jQuery('#edittag').fadeIn();
+	jQuery('.acf-field-linha-widgets').parent().parent().parent().parent().parent().find('.term-description-wrap').hide();
+	jQuery('.acf-field-linha-widgets').parent().parent().parent().parent().parent().find('.term-parent-wrap').hide();
 
 });
 

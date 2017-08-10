@@ -9,7 +9,7 @@ Class WidgetsAdmin {
 		$all_types = get_post_types();
 
 		unset(
-			$all_types['post'],
+			// $all_types['post'],
 			$all_types['page'],
 			$all_types['attachment'],
 			$all_types['revision'],
@@ -50,16 +50,6 @@ Class WidgetsAdmin {
 			);
 
 		return $all_taxonomies;
-	}
-
-	static function get_columns(){
-
-		$columns_options = array(
-			3=>'3 Colunas',
-			2=>'2 Colunas'
-			);
-
-		return $columns_options;
 	}
 
 }

@@ -1,7 +1,7 @@
 <?php
 Class line_banner {
 
-	static function set_fields(){
+	static function fields(){
 
 		add_action( 'admin_enqueue_scripts', array('line_banner', 'css_widget_admin_line_banner') );
 

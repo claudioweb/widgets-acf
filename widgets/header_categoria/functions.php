@@ -1,7 +1,7 @@
 <?php
 Class header_categoria {
 
-	static function set_fields(){
+	static function fields(){
 
 		add_action( 'admin_enqueue_scripts', array('header_categoria', 'css_widget_admin_header_line') );
 
