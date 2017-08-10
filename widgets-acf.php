@@ -1,12 +1,12 @@
 <?php
 /***************************************************************************
-Plugin Name:  Ativo Widgets
+Plugin Name:  Widgets ACF
 Plugin URI:   https://www.advancedcustomfields.com/
 Description:  Plugin dependente do ACF (Add Custom Fields)
 Version:      1.0
 Author:       Claudio Web (claudioweb)
 Author URI:   http://www.claudioweb.com.br/
-Text Domain:  ativo-widgets
+Text Domain:  widgets-acf
 **************************************************************************/
 
 class AtivoWidgets {
