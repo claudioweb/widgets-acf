@@ -13,7 +13,9 @@ jQuery(function(){
 		if(jQuery(this).attr('data-event')=='add-row'){
 			setTimeout(function(){
 				set_column();
-			},1000);
+				add_layout();
+
+			},500);
 		}
 	});
 
@@ -24,6 +26,7 @@ jQuery(function(){
 
 function set_column(){
 
+	// jQuery(".acf-table .acf-field[data-name='tamanho-grid'] ul li input").unbind( "click" );
 	jQuery(".acf-table .acf-field[data-name='tamanho-grid'] ul li input").click(function(){
 		var parents = jQuery(this).parent().parent().parent().parent().parent().parent();
 		console.log(parents);

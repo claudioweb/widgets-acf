@@ -45,10 +45,10 @@
 	width: 800px;
 	height: 550px;
 	top: 10%;
-	left: 45%;
-	margin: 0;
+	left: 23%;
 	background:rgba(0,0,0,0.9);
 	padding-left:27px !important;
+	margin:0 !important;
 }
 
 [data-key='field_linha_widgets'] .acf-flexible-content .acf-fc-popup:before {

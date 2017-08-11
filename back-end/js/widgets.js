@@ -1,44 +1,54 @@
 jQuery(function(){
 
+    add_layout();
 	set_widget_light_box();
 
-	jQuery('a[data-event="add-layout"]').click(function(){
-		setTimeout(function(){
-			jQuery(".acf-fc-popup li a").click(function(){
-				setTimeout(function(){
-					set_widget_light_box();
-				},1000);
-			});
-		},500);
-	});
+	
 
 });
 
+function add_layout(){
+    jQuery('a[data-event="add-layout"]').click(function(){
+        console.log('clicou add layout');
+        setTimeout(function(){
+            jQuery(".acf-fc-popup li a").click(function(){
+                console.log('layout adicionado');
+                setTimeout(function(){
+                   set_widget_light_box();
+                   console.log('lightbox criado');
+               },500);
+            });
+        },500);
+    });
+}
+
 function set_widget_light_box(){
 
-	jQuery("[data-key='field_linha_widgets'] .layout .acf-fc-layout-handle").click(function(){
+    // jQuery("[data-key='field_linha_widgets'] .layout .acf-fc-layout-handle").unbind( "click" );
 
-		jQuery('#widget_acf_box_light').remove();
+    jQuery("[data-key='field_linha_widgets'] .layout .acf-fc-layout-handle").click(function(){
 
-		var this_click = jQuery(this).parent();
+      jQuery('#widget_acf_box_light').remove();
 
-		var values_input = jQuery(this).parent().find('.acf-fields');
+      var this_click = jQuery(this).parent();
 
-		values_input.find('select').prop('disabled', false);
+      var values_input = jQuery(this).parent().find('.acf-fields');
 
-		values_input.find('.select2-container').remove();
+      values_input.find('select').prop('disabled', false);
 
-		jQuery('body').append('<div id="widget_acf_box_light"></div>');
-		jQuery('#widget_acf_box_light').html('<div class="acf_box_widgets_content"></div>');
-		jQuery('.acf_box_widgets_content')
-		.html('<h1>'+
-			this_click.find('.acf-fc-layout-handle').text()+
-			'</h1><div class="close fa fa-times"></div>'+values_input.html()
-			);
+      values_input.find('.select2-container').remove();
 
-		jQuery('.acf_box_widgets_content .wp-picker-container').remove();
+      jQuery('body').append('<div id="widget_acf_box_light"></div>');
+      jQuery('#widget_acf_box_light').html('<div class="acf_box_widgets_content"></div>');
+      jQuery('.acf_box_widgets_content')
+      .html('<h1>'+
+         this_click.find('.acf-fc-layout-handle').text()+
+         '</h1><div class="close fa fa-times"></div>'+values_input.html()
+         );
 
-		var myOptions = {
+      jQuery('.acf_box_widgets_content .wp-picker-container').remove();
+
+      var myOptions = {
     		// you can declare a default color here,
     		// or in the data-default-color attribute on the input
     		defaultColor: false,
