@@ -20,7 +20,7 @@ Class widget_custom {
 					'conditional_logic' => 0,
 					'wrapper' => array (
 						'width' => '',
-						'class' => '',
+						'class' => 'fa fa-picture-o',
 						'id' => '',
 						),
 					'return_format' => 'url',
