@@ -23,13 +23,19 @@ jQuery(function(){
 
 		jQuery('.acf_box_widgets_content').find('input').change(function(){
 			var name = jQuery(this).attr('name');
-			jQuery(this_click).find('[name="'+name+'"]').val(jQuery(this).val());
-			console.log(jQuery(this).val());
+			jQuery(this_click).find('[name="'+name+'"]').attr('value',jQuery(this).val());
+			console.log(jQuery(this_click).find('[name="'+name+'"]').val());
 		});
 
 		jQuery('.acf_box_widgets_content').find('select').change(function(){
 			var name = jQuery(this).attr('name');
-			jQuery(this_click).find('[name="'+name+'"]').parent().find('input').val(jQuery(this).val());
+			jQuery(this_click).find('[name="'+name+'"] option:selected').removeAttr("selected");
+
+			for (var i = 0; i < jQuery(this).val().length; i++) {
+				jQuery(this_click).find('[name="'+name+'"] option[value="'+jQuery(this).val()[i]+'"]').attr("selected","selected");
+			}
+			
+			jQuery(this_click).find('[name="'+name+'"]').parent().find('input').attr('value',jQuery(this).val());
 			console.log(jQuery(this).val());
 		});
 
