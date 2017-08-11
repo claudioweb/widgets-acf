@@ -1,3 +1,6 @@
+
+/* Icons font awesome WIdgets */
+
 @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
 
 [data-key='field_linha_widgets'] .fa {
@@ -69,6 +72,67 @@
 }
 
 
+/* Icons Radio layout */
+
+[data-key='field_linha_widgets'] [data-key="field_tamanho_grid"] li {
+	margin-right: 10px !important;
+}
+
+[data-key='field_linha_widgets'] [data-key="field_tamanho_grid"] input {
+	width: 65px;
+	height: 52px;
+	padding: 15px !important;
+	background-size: cover !important;
+	box-shadow: inherit;
+	border-radius: 0;
+}
+
+[data-key='field_linha_widgets'] [data-key="field_tamanho_grid"] input:before {
+	width: 15px;
+	height: 15px;
+	margin: 4px;
+	line-height: 16px;
+	background-color: #1e8cbe;
+	margin-top: 4px;
+	margin-left: 9px;
+}
+
+[data-key='field_linha_widgets'] [data-key="field_tamanho_grid"] input[value="1"]{
+	background: url('../layouts_img/column_1.jpg') no-repeat;
+}
+
+[data-key='field_linha_widgets'] [data-key="field_tamanho_grid"] input[value="2"]{
+	background: url('../layouts_img/column_2.jpg') no-repeat;
+}
+
+[data-key='field_linha_widgets'] [data-key="field_tamanho_grid"] input[value="2_1"]{
+	background: url('../layouts_img/column_2_1.jpg') no-repeat;
+}
+
+[data-key='field_linha_widgets'] [data-key="field_tamanho_grid"] input[value="2_2"]{
+	background: url('../layouts_img/column_2_2.jpg') no-repeat;
+}
+
+[data-key='field_linha_widgets'] [data-key="field_tamanho_grid"] input[value="3"]{
+	background: url('../layouts_img/column_3.jpg') no-repeat;
+}
+
+[data-key='field_linha_widgets'] [data-key="field_tamanho_grid"] input[value="3_1"]{
+	background: url('../layouts_img/column_3_1.jpg') no-repeat;
+}
+
+[data-key='field_linha_widgets'] [data-key="field_tamanho_grid"] input[value="4"]{
+	background: url('../layouts_img/column_4.jpg') no-repeat;
+}
+
+[data-key='field_linha_widgets'] [data-key="field_tamanho_grid"] input[value="5"]{
+	background: url('../layouts_img/column_5.jpg') no-repeat;
+}
+
+[data-key='field_linha_widgets'] [data-key="field_tamanho_grid"] input[value="6"]{
+	background: url('../layouts_img/column_6.jpg') no-repeat;
+}
+
 
 /* Lightbox WIDGETS ACF */
 
@@ -81,7 +145,6 @@
 	background: rgba(0,0,0,0.6);
 	z-index: 99;
 	border:1px #ddd solid;
-	border-radius: 5px;
 }
 
 #widget_acf_box_light .acf_box_widgets_content {
@@ -94,7 +157,7 @@
 	top: 5%;
 	height: 550px;
 	background: rgba(255,255,255,1);
-
+	border-radius: 5px;
 }
 
 #widget_acf_box_light .acf_box_widgets_content .fa:before {
