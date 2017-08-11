@@ -4,7 +4,7 @@ require("functions.php");
 Class ActionWidgets {
 
 	public function __construct() {
-		add_shortcode( 'ativo_widget', array( $this, 'init' ) );
+		add_shortcode( 'acf_widgets', array( $this, 'init' ) );
 	}
 
 	public function init($attr=null){
@@ -21,13 +21,21 @@ Class ActionWidgets {
 
 		$widgets = array();
 
-		if (have_rows('select-the-contents',$type)) {
+		if (have_rows('linha-widgets',$type)) {
 
-			while (have_rows('select-the-contents',$type)) {
+			while (have_rows('linha-widgets',$type)) {
 
-				the_row();
+				$columns = the_row();
 
-				$widgets[] = array('layout' => get_row_layout(), 'content' => get_row());
+				if (have_rows('select-the-contents')) {
+
+					while (have_rows('select-the-contents')) {
+						the_row();
+
+						$widgets[] = array('layout' => get_row_layout(), 'content' => get_row(),'columns'=>$columns);
+					}
+
+				}
 			}
 
 		}

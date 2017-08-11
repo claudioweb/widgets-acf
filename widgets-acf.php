@@ -53,7 +53,7 @@ class WidgetsWidgets {
 
 function widgetsWidgets_init() {
 
-	global $acf_action, $widgets, $actions;
+	global $widgets, $acf_action, $actions;
 
 	$widgets = new WidgetsWidgets();
 	$plugin_nome = $widgets::add_admin_menu();

@@ -4,18 +4,15 @@ Class TemplatesWidgets {
 
 	public function __construct() {}
 
-	static function get_templates($layout_content,$attr=null){
+	static function get_templates($layout_content,$attr=null,){
 
-		$html='<div class="columns is-multiline">';
+		$html='<div class="row">';
 
 		foreach ($layout_content as $key => $w_content) {
 
 			$layout_widget = $w_content['layout'];
 			$fields = $w_content['content'];
 
-			if(!empty($attr['column'])){
-				$column_is = 'is-'.$attr['column'];
-			}
 
 			$show_mobile = $fields['field_radio_mobile_post_unico_key'].' '.$column_is;
 			
