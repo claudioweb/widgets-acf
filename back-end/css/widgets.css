@@ -112,7 +112,7 @@
 
 [data-key='field_linha_widgets'] .acf-table .acf-fields.-left > .acf-field:before {
 	width:100% !important;
-	height:50px;
+	height: 100%;
 }
 
 [data-key='field_linha_widgets'] .acf-table .acf-label label{
