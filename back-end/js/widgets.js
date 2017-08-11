@@ -43,8 +43,9 @@ function set_widget_light_box(){
 			jQuery(this_click).find('[name="'+name+'"]').attr('value',jQuery(this).val());
 			console.log(jQuery(this_click).find('[name="'+name+'"]').val());
 		});
-		
+
 		jQuery('.acf_box_widgets_content').find('select').select2();
+
 		jQuery('.acf_box_widgets_content').find('select').change(function(){
 			var name = jQuery(this).attr('name');
 			jQuery(this_click).find('[name="'+name+'"] option:selected').removeAttr("selected");
