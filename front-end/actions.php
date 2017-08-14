@@ -1,4 +1,5 @@
 <?php
+
 require("functions.php");
 
 Class ActionWidgets {
@@ -32,7 +33,7 @@ Class ActionWidgets {
 				if (have_rows('select-the-contents')) {
 
 					while (have_rows('select-the-contents')) {
-						
+
 						the_row();
 
 						$class = $this->get_class_widget(get_row());

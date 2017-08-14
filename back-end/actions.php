@@ -1,7 +1,8 @@
 <?php
 
-// Cria e define a grid de widget via ADM
+include "fields.php";
 
+// Cria e define a grid de widget via ADM
 Class AcfAction {
 
 	public function __construct() {
@@ -148,39 +149,60 @@ Class AcfAction {
 
 	public function get_folders_widgets(){
 
-		$path = plugin_dir_path( __FILE__ )."../widgets";
+		$path = plugin_dir_path( __FILE__ )."../widgets-acf";
 		$dir = new DirectoryIterator($path);
+
+		$dir_plugin = array();
+
 		$widgets = array();
 
 		foreach ($dir as $fileinfo) {
 
-			if ($fileinfo->isDir() && !$fileinfo->isDot()) {
 
+			if ($fileinfo->isDir() && !$fileinfo->isDot()) {
+				$fields = array();
 				require($path."/".$fileinfo->getFilename()."/functions.php");
 
-				$widgets[] = call_user_func(array($fileinfo->getFilename(),'fields'));
+				$widget_name = $fileinfo->getFilename();
+
+				$widgets_fields = get_fields_acf_widgets::get_field($widget_name,$fields);
+
+				if(!empty($widgets_fields)){
+					$widgets[] = $widgets_fields;
+				}
+
+				$dir_plugin[] = $fileinfo->getFilename();
 			}
+
 		}
 
 		// get widgets theme
-		$widgets = AcfAction::get_folders_widgets_theme($widgets);
+		$widgets = AcfAction::get_folders_widgets_theme($widgets,$dir_plugin);
 
 		return $widgets;
 	}
 
-	public function get_folders_widgets_theme($widgets){
+	public function get_folders_widgets_theme($widgets,$dir_plugin){
+
 		$path =  get_template_directory()."/widgets-acf";
 
 		if(is_dir($path)){
+
 			$dir = new DirectoryIterator($path);
 
 			foreach ($dir as $fileinfo) {
 
-				if ($fileinfo->isDir() && !$fileinfo->isDot()) {
+				if(!in_array($fileinfo->getFilename(), $dir_plugin)){
 
-					require($path."/".$fileinfo->getFilename()."/functions.php");
+					if ($fileinfo->isDir() && !$fileinfo->isDot()) {
 
-					$widgets[] = call_user_func(array($fileinfo->getFilename(),'fields'));
+						require($path."/".$fileinfo->getFilename()."/functions.php");
+
+						$widget_name = $fileinfo->getFilename();
+
+						$widgets[] = get_fields_acf_widgets::get_field($widget_name,$fields);
+
+					}
 				}
 			}
 		}

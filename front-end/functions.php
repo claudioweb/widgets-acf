@@ -24,9 +24,9 @@ Class TemplatesWidgets {
 
 				ob_start();
 
-				$layout_widget = $w_content['layout'];
+				$layout_widget = str_replace('_widget_acf', '', $w_content['layout']);
 				$fields = $w_content['content'];
-				include plugin_dir_path( __FILE__ ).'../widgets/'.$layout_widget.'/index.php';
+				include plugin_dir_path( __FILE__ ).'../widgets-acf/'.$layout_widget.'/index.php';
 
 				$html .= ob_get_clean();
 

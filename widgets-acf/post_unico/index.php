@@ -1,4 +1,4 @@
-<?php $content = post_unico::post_content($fields); ?>
+<?php var_dump($fields); ?>
 <div class="">
 	<a href="<?php echo get_permalink($content['post']->ID); ?>" rel="bookmark" title="<?php echo $content['post']->post_title; ?>">
 		<div style="background-image: url('<?php echo $content['thumb']; ?>')" class="post-single" data-archive="viva-melhor">
