@@ -1,5 +1,5 @@
 <?php $posts = posts_slider::list_posts($fields); ?>
-<div class="column is-4 <?php echo $show_mobile; ?>" data-script="Slider">
+<div class="" data-script="Slider">
 	<div class="slider js_slider">
 		<div class="frame js_frame">
 			<ul class="slides js_slides">

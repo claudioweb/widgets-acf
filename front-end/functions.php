@@ -4,26 +4,41 @@ Class TemplatesWidgets {
 
 	public function __construct() {}
 
-	static function get_templates($layout_content,$attr=null,){
+	static function get_templates($layout_content,$attr=null){
 
-		$html='<div class="row">';
+		$html ='';
 
-		foreach ($layout_content as $key => $w_content) {
+		foreach ($layout_content as $key => $layout) {
 
-			$layout_widget = $w_content['layout'];
-			$fields = $w_content['content'];
+			$html .='<section class="row">';
+
+			$count_column = 0;
+
+			foreach ($layout as $key_l => $w_content) {
+
+				if($count_column>count($w_content['columns'])-1){
+					$count_column = 0;
+				}
 
 
-			$show_mobile = $fields['field_radio_mobile_post_unico_key'].' '.$column_is;
-			
-			ob_start();
+				$html .='<article class="'.$w_content['columns'][$count_column].' '.$w_content['class'].'">';
 
-			include plugin_dir_path( __FILE__ ).'../widgets/'.$layout_widget.'/index.php';
+				ob_start();
 
-			$html .= ob_get_clean();
+				$layout_widget = $w_content['layout'];
+				$fields = $w_content['content'];
+				include plugin_dir_path( __FILE__ ).'../widgets/'.$layout_widget.'/index.php';
+
+				$html .= ob_get_clean();
+
+				$html .='</article>';
+
+				$count_column++;
+			}
+
+			$html .='</section>';
+
 		}
-
-		$html .='</div>';
 
 		return $html;
 	}

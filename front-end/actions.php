@@ -21,6 +21,8 @@ Class ActionWidgets {
 
 		$widgets = array();
 
+		$grid = 0;
+
 		if (have_rows('linha-widgets',$type)) {
 
 			while (have_rows('linha-widgets',$type)) {
@@ -30,12 +32,24 @@ Class ActionWidgets {
 				if (have_rows('select-the-contents')) {
 
 					while (have_rows('select-the-contents')) {
+						
 						the_row();
 
-						$widgets[] = array('layout' => get_row_layout(), 'content' => get_row(),'columns'=>$columns);
+						$class = $this->get_class_widget(get_row());
+
+						$column =  $this->get_column_bs($columns['field_tamanho_grid']);
+
+						$widgets[$grid][] = array(
+							'layout' => get_row_layout(), 
+							'content' => get_row(), 
+							'class'=>$class, 
+							'columns'=>$column
+							);
 					}
 
 				}
+
+				$grid++;
 			}
 
 		}
@@ -43,6 +57,58 @@ Class ActionWidgets {
 		return TemplatesWidgets::get_templates($widgets,$attr);
 	}
 
+	public function get_class_widget($fields){
+
+		$layout_widget = $fields['layout'];
+
+		// show mobile ?
+		$show_mobile = $fields['field_radio_mobile_'.$layout_widget.'_key'];
+		if($show_mobile==0){
+			$show_mobile = 'hidden-xs';
+		}else{
+			$show_mobile = '';
+
+
+			return array($show_mobile);
+		}
+		
+	}
+
+	public function get_column_bs($column){
+
+		$total_grid = 12;
+
+		$columns = array();
+
+		if($column == '2_1'){
+
+			$columns[0] = 'col-sm-8';
+			
+			$column = str_replace('2_', '3_', $column);
+
+		}else if($column == '2_2'){
+
+			$columns[1] = 'col-sm-8';
+			$column = str_replace('2_', '3_', $column);
+
+		}else if($column == '3_1'){
+			$columns[1] = 'col-sm-6';
+			$column = str_replace('3_', '4_', $column);
+		}
+
+		$column = explode('_',$column);
+
+		if(!empty($columns[0])){
+			$columns[] = 'col-sm-'.$total_grid/intval($column[0]);
+		}else{
+			$columns[0] = 'col-sm-'.$total_grid/intval($column[0]);
+		}
+
+		return $columns;
+
+	}
+
 
 }
+
 ?>

@@ -1,5 +1,5 @@
 <?php $posts = posts_lista::list_posts($fields); ?>
-<div class="column is-4 <?php echo $show_mobile; ?> post-group">
+<div class="">
 	<?php foreach ($posts as $key => $post) : if($key==3){break;} ?>
 		<div class="columns is-multiline is-mobile">
 			<div class="column is-5">

@@ -1,5 +1,5 @@
 <?php $content = post_unico::post_content($fields); ?>
-<div class="column is-4 <?php echo $show_mobile; ?>">
+<div class="">
 	<a href="<?php echo get_permalink($content['post']->ID); ?>" rel="bookmark" title="<?php echo $content['post']->post_title; ?>">
 		<div style="background-image: url('<?php echo $content['thumb']; ?>')" class="post-single" data-archive="viva-melhor">
 			<div class="post-content" style="background:<?php echo $content['color']; ?>;">
