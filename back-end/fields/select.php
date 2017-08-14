@@ -2,9 +2,9 @@
 
 $field = array (
 	'key' => 'field_'.$key_field_name.'_'.$widget.'_key',
-	'label' => 'Campo de texto',
+	'label' => 'Campo de seleção',
 	'name' => 'field_'.$key_field_name.'_'.$widget,
-	'type' => 'text',
+	'type' => 'select',
 	'instructions' => '',
 	'required' => 0,
 	'conditional_logic' => 0,
@@ -13,9 +13,12 @@ $field = array (
 		'class' => '',
 		'id' => '',
 		),
-	'default_value' => '',
+	'choices' => array(),
+	'default_value' => array (),
+	'allow_null' => 0,
+	'multiple' => 1,
+	'ui' => 1,
+	'ajax' => 0,
+	'return_format' => 'value',
 	'placeholder' => '',
-	'prepend' => '',
-	'append' => '',
-	'maxlength' => '',
 	);

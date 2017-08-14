@@ -2,9 +2,9 @@
 
 $field = array (
 	'key' => 'field_'.$key_field_name.'_'.$widget.'_key',
-	'label' => 'Campo de texto',
+	'label' => 'Campo de cor',
 	'name' => 'field_'.$key_field_name.'_'.$widget,
-	'type' => 'text',
+	'type' => 'color_picker',
 	'instructions' => '',
 	'required' => 0,
 	'conditional_logic' => 0,
@@ -13,9 +13,5 @@ $field = array (
 		'class' => '',
 		'id' => '',
 		),
-	'default_value' => '',
-	'placeholder' => '',
-	'prepend' => '',
-	'append' => '',
-	'maxlength' => '',
+	'default_value' => '#ee434c',
 	);
