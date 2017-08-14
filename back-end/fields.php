@@ -46,7 +46,10 @@ Class get_fields_acf_widgets {
 				$key_field = explode('__',$key_field);
 
 
-				include plugin_dir_path( __FILE__ ).'fields/'.$key_field[0].'.php';
+				$dir = plugin_dir_path( __FILE__ ).'fields/'.$key_field[0].'.php';
+				if(file_exists($dir)){
+					include $dir;
+				}
 
 				$fields_return[] = array_merge($field,$fd);;
 
