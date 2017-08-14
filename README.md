@@ -1,8 +1,8 @@
 #**Widgets ACF**#
+
 ![#](https://img.shields.io/badge/release-v1.0.0-blue.svg?style=flat-square)
 ![#](https://img.shields.io/badge/Front--end-50%25-brightgreen.svg?style=flat-square)
 ![#](https://img.shields.io/badge/Back--end-90%25-yellow.svg?style=flat-square)
-![#](https://img.shields.io/badge/license-ISC-lightgrey.svg?style=flat-square)
 
 ---
 
