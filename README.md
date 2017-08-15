@@ -25,7 +25,8 @@ Siga o tutorial a seguir para criar e personalizar seu widget:
 4. Pronto, agora você ja pode editar e criar widgets para seu tema.
 
 ### Como criar campos para um widget
-Como pode observar em um dos widgets, para definir os campos que serão utilizados basta utilizar os seguintes parametros que possuem o ACF: 
+Como pode observar em um dos widgets do plugin, para definir os campos que serão criados, basta criar os seguintes parametros na variavel $fields como na documentação do ACF:
+
 ** coloque (__) para duplicar campos exemplo: ['text__1'], ['text__2']
 
 ### icone widget
