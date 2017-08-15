@@ -158,6 +158,7 @@
 	height: 550px;
 	background: rgba(255,255,255,1);
 	border-radius: 5px;
+	overflow-y: scroll;
 }
 
 #widget_acf_box_light .acf_box_widgets_content .select2-container {

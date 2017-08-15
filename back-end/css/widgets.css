@@ -35,10 +35,10 @@
 .acf-field-the-contents.column_2_2 .acf-flexible-content .values .layout {
 	width: 31%;
 }
+
 .acf-field-the-contents.column_2_2 .acf-flexible-content .values .layout:nth-child(even) {
 	width: 62%;
 }
-
 
 .acf-field-the-contents.column_3 .acf-flexible-content .values .layout {
 	width: 31%;
