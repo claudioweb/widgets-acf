@@ -4,7 +4,7 @@
 ![#](https://img.shields.io/badge/Back--end-90%25-yellow.svg?style=flat-square)
 
 ---
-### Como funciona?
+## Como funciona?
 ---
 
 Acf widgets foi desenvolvido para um projeto em que transforma seu tema em um projeto totalmente modular, utilizando o conceito de widgets drag in drop, pondendo controlar o conteúdo de forma dinamica com a ajuda das grids do bootstrap nas seguintes visualizações do wordpress:
