@@ -50,7 +50,7 @@ Coloque **(__) 2x underline** para duplicar campos exemplo: **['text__1'], ['tex
 **$fields['image__']['label']** = 'Nome do campo';
 
 
-### Para trazer os valores dos campos criados basta trazer a variavel $fields no index.php do seu widget:
+### Trazer os valores dos campos criados em $fields:
 
 **/widgets-templates/widget_new/index.php**
 ## var_dump(**$fields**);
