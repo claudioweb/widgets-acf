@@ -28,7 +28,7 @@ Como pode observar em um dos widgets do plugin no arquivo **functions.php**, par
 
 
 ### Key field - (não é obrigatório)
-* $fields['text__']['key'] = 'key_text_widget_novo';
+* $fields['text__1']['key'] = 'key_text_widget_novo';
 * $fields['text__2']['key'] = 'key_text_widget_novo_2'; 
 
 
