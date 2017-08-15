@@ -30,7 +30,7 @@ Como pode observar em um dos widgets do plugin no arquivo **functions.php**, par
 
 ### icone widget
 **$fields['icon']** = 'Class do font awesome (fa fa-cube)';
-**$fields['text__']['key']** = 'key_text_widget_novo'; *não é obrigatório
+**$fields['text__']['key']** = 'key_text_widget_novo'; **não é obrigatório
 
 #### Campo de texto
 **$fields['text__']['label']** = 'Nome do campo';
