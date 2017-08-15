@@ -149,7 +149,7 @@ Class AcfAction {
 
 	public function get_folders_widgets(){
 
-		$path = plugin_dir_path( __FILE__ )."../widgets-acf";
+		$path = plugin_dir_path( __FILE__ )."../widgets-templates";
 		$dir = new DirectoryIterator($path);
 
 		$dir_plugin = array();
@@ -184,7 +184,7 @@ Class AcfAction {
 
 	public function get_folders_widgets_theme($widgets,$dir_plugin){
 
-		$path =  get_template_directory()."/widgets-acf";
+		$path =  get_template_directory()."/widgets-templates";
 
 		if(is_dir($path)){
 
