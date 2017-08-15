@@ -66,5 +66,4 @@ Coloque **(__) 2x underline** para duplicar campos exemplo: **['text__1'], ['tex
 
 ### Trazer os valores dos campos criados em $fields:
 
-**/widgets-templates/widget_new/index.php**
-#### var_dump(**$fields**);
+/widgets-templates/widget_new/**index.php -> var_dump(**$fields**);**
