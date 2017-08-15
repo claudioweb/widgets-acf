@@ -28,40 +28,44 @@ Como pode observar em um dos widgets do plugin no arquivo **functions.php**, par
 
 
 ### Key field - (não é obrigatório)
-**$fields['text__']['key']** = 'key_text_widget_novo'; 
+* **$fields['text__']['key']** = 'key_text_widget_novo';
+* **$fields['text__2']['key']** = 'key_text_widget_novo_2'; 
 
 
 
 ### Campo de texto - ['text']
-**$fields['text__']['label']** = 'Nome do campo';
+* **$fields['text__']['label']** = 'Nome do campo';
 
 
 
 ### Campo de Seleção - ['select']
-**$fields['select__']['label']** = 'Nome do campo';<br>
-**$fields['select__']['choices']** = array(1 => 'opção 1', 2 => 'opção 2');
+* **$fields['select__']['label']** = 'Nome do campo';<br>
+* **$fields['select__']['choices']** = array(1 => 'opção 1', 2 => 'opção 2');
 
 
 
 ### Campo de textarea - ['textarea']
-**$fields['textarea__']['label']** = 'Nome do campo';
+* **$fields['textarea__']['label']** = 'Nome do campo';
+
 
 
 ### Campo de color_picker - ['color_picker']
-**$fields['color_picker__']['label']** = 'Nome do campo';
+* **$fields['color_picker__']['label']** = 'Nome do campo';
 
 
 
 ### Campo de image - ['image']
-**$fields['image__']['label']** = 'Nome do campo';
+* **$fields['image__']['label']** = 'Nome do campo';
+
 
 Quando precisar criar mais de um campo do mesmo tipo, apenas adicione "__" a frente seguido de uma string identificadora
 * (__) 2x underline para duplicar campos exemplo: **['text__1'], ['text__2']**
 
+
 ## Opções do widget
 
 ### icone widget
-**$fields['icon'] ** = 'Class do font awesome (fa fa-cube)';
+* **$fields['icon']** = 'Class do font awesome (fa fa-cube)';
 
 
 ### Trazer os valores dos campos criados em $fields:
