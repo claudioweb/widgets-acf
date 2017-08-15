@@ -168,7 +168,7 @@ Class AcfAction {
 				$widgets_fields = get_fields_acf_widgets::get_field($widget_name,$fields);
 
 				if(!empty($widgets_fields)){
-					$widgets[] = $widgets_fields;
+					$widgets[$widget_name] = $widgets_fields;
 				}
 
 				$dir_plugin[] = $fileinfo->getFilename();
@@ -192,17 +192,18 @@ Class AcfAction {
 
 			foreach ($dir as $fileinfo) {
 
-				if(!in_array($fileinfo->getFilename(), $dir_plugin)){
+				if(in_array($fileinfo->getFilename(), $dir_plugin)){
+					unset($widgets[$fileinfo->getFilename()]);
+				}
 
-					if ($fileinfo->isDir() && !$fileinfo->isDot()) {
+				if ($fileinfo->isDir() && !$fileinfo->isDot()) {
 
-						require($path."/".$fileinfo->getFilename()."/functions.php");
+					require($path."/".$fileinfo->getFilename()."/functions.php");
 
-						$widget_name = $fileinfo->getFilename();
+					$widget_name = $fileinfo->getFilename();
 
-						$widgets[] = get_fields_acf_widgets::get_field($widget_name,$fields);
+					$widgets[$widget_name] = get_fields_acf_widgets::get_field($widget_name,$fields);
 
-					}
 				}
 			}
 		}
