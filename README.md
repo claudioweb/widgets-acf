@@ -30,7 +30,7 @@ Coloque **(__) 2x underline** para duplicar campos exemplo: **['text__1'], ['tex
 
 ### icone widget
 **$fields['icon']** = 'Class do font awesome (fa fa-cube)';
-**$fields['text__']['key']** = 'key_text_widget_novo'; **não é obrigatório
+**$fields['text__']['key']** = 'key_text_widget_novo';
 
 
 ### Campo de texto
