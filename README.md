@@ -30,21 +30,25 @@ Coloque **(__) 2x underline** para duplicar campos exemplo: **['text__1'], ['tex
 
 ### icone widget
 **$fields['icon']** = 'Class do font awesome (fa fa-cube)';
-
 **$fields['text__']['key']** = 'key_text_widget_novo'; **não é obrigatório
+
 
 ### Campo de texto
 **$fields['text__']['label']** = 'Nome do campo';
+
 
 ### Campo de select
 **$fields['select__']['label']** = 'Nome do campo';
 **$fields['select__']['choices']** = array(1 => 'opção 1', 2 => 'opção 2');
 
+
 ### Campo de textarea
 **$fields['textarea__']['label']** = 'Nome do campo';
 
+
 ### Campo de color_picker
 **$fields['color_picker__']['label']** = 'Nome do campo';
+
 
 ### Campo de image
 **$fields['image__']['label']** = 'Nome do campo';
@@ -53,4 +57,4 @@ Coloque **(__) 2x underline** para duplicar campos exemplo: **['text__1'], ['tex
 ### Trazer os valores dos campos criados em $fields:
 
 **/widgets-templates/widget_new/index.php**
-## var_dump(**$fields**);
+#### var_dump(**$fields**);
