@@ -21,7 +21,7 @@ Siga o tutorial a seguir para criar e personalizar um widget:
 1. Acesse a pasta do plugin em **wp-content/plugins/widgets-acf**
 2. Copie a pasta **widgets-templates**
 3. Cole a pasta **widgets-templates** dentro do seu tema ao lado da **/wp-content/themes/tema -> index.php**
-4. Pronto, agora você ja pode editar e criar widgets para seu tema dentro do diretório **/widgets-templates** no seu tema.
+4. Pronto, agora você ja pode editar e criar widgets para seu tema dentro do diretório **themes/seu-tema/widgets-templates** no seu tema.
 
 ## Como criar campos no wp-admin para um widget
 Como pode observar em um dos widgets do plugin no arquivo **functions.php**, para definir os campos que serão criados, basta criar os seguintes parametros na variavel ** $fields ** como na documentação do ACF:
