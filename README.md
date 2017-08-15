@@ -26,10 +26,11 @@ Siga o tutorial a seguir para criar e personalizar um widget:
 ### Como criar campos no wp-admin para um widget
 Como pode observar em um dos widgets do plugin no arquivo **functions.php**, para definir os campos que serão criados, basta criar os seguintes parametros na variavel **$fields** como na documentação do ACF:
 
-** Coloque (__) 2x underline para duplicar campos exemplo: ['text__1'], ['text__2']
+Coloque **(__) 2x underline** para duplicar campos exemplo: **['text__1'], ['text__2']**
 
 ### icone widget
 **$fields['icon']** = 'Class do font awesome (fa fa-cube)';
+
 **$fields['text__']['key']** = 'key_text_widget_novo'; **não é obrigatório
 
 #### Campo de texto
