@@ -53,4 +53,5 @@ Coloque **(__) 2x underline** para duplicar campos exemplo: **['text__1'], ['tex
 ### Para trazer os valores dos campos criados basta trazer a variavel $fields no index.php do seu widget:
 
 **index.php**
+
 ##var_dump(**$fields**);
