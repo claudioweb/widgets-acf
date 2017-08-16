@@ -7,11 +7,11 @@
 ## Como funciona?
 ---
 
-Acf widgets foi desenvolvido para um projeto em que transforma seu tema em um projeto totalmente modular, utilizando o conceito de widgets drag in drop, pondendo controlar o conteúdo de forma dinamica com a ajuda das grids do bootstrap nas seguintes visualizações do wordpress:
+ACF Widgets foi desenvolvido para criação de temas modulares de WordPress. Utilizando o conceito de "Widgets Drag and Drop", o plugin torna possível controlar o conteúdo de forma dinâmica (utilizando as grids do bootstrap) nas seguintes visualizações do WordPress:
 
-* **pages** >= seleciona página a página que possuirá widgets de conteudo.
-* **post_types** >= podendo selecionar um ou mais post_type via painel. (post - padrão)
-* **taxonomies** >= podendo selecionar a taxonomia via painel.
+* **pages** >= Podendo selecionar a página que possuirá widgets de conteudo.
+* **post_types** >= Podendo selecionar um ou mais post_type via painel. (post - padrão)
+* **taxonomies** >= Podendo selecionar a taxonomia via painel.
 
 
 ## Personalize seu próprio widget
@@ -20,11 +20,11 @@ Siga o tutorial a seguir para criar e personalizar um widget:
 
 1. Acesse a pasta do plugin em **wp-content/plugins/widgets-acf**
 2. Copie a pasta **widgets-templates**
-3. Cole a pasta **widgets-templates** dentro do seu tema ao lado da **/wp-content/themes/tema -> index.php**
+3. Cole a pasta **widgets-templates** na raiz de seu tema ao lado da **/wp-content/themes/seu-tema -> index.php**
 4. Pronto, agora você ja pode editar e criar widgets para seu tema dentro do diretório <br> **themes/seu-tema/widgets-templates** no seu tema.
 
 ## Como criar campos no wp-admin para um widget
-Como pode observar em um dos widgets do plugin no arquivo **functions.php**, para definir os campos que serão criados, basta criar os seguintes parametros na variavel ** $fields ** como na documentação do ACF:
+Como pode observar em um dos widgets do plugin no arquivo **functions.php**, para definir os campos que serão criados, basta criar os seguintes parâmetros na variável ** $fields ** como na documentação do ACF:
 
 
 ### Key field - (não é obrigatório)
@@ -59,8 +59,8 @@ Como pode observar em um dos widgets do plugin no arquivo **functions.php**, par
 * $fields['image__']['label'] = 'Nome do campo';
 
 
-Quando precisar criar mais de um campo do mesmo tipo, apenas adicione "__" a frente seguido de uma string identificadora
-* (__) 2x underline para duplicar campos exemplo: **['text__1'], ['text__2']**
+Quando for necessário criar mais de um campo do mesmo tipo, apenas adicione "__" (2x underline) ,seguido de uma string identificadora, a frente do tipo do campo, como no exemplo que segue:
+**['text__1'], ['text__2']**
 
 
 ## Opções do widget
