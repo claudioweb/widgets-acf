@@ -192,12 +192,8 @@ Class AcfAction {
 
 			foreach ($dir as $fileinfo) {
 
-				if(in_array($fileinfo->getFilename(), $dir_plugin)){
-					unset($widgets[$fileinfo->getFilename()]);
-				}
-
 				if ($fileinfo->isDir() && !$fileinfo->isDot()) {
-
+					$fields=array();
 					require($path."/".$fileinfo->getFilename()."/functions.php");
 
 					$widget_name = $fileinfo->getFilename();

@@ -1,25 +1,25 @@
 jQuery(function(){
 
-    add_layout();
-	set_widget_light_box();
-
-	
+  add_layout();
+  set_widget_light_box();
 
 });
 
 function add_layout(){
-    jQuery('a[data-event="add-layout"]').click(function(){
-        console.log('clicou add layout');
+  jQuery('div[data-key="field_the_contents"]').find('a[data-event="add-layout"], a[data-name="add-layout"]').click(function(){
+    console.log('clicou add layout');
+
+    setTimeout(function(){
+
+      jQuery(".acf-fc-popup li a").click(function(){
+        console.log('layout adicionado');
         setTimeout(function(){
-            jQuery(".acf-fc-popup li a").click(function(){
-                console.log('layout adicionado');
-                setTimeout(function(){
-                   set_widget_light_box();
-                   console.log('lightbox criado');
-               },500);
-            });
-        },500);
-    });
+         set_widget_light_box();
+         console.log('lightbox criado');
+       },500);
+      });
+    },500);
+  });
 }
 
 function set_widget_light_box(){
@@ -34,6 +34,8 @@ function set_widget_light_box(){
 
       var values_input = jQuery(this).parent().find('.acf-fields');
 
+      console.log(values_input.html());
+
       values_input.find('select').prop('disabled', false);
 
       values_input.find('.select2-container').remove();
@@ -42,9 +44,9 @@ function set_widget_light_box(){
       jQuery('#widget_acf_box_light').html('<div class="acf_box_widgets_content"></div>');
       jQuery('.acf_box_widgets_content')
       .html('<h1>'+
-         this_click.find('.acf-fc-layout-handle').text()+
-         '</h1><div class="close fa fa-times"></div>'+values_input.html()
-         );
+       this_click.find('.acf-fc-layout-handle').text()+
+       '</h1><div class="close fa fa-times"></div>'+values_input.html()
+       );
 
       jQuery('.acf_box_widgets_content .wp-picker-container').remove();
 
@@ -78,9 +80,9 @@ function set_widget_light_box(){
     		jQuery(this_click).parent().find('.show-if-value img').attr('src',img_new);
         jQuery(this_click).find('[name="'+name+'"]').val(jQuery(this).val());
         jQuery(this_click).find('[name="'+name+'"]').text(jQuery(this).val());
-    		jQuery(this_click).find('[name="'+name+'"]').attr('value',jQuery(this).val());
-    		console.log(jQuery(this_click).find('[name="'+name+'"]').val());
-    	});
+        jQuery(this_click).find('[name="'+name+'"]').attr('value',jQuery(this).val());
+        console.log(jQuery(this_click).find('[name="'+name+'"]').val());
+      });
 
     	jQuery('.acf_box_widgets_content').find('select').select2();
 
@@ -102,4 +104,4 @@ function set_widget_light_box(){
 
     });
 
-}
+  }

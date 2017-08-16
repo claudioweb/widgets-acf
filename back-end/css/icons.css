@@ -22,6 +22,7 @@
 	font-size: 80px;
 }
 
+
 [data-key='field_linha_widgets'] .acf-fc-layout-order {
 	display: none !important;
 }
@@ -30,7 +31,9 @@
 	display: none;
 }
 
-[data-key='field_linha_widgets'] [data-event='collapse-layout'], [data-key='field_linha_widgets'] .acf-fc-layout-controlls [data-event='add-layout'] {
+[data-key='field_linha_widgets'] [data-event='collapse-layout'], 
+[data-key='field_linha_widgets'] .acf-fc-layout-controlls [data-event='add-layout'], 
+[data-key='field_the_contents'] a[data-name='collapse-layout'] {
 	display: none !important;
 }
 
@@ -40,33 +43,32 @@
 	right: 0;
 }
 
-[data-key='field_linha_widgets'] .acf-flexible-content .acf-fc-popup {
-	position: fixed;
+.acf-fc-popup {
+	position: fixed !important;
 	width: 800px;
 	height: 550px;
-	top: 10%;
-	left: 23%;
-	background:rgba(0,0,0,0.9);
+	top: 10% !important;
+	left: 23% !important;
+	background:rgba(0,0,0,0.9) !important;
 	padding-left:27px !important;
 	margin:0 !important;
 }
 
-[data-key='field_linha_widgets'] .acf-flexible-content .acf-fc-popup:before {
+.acf-fc-popup:before {
 	border: 0 none !important;
 }
 
-[data-key='field_linha_widgets'] .acf-flexible-content .acf-fc-popup li {
+.acf-fc-popup li {
 	position: relative;
-	float: none;
-	white-space: nowrap;
-	float: left;
+	white-space: nowrap !important;
+	float: left !important;
 	width: 160px;
 	height: 80px;
 	border: 1px #fff solid;
-	margin: 15px;
+	margin: 15px !important;
 }
 
-[data-key='field_linha_widgets'] .acf-flexible-content .acf-fc-popup li a {
+.acf-fc-popup li a {
 	padding: 20% 12px;
 	text-align: center;
 }
@@ -173,6 +175,10 @@
 	top: 25px;
 }
 
+#widget_acf_box_light .acf_box_widgets_content .acf-field.fa:before {
+	margin-top: -95px;
+}
+
 #widget_acf_box_light .acf_box_widgets_content h1 {
 	padding-left: 60px;
 	padding-bottom: 25px;
@@ -198,10 +204,11 @@
 }
 
 #widget_acf_box_light .acf_box_widgets_content .acf-field .acf-label {
-	font-size:20px;
+	font-size: 20px;
 	line-height: 17px;
 }
 
 #widget_acf_box_light .acf_box_widgets_content .acf-field select {
 	display: block;
+	width: 100% !important;
 }

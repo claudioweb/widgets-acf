@@ -53,6 +53,8 @@ Class get_fields_acf_widgets {
 
 				$fields_return[] = array_merge($field,$fd);;
 
+				$icon = 'not-icon';
+
 			}
 
 		}

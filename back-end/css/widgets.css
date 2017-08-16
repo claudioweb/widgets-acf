@@ -108,6 +108,11 @@
 [data-key='field_linha_widgets'] .acf-table .acf-label, [data-key='field_linha_widgets'] .acf-table .acf-input {
 	width:100% !important;
 	padding: 15px 10px !important;
+	margin-left:0 !important;
+}
+
+[data-key='field_linha_widgets'] .acf-fields.-left > .acf-field {
+	padding-left:0 !important;
 }
 
 [data-key='field_linha_widgets'] .acf-table .acf-fields.-left > .acf-field:before {
@@ -146,3 +151,5 @@
 	margin-left: -305%;
 	margin-top:15px;
 }
+
+/* ACF 5.6 */
