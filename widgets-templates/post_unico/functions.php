@@ -2,8 +2,27 @@
 
 $fields['icon'] = 'fa fa-file-image-o';
 
-$fields['text']['key'] = 'Futito';
-$fields['text']['label'] = 'Futito';
-$fields['text']['instructions'] = 'aqui vem qualquer campo';
+$fields['select']['label'] = 'Selecione um post';
+$fields['select']['choices'] = post_unico_widgets_acf::get_posts();
+
+Class post_unico_widgets_acf {
+
+	public function get_posts(){
+		
+		$posts_return = array();
+
+		$args = array('posts_per_page'=>-1,	'order'=>'ASC', 'orderby'=>'post_date');
+
+		$posts = get_posts($args);
+
+		foreach ($posts as $key => $post) {
+			$posts_return[$post->ID] = $post->post_title;
+		}
+
+		return $posts_return;
+	}
+	
+}
+
 
 ?>

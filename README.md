@@ -41,6 +41,7 @@ Como pode observar em um dos widgets do plugin no arquivo **functions.php**, par
 ### Campo de Seleção - ['select']
 * $fields['select__']['label'] = 'Nome do campo';
 * $fields['select__']['choices'] = array(1 => 'opção 1', 2 => 'opção 2');
+* $fields['select__']['multiple'] = 1; // para multipla seleção
 
 
 

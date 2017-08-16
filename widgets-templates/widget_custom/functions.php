@@ -2,7 +2,7 @@
 
 $fields['icon'] = 'fa fa-picture-o';
 
-$fields['image']['label'] = 'imagem';
-$fields['color_picker']['label'] = 'cor';
-$fields['text']['label'] = 'Título';
-$fields['text__1']['label'] = 'Link';
+$fields['image']['label'] = 'Imagem destacada';
+$fields['color_picker']['label'] = 'Cor';
+$fields['text']['label'] = 'Título do widget';
+$fields['text__1']['label'] = 'Link URL';
