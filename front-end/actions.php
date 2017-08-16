@@ -60,18 +60,18 @@ Class ActionWidgets {
 
 	public function get_class_widget($fields){
 
-		$layout_widget = $fields['layout'];
+		$layout_widget = $fields['acf_fc_layout'];
 
 		// show mobile ?
 		$show_mobile = $fields['field_radio_mobile_'.$layout_widget.'_key'];
-		if($show_mobile==0){
+
+		if(empty($show_mobile)){
 			$show_mobile = 'hidden-xs';
 		}else{
 			$show_mobile = '';
-
-
-			return array($show_mobile);
 		}
+
+		return $show_mobile;
 		
 	}
 

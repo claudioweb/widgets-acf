@@ -20,6 +20,7 @@ Class TemplatesWidgets {
 					$count_column = 0;
 				}
 
+
 				$html .='<article class="'.$w_content['columns'][$count_column].' '.$w_content['class'].'">';
 
 				ob_start();
