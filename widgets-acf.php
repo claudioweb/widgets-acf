@@ -15,6 +15,8 @@ class WidgetsWidgets {
 
 		add_action( 'admin_menu', array( $this, 'add_admin_menu' ) );
 		add_action( 'admin_enqueue_scripts', array($this, 'load_custom_wp_admin_style') );
+		
+		add_action( 'wp_enqueue_scripts', array($this, 'load_theme_widget_style') );
 	}
 
 	/*=========================================================
@@ -47,6 +49,20 @@ class WidgetsWidgets {
 		wp_enqueue_script( 'custom_wp_admin_js', plugins_url('back-end/js/admin.js', __FILE__) );
 		wp_enqueue_script( 'custom_wp_widgets_js', plugins_url('back-end/js/widgets.js', __FILE__) );
 		
+	}
+
+	public function load_theme_widget_style() {
+
+		$show_bootstrap = get_field('widgets_acf_show_bootstrap','options');
+		if($show_bootstrap==true){
+			wp_enqueue_style( 'front_end_widget_acf_bootstrap_css', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css');
+			wp_enqueue_script( 'front_end_widget_acf_bootstrap_js', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js');
+		}
+
+		$show_css = get_field('widgets_acf_show_css','options');
+		if($show_css==true){
+			wp_enqueue_style( 'front_end_widget_acf', plugins_url('front-end/css/widget-acf.css', __FILE__) );
+		}
 	}
 
 }

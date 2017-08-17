@@ -163,7 +163,7 @@ Class AcfAction {
 				$fields = array();
 				require($path."/".$fileinfo->getFilename()."/functions.php");
 
-				$widget_name = $fileinfo->getFilename();
+				$widget_name = str_replace('-', '_', $fileinfo->getFilename());
 
 				$widgets_fields = get_fields_acf_widgets::get_field($widget_name,$fields);
 
@@ -196,7 +196,7 @@ Class AcfAction {
 					$fields=array();
 					require($path."/".$fileinfo->getFilename()."/functions.php");
 
-					$widget_name = $fileinfo->getFilename();
+					$widget_name =  str_replace('-', '_',$fileinfo->getFilename());
 
 					$widgets[$widget_name] = get_fields_acf_widgets::get_field($widget_name,$fields);
 

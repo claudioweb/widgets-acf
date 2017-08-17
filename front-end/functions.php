@@ -21,13 +21,22 @@ Class TemplatesWidgets {
 				}
 
 
-				$html .='<article class="'.$w_content['columns'][$count_column].' '.$w_content['class'].'">';
+				$html .='<article class="widget_acf '.$w_content['columns'][$count_column].' '.$w_content['class'].'">';
 
 				ob_start();
 
 				$layout_widget = str_replace('_widget_acf', '', $w_content['layout']);
+				$layout_widget = str_replace('_','-',$layout_widget);
+
 				$fields = $w_content['content'];
-				include plugin_dir_path( __FILE__ ).'../widgets-templates/'.$layout_widget.'/index.php';
+
+				$dir_widget = get_template_directory().'/widgets-templates/'.$layout_widget;
+
+				if(!is_dir($dir_widget)){
+					$dir_widget = plugin_dir_path( __FILE__ ).'../widgets-templates/'.$layout_widget;
+				}
+
+				include $dir_widget."/index.php";
 
 				$html .= ob_get_clean();
 
