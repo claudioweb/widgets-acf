@@ -59,6 +59,16 @@ Como pode observar em um dos widgets do plugin no arquivo **functions.php**, par
 * $fields['image__']['label'] = 'Nome do campo';
 
 
+
+### Campo de Repetição - ['repeater']
+* $fields['repeater__']['label'] = 'Nome do campo';
+* $fields['repeater__']['sub_fields']['text__']['label'] = 'Campo texto de repetição';
+* $fields['repeater__']['sub_fields']['imagem__']['label'] = 'Campo imagem de repetição';
+
+### Campo de Repetição 2x - ['repeater']
+$fields['repeater__']['sub_fields']['repeater__']['sub_fields']['text__']['label'] = 'Título repetidor 2x';
+
+
 Quando precisar criar mais de um campo do mesmo tipo, apenas adicione "__" a frente seguido de uma string identificadora
 * (__) 2x underline para duplicar campos exemplo: **['text__1'], ['text__2']**
 
