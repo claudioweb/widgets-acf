@@ -81,6 +81,10 @@ function set_widget_light_box(){
         jQuery(this_click).find('[name="'+name+'"]').val(jQuery(this).val());
         jQuery(this_click).find('[name="'+name+'"]').text(jQuery(this).val());
         jQuery(this_click).find('[name="'+name+'"]').attr('value',jQuery(this).val());
+
+        jQuery(this).attr('value',jQuery(this).val());
+        jQuery(this).text(jQuery(this).val());
+
         console.log(jQuery(this_click).find('[name="'+name+'"]').val());
       });
 
@@ -99,7 +103,14 @@ function set_widget_light_box(){
     	});
 
     	jQuery(".acf_box_widgets_content .close").click(function(){
+
+        jQuery(this_click).find(".acf-field-repeater").each(function(){
+          var data_key = jQuery(this).attr('data-key');
+          jQuery(this).html(jQuery(".acf_box_widgets_content").find('.acf-field-repeater[data-key="'+data_key+'"]').html());
+        });
+
     		jQuery('#widget_acf_box_light').remove();
+
     	});
 
     });

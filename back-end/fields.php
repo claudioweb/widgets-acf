@@ -45,13 +45,17 @@ Class get_fields_acf_widgets {
 
 				$key_field = explode('__',$key_field);
 
-
 				$dir = plugin_dir_path( __FILE__ ).'fields/'.$key_field[0].'.php';
 				if(file_exists($dir)){
 					include $dir;
 				}
 
-				$fields_return[] = array_merge($field,$fd);;
+				if($key_field[0]=='repeater'){
+
+					$fd = get_fields_acf_widgets::sub_fields($fd);
+				}
+
+				$fields_return[] = array_merge($field,$fd);
 
 				$icon = 'not-icon';
 
@@ -62,6 +66,40 @@ Class get_fields_acf_widgets {
 		// var_dump($fields_return);
 
 		return $fields_return;
+
+	}
+
+	public function sub_fields($fd){
+
+
+		$subs_fields = array();
+
+		foreach ($fd['sub_fields'] as $key_sub => $sub) {
+
+			$key_field_name = $key_sub.'_sub';
+
+			$key_sub = explode('__',$key_sub);
+
+			$dir = plugin_dir_path( __FILE__ ).'fields/'.$key_sub[0].'.php';
+			if(file_exists($dir)){
+				include $dir;
+			}
+
+			$subs_fields[] = array_merge($field,$sub);
+		}
+
+		$fd['sub_fields'] = $subs_fields;
+
+		$sub_sub = array();
+		foreach ($fd['sub_fields'] as $field) {
+			if($field['type']=='repeater'){
+				$sub_sub[] = get_fields_acf_widgets::sub_fields($field);
+			}
+		}
+
+		$fd['sub_fields'] = array_merge($fd['sub_fields'],$sub_sub);
+
+		return $fd;
 
 	}
 

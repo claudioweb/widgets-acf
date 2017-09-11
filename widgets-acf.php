@@ -69,7 +69,7 @@ class WidgetsWidgets {
 
 function widgetsWidgets_init() {
 
-	global $widgets, $acf_action, $actions;
+	global $widgets, $acf_action, $actions, $duplicate;
 
 	$widgets = new WidgetsWidgets();
 	$plugin_nome = $widgets::add_admin_menu();
@@ -83,6 +83,9 @@ function widgetsWidgets_init() {
 
 	require("front-end/actions.php");
 	$actions = new ActionWidgets();
+
+	require("back-end/duplicate.php");
+	$duplicate = new Duplicate_acf_widgets();
 }
 
 if( function_exists('acf_add_local_field_group') ){
