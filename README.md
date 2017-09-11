@@ -69,6 +69,8 @@ Como pode observar em um dos widgets do plugin no arquivo **functions.php**, par
 $fields['repeater__']['sub_fields']['repeater__']['sub_fields']['text__']['label'] = 'Título repetidor 2x';
 
 
+
+### Duplicar campos (sem conflito)
 Quando precisar criar mais de um campo do mesmo tipo, apenas adicione "__" a frente seguido de uma string identificadora
 * (__) 2x underline para duplicar campos exemplo: **['text__1'], ['text__2']**
 
