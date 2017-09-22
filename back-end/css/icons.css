@@ -100,38 +100,56 @@
 }
 
 [data-key='field_linha_widgets'] [data-key="field_tamanho_grid"] input[value="1"]{
+	-moz-appearance: none;
+	-webkit-appearance: none;
 	background: url('../layouts_img/column_1.jpg') no-repeat;
 }
 
 [data-key='field_linha_widgets'] [data-key="field_tamanho_grid"] input[value="2"]{
+	-moz-appearance: none;
+	-webkit-appearance: none;
 	background: url('../layouts_img/column_2.jpg') no-repeat;
 }
 
 [data-key='field_linha_widgets'] [data-key="field_tamanho_grid"] input[value="2_1"]{
+	-moz-appearance: none;
+	-webkit-appearance: none;
 	background: url('../layouts_img/column_2_1.jpg') no-repeat;
 }
 
 [data-key='field_linha_widgets'] [data-key="field_tamanho_grid"] input[value="2_2"]{
+	-moz-appearance: none;
+	-webkit-appearance: none;
 	background: url('../layouts_img/column_2_2.jpg') no-repeat;
 }
 
 [data-key='field_linha_widgets'] [data-key="field_tamanho_grid"] input[value="3"]{
+	-moz-appearance: none;
+	-webkit-appearance: none;
 	background: url('../layouts_img/column_3.jpg') no-repeat;
 }
 
 [data-key='field_linha_widgets'] [data-key="field_tamanho_grid"] input[value="3_1"]{
+	-moz-appearance: none;
+	-webkit-appearance: none;
 	background: url('../layouts_img/column_3_1.jpg') no-repeat;
 }
 
 [data-key='field_linha_widgets'] [data-key="field_tamanho_grid"] input[value="4"]{
+	-moz-appearance: none;
+	-webkit-appearance: none;
 	background: url('../layouts_img/column_4.jpg') no-repeat;
 }
 
 [data-key='field_linha_widgets'] [data-key="field_tamanho_grid"] input[value="5"]{
+	-moz-appearance: none;
+	-webkit-appearance: none;
 	background: url('../layouts_img/column_5.jpg') no-repeat;
 }
 
 [data-key='field_linha_widgets'] [data-key="field_tamanho_grid"] input[value="6"]{
+	-moz-appearance: none;
+	-webkit-appearance: none;
 	background: url('../layouts_img/column_6.jpg') no-repeat;
 }
 
