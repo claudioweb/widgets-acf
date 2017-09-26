@@ -45,7 +45,7 @@ function set_widget_light_box(){
       jQuery('.acf_box_widgets_content')
       .html('<h1>'+
        this_click.find('.acf-fc-layout-handle').text()+
-       '</h1><div class="close fa fa-times"></div>'+values_input.html()
+       '</h1><div class="close button">Salvar</div>'+values_input.html()
        );
 
       jQuery('.acf_box_widgets_content .wp-picker-container').remove();
