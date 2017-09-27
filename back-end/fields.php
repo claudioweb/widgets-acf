@@ -85,7 +85,9 @@ Class get_fields_acf_widgets {
 				include $dir;
 			}
 
-			$subs_fields[] = array_merge($field,$sub);
+			if(!empty($field)){
+				$subs_fields[] = array_merge($field,$sub);
+			}
 		}
 
 		$fd['sub_fields'] = $subs_fields;
