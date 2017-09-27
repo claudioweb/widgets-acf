@@ -99,6 +99,12 @@
 	margin-left: 9px;
 }
 
+[data-key='field_linha_widgets'] [data-key="field_tamanho_grid"] input[value="full"]{
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	background: url('../layouts_img/column_full.jpg') no-repeat;
+}
+
 [data-key='field_linha_widgets'] [data-key="field_tamanho_grid"] input[value="1"]{
 	-moz-appearance: none;
 	-webkit-appearance: none;

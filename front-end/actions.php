@@ -40,6 +40,7 @@ Class ActionWidgets {
 
 						$column =  $this->get_column_bs($columns['field_tamanho_grid']);
 
+						$widgets[$grid]['attr'] = $columns['fields_layout_settings'];
 						$widgets[$grid][] = array(
 							'layout' => get_row_layout(), 
 							'content' => get_row(), 
@@ -99,11 +100,18 @@ Class ActionWidgets {
 
 		$column = explode('_',$column);
 
-		if(!empty($columns[0])){
-			$columns[] = 'col-sm-'.$total_grid/intval($column[0]);
+		if($column[0]=='full'){
+			$columns[0]='full width';
 		}else{
-			$columns[0] = 'col-sm-'.$total_grid/intval($column[0]);
+
+			if(!empty($columns[0])){
+				$columns[] = 'col-sm-'.$total_grid/intval($column[0]);
+			}else{
+				$columns[0] = 'col-sm-'.$total_grid/intval($column[0]);
+			}
 		}
+
+
 
 		return $columns;
 

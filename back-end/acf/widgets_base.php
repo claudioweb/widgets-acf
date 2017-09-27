@@ -3,6 +3,8 @@ Class AcfWidget {
 
 	static function get_base(){
 
+		include "fields_layout_settings.php";
+
 		$base_fields = array (
 			'key' => 'group_widgets_acf',
 			'title' => 'Widgets',
@@ -40,6 +42,7 @@ Class AcfWidget {
 								'id' => '',
 								),
 							'choices' => array (
+								'full' => '',
 								'1' => '',
 								'2' => '',
 								'2_1' => '',
@@ -58,6 +61,7 @@ Class AcfWidget {
 							'return_format' => 'value',
 							),
 						1=>array(),
+						1.5=> $fields_layout_settings,
 						2=>array (
 							'key' => 'field_the_contents',
 							'label' => 'Seleção de conteudo',
