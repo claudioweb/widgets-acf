@@ -2,9 +2,9 @@
 
 $field = array (
 	'key' => 'field_'.$key_field_name.'_'.$widget.'_key',
-	'label' => 'Campo de Imagem',
+	'label' => 'Campo de Galeria',
 	'name' => 'field_'.$key_field_name.'_'.$widget,
-	'type' => 'image',
+	'type' => 'gallery',
 	'instructions' => '',
 	'required' => 0,
 	'conditional_logic' => 0,
@@ -13,8 +13,9 @@ $field = array (
 		'class' => '',
 		'id' => '',
 		),
-	'return_format' => 'array',
-	'preview_size' => 'thumbnail',
+	'min' => '',
+	'max' => '',
+	'insert' => 'append',
 	'library' => 'all',
 	'min_width' => '',
 	'min_height' => '',

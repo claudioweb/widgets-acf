@@ -5,11 +5,7 @@
 			<?php $img = $fields['field_image_widget_custom_key']; ?>
 			<?php if(!empty($img)): ?>
 
-				<?php if(is_array($img)){
-					$img = $img['sizes']['medium'];
-				}else{
-					$img = wp_get_attachment_url($img);
-				} ?>
+				<?php $img = $img['sizes']['medium']; ?>
 
 				<img src="<?php echo $img; ?>" class="img-responsive" alt="<?php echo $fields['field_text_widget_custom_key']; ?>">
 			<?php endif; ?>

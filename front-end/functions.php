@@ -10,29 +10,8 @@ Class TemplatesWidgets {
 
 		foreach ($layout_content as $key => $layout) {
 
-			$style_attr = array();
-			$style_bg = array();
+			include "styles_layout.php";
 
-			$style_attr['padding'] = 'padding: '.
-			$layout['attr']['padding_layout_setting']['padding_top_layout_setting'].'px '.
-			$layout['attr']['padding_layout_setting']['padding_right_layout_setting'].'px '.
-			$layout['attr']['padding_layout_setting']['padding_bottom_layout_setting'].'px '.
-			$layout['attr']['padding_layout_setting']['padding_left_layout_setting'].'px;';
-
-			if(!empty($layout['attr']['imagem_layout_setting'])){ 
-
-				if(is_array($img_bg)){
-					$img_bg = $layout['attr']['imagem_layout_setting']['sizes']['full'];
-				}else{
-					$img_bg = wp_get_attachment_url($layout['attr']['imagem_layout_setting']);
-				}
-			$style_bg['background_image'] = 'background-image: url('.$img_bg.');';
-			$style_bg['background_size'] = 'background-size: 100%;';
-			$style_bg['background_repeat'] = 'background-repeat: no-repeat;';
-			$style_bg['background_position'] = 'background-position: top center;';
-			}
-			$style_bg['background_color'] = 'background-color: '.$layout['attr']['cor_layout_setting'].';';
-			
 			$html .='<div style="'.implode(' ',$style_bg).'">';
 
 			if($layout['attr']['largura_layout_setting']=='container'){
@@ -63,6 +42,8 @@ Class TemplatesWidgets {
 
 					$fields = $w_content['content'];
 
+					$fields = TemplatesWidgets::get_image($fields);
+
 					$dir_widget = get_template_directory().'/widgets-templates/'.$layout_widget;
 
 					if(!is_dir($dir_widget)){
@@ -85,6 +66,38 @@ Class TemplatesWidgets {
 		}
 
 		return $html;
+	}
+
+	static function get_image($fields){
+
+		foreach ($fields as $field_key => $field) {
+			if(strpos($field_key,'image')){
+
+				if(!empty($field)){
+					if(is_array($field)){
+
+						if(!array_key_exists('sizes', $field)){
+							$fields[$field_key] = get_image($field);
+						}
+					}else{
+
+						$id_image = $field;
+
+						$fields[$field_key] = array();
+
+						$images_sizes = get_intermediate_image_sizes();
+
+						foreach ($images_sizes as $size) {
+							
+							$fields[$field_key]['sizes'][$size] = wp_get_attachment_image_src($id_image,$size)[0];
+						}
+
+					}
+				}
+			}
+		}
+		
+		return $fields;
 	}
 }
 

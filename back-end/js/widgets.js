@@ -1,6 +1,7 @@
 jQuery(function(){
 
   add_layout();
+  change_layout();
   set_widget_light_box();
   set_layout_light_box();
 
@@ -24,45 +25,44 @@ function add_layout(){
 }
 
 function change_layout(){
-  jQuery('div[data-key="field_the_contents"]').find(".acf-field[data-name='ajustes_de_layout']").click(function(){
-    console.log('clicou edit layout');
-    console.log('layout adicionado');
+
+  jQuery('a[data-event="add-row"]').click(function(){
+    console.log('linha adicionado');
     setTimeout(function(){
      set_layout_light_box();
      console.log('lightbox criado');
    },500);
+
   });
 }
 
 function set_widget_light_box(){
 
-    // jQuery("[data-key='field_linha_widgets'] .layout .acf-fc-layout-handle").unbind( "click" );
+  jQuery("[data-key='field_linha_widgets'] .layout .acf-fc-layout-handle").click(function(){
 
-    jQuery("[data-key='field_linha_widgets'] .layout .acf-fc-layout-handle").click(function(){
+    jQuery('#widget_acf_box_light').remove();
 
-      jQuery('#widget_acf_box_light').remove();
+    var this_click = jQuery(this).parent();
 
-      var this_click = jQuery(this).parent();
+    var values_input = jQuery(this).parent().find('.acf-fields');
 
-      var values_input = jQuery(this).parent().find('.acf-fields');
+    console.log(values_input.html());
 
-      console.log(values_input.html());
+    values_input.find('select').prop('disabled', false);
 
-      values_input.find('select').prop('disabled', false);
+    values_input.find('.select2-container').remove();
 
-      values_input.find('.select2-container').remove();
+    jQuery('body').append('<div id="widget_acf_box_light"></div>');
+    jQuery('#widget_acf_box_light').html('<div class="acf_box_widgets_content"></div>');
+    jQuery('.acf_box_widgets_content')
+    .html('<h1>'+
+     this_click.find('.acf-fc-layout-handle').text()+
+     '</h1><div class="close button">Salvar</div>'+values_input.html()
+     );
 
-      jQuery('body').append('<div id="widget_acf_box_light"></div>');
-      jQuery('#widget_acf_box_light').html('<div class="acf_box_widgets_content"></div>');
-      jQuery('.acf_box_widgets_content')
-      .html('<h1>'+
-       this_click.find('.acf-fc-layout-handle').text()+
-       '</h1><div class="close button">Salvar</div>'+values_input.html()
-       );
+    jQuery('.acf_box_widgets_content .wp-picker-container').remove();
 
-      jQuery('.acf_box_widgets_content .wp-picker-container').remove();
-
-      var myOptions = {
+    var myOptions = {
     		// you can declare a default color here,
     		// or in the data-default-color attribute on the input
     		defaultColor: false,
@@ -97,6 +97,13 @@ function set_widget_light_box(){
         jQuery(this).attr('value',jQuery(this).val());
         jQuery(this).text(jQuery(this).val());
 
+        var html_file = jQuery(this).parent().find('.file-wrap').html();
+        jQuery(this_click).find('[name="'+name+'"]').parent().removeClass('has-value');
+        jQuery(this_click).find('[name="'+name+'"]').parent().find('.file-wrap').html(html_file);
+        if(jQuery(this).val()!='' && jQuery(this).val()!=0){
+          jQuery(this_click).find('[name="'+name+'"]').parent().addClass('has-value');
+        }
+
         console.log(jQuery(this_click).find('[name="'+name+'"]').val());
       });
 
@@ -125,11 +132,46 @@ function set_widget_light_box(){
 
       });
 
+
+      jQuery('.mce-container-body,.wp-editor-tools, .mce-tinymce, .quicktags-toolbar').remove();
+
+      jQuery('.wp-editor-container textarea').show();
+
+
+      setTimeout(function(){
+        tinymce.remove('.wp-editor-container textarea');
+
+        tinymce.init({
+          selector: 'textarea',
+          setup:function(ed) {
+           ed.on('change', function(e) {
+
+             jQuery('.wp-editor-container textarea').val(ed.getContent());
+             jQuery('.wp-editor-container textarea').text(ed.getContent());
+             jQuery('.wp-editor-container textarea').html(ed.getContent());
+
+           });
+         }
+       });
+
+      },500);
+
+      // jQuery('.mce-first').first().hide();
+
+      jQuery('.acf-date-time-picker').find('input[type="text"]').remove();
+      jQuery('.acf-date-time-picker').find('input[type="hidden"]').attr('type','text');
+      // jQuery('.acf-ui-datepicker').remove();
+
+      jQuery('.acf-date-time-picker').find('input[type="text"]').datetimepicker({
+        altFormat: jQuery('.acf-date-time-picker').attr('data-date_format'),
+        timeFormat: jQuery('.acf-date-time-picker').attr('data-time_format')
+      });
+
     });
 
-  }
+}
 
-  function set_layout_light_box(){
+function set_layout_light_box(){
 
     // jQuery("[data-key='field_linha_widgets'] .layout .acf-fc-layout-handle").unbind( "click" );
 
@@ -233,4 +275,4 @@ function set_widget_light_box(){
 
     });
 
-    }
+}

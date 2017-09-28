@@ -2,9 +2,9 @@
 
 $field = array (
 	'key' => 'field_'.$key_field_name.'_'.$widget.'_key',
-	'label' => 'Campo de Imagem',
+	'label' => 'Upload de arquivo',
 	'name' => 'field_'.$key_field_name.'_'.$widget,
-	'type' => 'image',
+	'type' => 'file',
 	'instructions' => '',
 	'required' => 0,
 	'conditional_logic' => 0,
@@ -14,13 +14,8 @@ $field = array (
 		'id' => '',
 		),
 	'return_format' => 'array',
-	'preview_size' => 'thumbnail',
 	'library' => 'all',
-	'min_width' => '',
-	'min_height' => '',
 	'min_size' => '',
-	'max_width' => '',
-	'max_height' => '',
 	'max_size' => '',
 	'mime_types' => '',
 	);
