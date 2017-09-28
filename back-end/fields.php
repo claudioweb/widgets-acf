@@ -99,7 +99,12 @@ Class get_fields_acf_widgets {
 		$sub_sub = array();
 		foreach ($fd['sub_fields'] as $field) {
 			if($field['type']=='repeater'){
-				$sub_sub[] = get_fields_acf_widgets::sub_fields($field);
+
+				if(empty($key_sub[1])){
+						$key_sub[1] = rand(0,100);
+					}
+
+				$sub_sub[] = get_fields_acf_widgets::sub_fields($field,$key_sub[1]);
 			}
 		}
 
