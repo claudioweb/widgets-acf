@@ -101,8 +101,8 @@ Class get_fields_acf_widgets {
 			if($field['type']=='repeater'){
 
 				if(empty($key_sub[1])){
-						$key_sub[1] = rand(0,100);
-					}
+					$key_sub[1] = rand(0,100);
+				}
 
 				$sub_sub[] = get_fields_acf_widgets::sub_fields($field,$key_sub[1]);
 			}
