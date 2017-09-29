@@ -2,8 +2,8 @@
 
 $fields['icon'] = 'fa fa-picture-o';
 
-$fields['repeater__1']['sub_fields']['image__1']['label'] = 'Imagem destacada';
-// $fields['image']['label'] = 'Imagem destacada ';
+// $fields['repeater__1']['sub_fields']['image__1']['label'] = 'Imagem destacada';
+$fields['image']['label'] = 'Imagem destacada ';
 $fields['color_picker']['label'] = 'Cor';
 $fields['text']['label'] = 'Título do widget';
 $fields['text__1']['label'] = 'Link URL';
