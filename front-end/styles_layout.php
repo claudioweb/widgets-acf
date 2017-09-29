@@ -25,3 +25,7 @@ if(!empty($layout['attr']['imagem_layout_setting'])){
 }
 
 $style_bg['background_color'] = 'background-color: '.$layout['attr']['cor_layout_setting'].';';
+
+$class_setting = $layout['attr']['id_class_layout_setting']['class_layout_setting'];
+
+$id_setting = $layout['attr']['id_class_layout_setting']['id_layout_setting'];

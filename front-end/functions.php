@@ -20,7 +20,7 @@ Class TemplatesWidgets {
 				$html .='<div class="container-fluid">';
 			}
 
-			$html .='<section class="row" style="'.implode(' ',$style_attr).'">';
+			$html .='<section id="'.$id_setting.'" class="row '.$class_setting.'" style="'.implode(' ',$style_attr).'">';
 
 			$count_column = 0;
 
