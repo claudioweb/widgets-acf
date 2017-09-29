@@ -189,7 +189,7 @@ function set_layout_light_box(){
 
       values_input.find('.select2-container').remove();
 
-      jQuery('body').append('<div id="widget_acf_box_light"></div>');
+      jQuery('body').append('<div id="widget_acf_box_light" class="light_s"></div>');
       jQuery('#widget_acf_box_light').html('<div class="acf_box_widgets_content"></div>');
       jQuery('.acf_box_widgets_content')
       .html('<h1>Ajustes de Layout</h1><div class="close button">Salvar</div>'+values_input.html()
