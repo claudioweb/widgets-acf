@@ -1,4 +1,4 @@
-<?php//var_dump($fields); ?>
+<pre><?php var_dump($fields); die(); ?>
 <div class="row">
 	<div class="col-sm-12">
 		<div class="image_widget_custom">

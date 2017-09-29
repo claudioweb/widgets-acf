@@ -71,15 +71,17 @@ Class TemplatesWidgets {
 	static function get_image($fields){
 
 		foreach ($fields as $field_key => $field) {
-			if(strpos($field_key,'image')){
+			
+			if(strpos($field_key,'image') || count($field)>0){
 
 				if(!empty($field)){
 					if(is_array($field)){
 
 						if(!array_key_exists('sizes', $field)){
-							$fields[$field_key] = get_image($field);
+
+							$fields[$field_key] = TemplatesWidgets::get_image($field);
 						}
-					}else{
+					}else if(strpos($field_key,'image')){
 
 						$id_image = $field;
 
