@@ -146,20 +146,24 @@
 	display: none;
 }
 
-/*[data-key='field_linha_widgets'] .acf-repeater .acf-hl li [data-event="add-row"], .acf-repeater .acf-actions [data-event="add-row"] {
-	background: transparent !important;
+[data-key='field_linha_widgets'] .acf-repeater .acf-hl li [data-event="add-row"], .acf-repeater .acf-actions [data-event="add-row"] {
+	/*background: transparent !important;*/
 	border: 0 none !important;
 	box-shadow: inherit !important;
-	color: #000 !important;
+	/*color: #000 !important;*/
 	text-shadow: inherit !important;
 	font-weight: bold;
 	margin-left: -305%;
 	margin-top:15px;
 }
 
+[data-key='field_linha_widgets'] .no-value-message {
+	margin-top: 20px;
+}
+
 .acf-repeater .acf-actions [data-event="add-row"] {
 	margin-right: 44%;
-}*/
+}
 
 /* ACF 5.6 */
 

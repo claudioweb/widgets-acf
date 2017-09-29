@@ -11,7 +11,7 @@ Class AcfWidget {
 			'fields' => array (
 				array (
 					'key' => 'field_linha_widgets',
-					'label' => 'Linha widgets',
+					'label' => 'Layout de widgets',
 					'name' => 'linha-widgets',
 					'type' => 'repeater',
 					'instructions' => '',
@@ -26,7 +26,7 @@ Class AcfWidget {
 					'min' => 1,
 					'max' => 0,
 					'layout' => 'row',
-					'button_label' => 'Adicionar Linha',
+					'button_label' => 'Adicionar Layout',
 					'sub_fields' => array (
 						array(
 							// 'key' => 'field_tamanho_grid',
