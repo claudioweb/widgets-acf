@@ -55,9 +55,9 @@ function set_widget_light_box(){
     jQuery('body').append('<div id="widget_acf_box_light"></div>');
     jQuery('#widget_acf_box_light').html('<div class="acf_box_widgets_content"></div>');
     jQuery('.acf_box_widgets_content')
-    .html('<h1>'+
+    .html('<div class="fixed_box_light"><h1>'+
      this_click.find('.acf-fc-layout-handle').text()+
-     '</h1><div class="close button">Salvar</div>'+values_input.html()
+     '</h1><div class="close button">Salvar</div></div>'+values_input.html()
      );
 
     jQuery('.acf_box_widgets_content .wp-picker-container').remove();
@@ -192,7 +192,7 @@ function set_layout_light_box(){
       jQuery('body').append('<div id="widget_acf_box_light" class="light_s"></div>');
       jQuery('#widget_acf_box_light').html('<div class="acf_box_widgets_content"></div>');
       jQuery('.acf_box_widgets_content')
-      .html('<h1>Ajustes de Layout</h1><div class="close button">Salvar</div>'+values_input.html()
+      .html('<div class="fixed_box_light"><h1>Ajustes de Layout</h1><div class="close button">Salvar</div></div>'+values_input.html()
        );
 
       jQuery('.acf_box_widgets_content .wp-picker-container').remove();
