@@ -5,14 +5,17 @@ jQuery(function(){
 	jQuery('.acf-field-the-contents').parent().parent().parent().parent().parent().find('#postimagediv').hide();
 
 	jQuery('#poststuff, #edittag').fadeIn(function(){
-		set_column_load();
-		set_column();
+		// set_column_load();
+		// set_column();
+
+		load_new_column();
+		change_new_column();
 	});
 
 	jQuery(".button[data-event='add-row']").click(function(){
 		if(jQuery(this).attr('data-event')=='add-row'){
 			setTimeout(function(){
-				set_column();
+				// set_column();
 				add_layout();
 
 			},500);
@@ -47,4 +50,24 @@ function set_column_load(){
 		
 	});
 
+}
+
+function load_new_column(){
+
+	jQuery('.acf-field-the-contents .layout').each(function(){
+
+		var colunagem = jQuery(this).find('.grid_widget_settings select').val();
+
+		jQuery(this).attr("data-widget",colunagem);
+
+	});
+}
+
+function change_new_column(){
+
+	jQuery('.grid_widget_settings select').change(function(){
+		var colunagem = jQuery(this).val();
+
+		jQuery(this).closest('.layout').attr("data-widget",colunagem);
+	});
 }

@@ -32,12 +32,15 @@ Class TemplatesWidgets {
 						$count_column = 0;
 					}
 
+					//v1 $w_content['columns'][$count_column]
 
-					$html .='<article class="widget_acf '.$w_content['columns'][$count_column].' '.$w_content['class'].'">';
+					$layout_widget = str_replace('_widget_acf', '', $w_content['layout']);
+					$columns = $w_content['content']['field_tamanho_grid_desktop_'.$layout_widget.'_widget_acf_key'];
+					
+					$html .='<article class="widget_acf '.$columns.' '.$w_content['class'].'">';
 
 					ob_start();
 
-					$layout_widget = str_replace('_widget_acf', '', $w_content['layout']);
 					$layout_widget = str_replace('_','-',$layout_widget);
 
 					$fields = $w_content['content'];
@@ -72,16 +75,18 @@ Class TemplatesWidgets {
 
 		foreach ($fields as $field_key => $field) {
 			
-			if(strpos($field_key,'image') || count($field)>0){
+			if(strpos($field_key,'image__') || count($field)>0){
 
 				if(!empty($field)){
+
 					if(is_array($field)){
 
 						if(!array_key_exists('sizes', $field)){
 
 							$fields[$field_key] = TemplatesWidgets::get_image($field);
 						}
-					}else if(strpos($field_key,'image')){
+						
+					}else if(strpos($field_key,'image__')){
 
 						$id_image = $field;
 

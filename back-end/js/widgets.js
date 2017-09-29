@@ -16,7 +16,12 @@ function add_layout(){
       jQuery(".acf-fc-popup li a").click(function(){
         console.log('layout adicionado');
         setTimeout(function(){
+          
          set_widget_light_box();
+
+         load_new_column();
+         change_new_column();
+
          console.log('lightbox criado');
        },500);
       });

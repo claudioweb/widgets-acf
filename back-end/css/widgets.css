@@ -126,7 +126,7 @@
 }
 
 [data-key='field_linha_widgets'] .acf-table .acf-label label{
-	margin-top: -10px;
+	margin-top: -11px;
 }
 
 [data-key='field_linha_widgets'] .acf-table .acf-field-text {
@@ -166,19 +166,21 @@
 /* Ajustes de Layout */
 
 .acf-fields .acf-field[data-name="ajustes_de_layout"] {
-	width: 16%;
-	position: absolute;
-	top: 87px;
-	left: -4.7%;
-	height: 25px;
-	font-size: 10px;
-	border: 1px #ddd solid;
-	padding: 0;
-	/* padding-top: 0px; */
-	cursor: pointer;
-	border-radius: 3px;
-	/* margin-top: 0; */
-	color: #fff !important;
+	width: 20%;
+    position: absolute;
+    top: 62px;
+    text-align: center;
+    left: 0%;
+    height: 25px;
+    z-index: 1;
+    font-size: 12px;
+    border: 1px #ddd solid;
+    padding: 0;
+    /* padding-top: 0px; */
+    cursor: pointer;
+    border-radius: 3px;
+    /* margin-top: 0; */
+    color: #fff !important;
 }
 .acf-fields .acf-field[data-name="ajustes_de_layout"]:before {
 	background: #0073aa !important; 
@@ -191,4 +193,29 @@
 .acf_box_widgets_content input[type="number"]{
 	width: auto !important;
 
+}
+
+/* GrID WIDGETS */
+
+#widget_acf_box_light .grid_widget_settings {
+	display: none !important;
+}
+
+.grid_widget_settings {
+	position: absolute !important;
+	z-index: 10;
+	top: 40px;
+    background: transparent !important;
+    height: 0;
+    padding: 0 !important;
+    right: 5px;
+}
+
+.grid_widget_settings .acf-label {
+	display: none;
+}
+
+[data-key='field_linha_widgets'] .acf-table .grid_widget_settings .acf-input {
+	margin-top: 0 !important;
+	padding: 0 !important;
 }

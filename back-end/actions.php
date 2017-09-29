@@ -89,7 +89,7 @@ Class AcfAction {
 			$acf_base['fields'][0]['sub_fields'][2]['wrapper']['class'] = 'column_3';
 
 			foreach ($directory_widgets as $key => $widget) {
-				$widget['sub_fields'][] = $this->set_mobile_fields($widget['key']);
+				$widget['sub_fields'] = $this->set_mobile_fields($widget['sub_fields'],$widget['key']);
 				$acf_base['fields'][0]['sub_fields'][2]['layouts'][] = $widget;
 			}
 
@@ -120,29 +120,10 @@ Class AcfAction {
 		return $pgs;
 	}
 
-	public function set_mobile_fields($prefixed_widget=null){
+	public function set_mobile_fields($sub_fields,$prefixed_widget=null){
 
-		$sub_fields = array (
-			'key' => 'field_radio_mobile_'.$prefixed_widget,
-			'label' => 'Exibir Mobile?',
-			'name' => 'mobile',
-			'type' => 'radio',
-			'instructions' => '',
-			'required' => 0,
-			'conditional_logic' => 0,
-			'wrapper' => array (
-				'width' => '',
-				'class' => '',
-				'id' => '',
-				),
-			'choices' => array(1=>'Sim',0=>'Não'),
-			'allow_null' => 0,
-			'other_choice' => 0,
-			'save_other_choice' => 0,
-			'default_value' => '',
-			'layout' => 'horizontal',
-			'return_format' => 'value',
-			);
+		include "fixed_fields/mobile.php";
+		include "fixed_fields/layouts.php";
 
 		return $sub_fields;
 	}

@@ -78,6 +78,8 @@ Class ActionWidgets {
 
 	public function get_column_bs($column){
 
+		return array();
+
 		$total_grid = 12;
 
 		$columns = array();
