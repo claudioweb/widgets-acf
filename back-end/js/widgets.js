@@ -142,7 +142,7 @@ function set_widget_light_box(){
         tinymce.remove('.wp-editor-container textarea');
 
         tinymce.init({
-          selector: 'textarea',
+          selector: '.wp-editor-container textarea',
           setup:function(ed) {
            ed.on('change', function(e) {
 
