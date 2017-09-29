@@ -14,6 +14,8 @@ function add_layout(){
     setTimeout(function(){
 
       jQuery(".acf-fc-popup li a").click(function(){
+
+        jQuery('div[data-key="field_the_contents"]').find('a[data-event="add-layout"], a[data-name="add-layout"]').hide();
         console.log('layout adicionado');
         setTimeout(function(){
           
@@ -22,10 +24,14 @@ function add_layout(){
          load_new_column();
          change_new_column();
 
+        jQuery('div[data-key="field_the_contents"]').find('a[data-event="add-layout"], a[data-name="add-layout"]').show();
+
          console.log('lightbox criado');
        },500);
       });
-    },500);
+
+    },100);
+
   });
 }
 

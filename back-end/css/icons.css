@@ -263,6 +263,10 @@
 	visibility: initial;
 }
 
+[data-key='field_linha_widgets'] .acf-table > tbody > tr > td {
+	border-width: 1px 0 35px 1px;
+}
+
 .acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-2'] {
 	width: 14.55% !important;
 }
@@ -280,7 +284,7 @@
 }
 
 .acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-8'] {
-	width: 62% !important;
+	width: 62.55% !important;
 }
 
 .acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-12'] {
@@ -289,5 +293,5 @@
 
 .acf-field-the-contents .acf-flexible-content .layout[data-widget='full'] {
 	width: 104% !important;
-    margin-left: -1.2% !important;
+	margin-left: -1.2% !important;
 }
