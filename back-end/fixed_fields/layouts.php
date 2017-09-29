@@ -14,7 +14,7 @@ $sub_fields[] = array(
 		'id' => '',
 		),
 	'choices' => array (
-		'full' => '100%',
+		'full-widget-acf' => '100%',
 		'col-sm-12' => '12/12',
 		'col-sm-8' => '8/12',
 		'col-sm-6' => '6/12',
