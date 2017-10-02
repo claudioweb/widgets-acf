@@ -65,13 +65,13 @@
 	white-space: nowrap !important;
 	float: left !important;
 	width: 160px;
-	height: 80px;
+	height: 70px;
 	border: 1px #fff solid;
 	margin: 15px !important;
 }
 
 .acf-fc-popup li a {
-	padding: 20% 12px;
+	padding: 18% 12px;
 	text-align: center;
 }
 
