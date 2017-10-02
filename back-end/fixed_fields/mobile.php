@@ -17,7 +17,7 @@ $sub_fields[] = array(
 			'allow_null' => 0,
 			'other_choice' => 0,
 			'save_other_choice' => 0,
-			'default_value' => '',
+			'default_value' => 1,
 			'layout' => 'horizontal',
 			'return_format' => 'value',
 			);

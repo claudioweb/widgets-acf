@@ -12,7 +12,11 @@ Class TemplatesWidgets {
 
 			include "styles_layout.php";
 
-			$html .='<div style="'.implode(' ',$style_bg).'">';
+			if($layout['attr']['mobile_setting']==0){
+				$class_setting .= ' hidden-xs';
+			}
+
+			$html .='<section id="'.$id_setting.'" class="'.$class_setting.'" style="'.implode(' ',$style_bg).' '.implode(' ',$style_attr).'">';
 
 			if($layout['attr']['largura_layout_setting']=='container'){
 				$html .='<div class="container">';
@@ -20,7 +24,7 @@ Class TemplatesWidgets {
 				$html .='<div class="container-fluid">';
 			}
 
-			$html .='<section id="'.$id_setting.'" class="row '.$class_setting.'" style="'.implode(' ',$style_attr).'">';
+			$html .='<div class="row">';
 
 			$count_column = 0;
 

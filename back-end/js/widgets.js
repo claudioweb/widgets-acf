@@ -95,7 +95,10 @@ function set_widget_light_box(){
     		palettes: true
     	};
 
-    	jQuery('.acf_box_widgets_content .acf-color_picker').find('input').wpColorPicker(myOptions);
+      jQuery('.acf_box_widgets_content .acf-color_picker').find('input').wpColorPicker(myOptions);
+      jQuery('.acf_box_widgets_content .acf-color_picker').find('input.wp-color-picker').attr('type','text');
+      console.log(jQuery('.acf_box_widgets_content .acf-color_picker').find('input.wp-color-picker').val());
+      
 
     	jQuery('.acf_box_widgets_content').find('input, textarea').change(function(){
     		var name = jQuery(this).attr('name');
@@ -231,6 +234,9 @@ function set_layout_light_box(){
       };
 
       jQuery('.acf_box_widgets_content .acf-color_picker').find('input').wpColorPicker(myOptions);
+      jQuery('.acf_box_widgets_content .acf-color_picker').find('input.wp-color-picker').attr('type','text');
+      console.log(jQuery('.acf_box_widgets_content .acf-color_picker').find('input.wp-color-picker').val());
+      
 
       jQuery('.acf_box_widgets_content').find('input[type="number"],input[type="hidden"],input[type="text"] , textarea').change(function(){
         var name = jQuery(this).attr('name');

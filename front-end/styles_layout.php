@@ -3,6 +3,22 @@
 $style_attr = array();
 $style_bg = array();
 
+if(empty($layout['attr']['padding_layout_setting']['padding_top_layout_setting'])){
+	$layout['attr']['padding_layout_setting']['padding_top_layout_setting'] = 0;
+}
+
+if(empty($layout['attr']['padding_layout_setting']['padding_right_layout_setting'])){
+	$layout['attr']['padding_layout_setting']['padding_right_layout_setting'] = 0;
+}
+
+if(empty($layout['attr']['padding_layout_setting']['padding_bottom_layout_setting'])){
+	$layout['attr']['padding_layout_setting']['padding_bottom_layout_setting'] = 0;
+}
+
+if(empty($layout['attr']['padding_layout_setting']['padding_left_layout_setting'])){
+	$layout['attr']['padding_layout_setting']['padding_left_layout_setting'] = 0;
+}
+
 $style_attr['padding'] = 'padding: '.
 $layout['attr']['padding_layout_setting']['padding_top_layout_setting'].'px '.
 $layout['attr']['padding_layout_setting']['padding_right_layout_setting'].'px '.
