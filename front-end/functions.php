@@ -12,7 +12,7 @@ Class TemplatesWidgets {
 
 			include "styles_layout.php";
 
-			if($layout['attr']['mobile_setting']==0){
+			if($layout['attr']['field_radio_mobile_setting']==0){
 				$class_setting .= ' hidden-xs';
 			}
 
