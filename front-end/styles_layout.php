@@ -3,27 +3,21 @@
 $style_attr = array();
 $style_bg = array();
 
-if(empty($layout['attr']['padding_layout_setting']['padding_top_layout_setting'])){
-	$layout['attr']['padding_layout_setting']['padding_top_layout_setting'] = 0;
+if(!empty($layout['attr']['padding_layout_setting']['padding_top_layout_setting'])){
+	$style_attr['padding_top'] = 'padding-top: '.$layout['attr']['padding_layout_setting']['padding_top_layout_setting'].'px;';
 }
 
-if(empty($layout['attr']['padding_layout_setting']['padding_right_layout_setting'])){
-	$layout['attr']['padding_layout_setting']['padding_right_layout_setting'] = 0;
+if(!empty($layout['attr']['padding_layout_setting']['padding_right_layout_setting'])){
+	$style_attr['padding_right'] = 'padding-right: '.$layout['attr']['padding_layout_setting']['padding_right_layout_setting'].'px;';
 }
 
-if(empty($layout['attr']['padding_layout_setting']['padding_bottom_layout_setting'])){
-	$layout['attr']['padding_layout_setting']['padding_bottom_layout_setting'] = 0;
+if(!empty($layout['attr']['padding_layout_setting']['padding_bottom_layout_setting'])){
+	$style_attr['padding_bottom'] = 'padding-bottom: '.$layout['attr']['padding_layout_setting']['padding_bottom_layout_setting'].'px;';
 }
 
-if(empty($layout['attr']['padding_layout_setting']['padding_left_layout_setting'])){
-	$layout['attr']['padding_layout_setting']['padding_left_layout_setting'] = 0;
+if(!empty($layout['attr']['padding_layout_setting']['padding_left_layout_setting'])){
+	$style_attr['padding_left'] = 'padding-left: '.$layout['attr']['padding_layout_setting']['padding_left_layout_setting'].'px;';
 }
-
-$style_attr['padding'] = 'padding: '.
-$layout['attr']['padding_layout_setting']['padding_top_layout_setting'].'px '.
-$layout['attr']['padding_layout_setting']['padding_right_layout_setting'].'px '.
-$layout['attr']['padding_layout_setting']['padding_bottom_layout_setting'].'px '.
-$layout['attr']['padding_layout_setting']['padding_left_layout_setting'].'px;';
 
 if(!empty($layout['attr']['imagem_layout_setting'])){ 
 
@@ -40,7 +34,9 @@ if(!empty($layout['attr']['imagem_layout_setting'])){
 
 }
 
-$style_bg['background_color'] = 'background-color: '.$layout['attr']['cor_layout_setting'].';';
+if(!empty($layout['attr']['cor_layout_setting'])){
+	$style_bg['background_color'] = 'background-color: '.$layout['attr']['cor_layout_setting'].';';
+}
 
 $class_setting = $layout['attr']['id_class_layout_setting']['class_layout_setting'];
 
