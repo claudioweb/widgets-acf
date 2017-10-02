@@ -37,7 +37,13 @@ Class TemplatesWidgets {
 					$layout_widget = str_replace('_widget_acf', '', $w_content['layout']);
 					$columns = $w_content['content']['field_tamanho_grid_desktop_'.$layout_widget.'_widget_acf_key'];
 					
-					$html .='<article class="widget_acf '.$columns.' '.$w_content['class'].'">';
+					$style = '';
+
+					if($columns=='full-widget-acf'){
+						$style = 'width: 100%; overflow: hidden;';
+					}
+
+					$html .='<article class="widget_acf '.$columns.' '.$w_content['class'].'"  style="'.$style.'">';
 
 					ob_start();
 
@@ -64,6 +70,7 @@ Class TemplatesWidgets {
 			}
 
 			$html .='</section>';
+			$html .='</div>';
 			$html .='</div>';
 
 		}

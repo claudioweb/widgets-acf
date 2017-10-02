@@ -17,5 +17,5 @@ $field = array (
 	'placeholder' => '',
 	'maxlength' => '',
 	'rows' => '',
-	'new_lines' => 'wpautop',
+	'new_lines' => 'br',
 	);
