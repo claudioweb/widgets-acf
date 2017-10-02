@@ -204,6 +204,10 @@
 	width: 100%;
 }
 
+#widget_acf_box_light .acf-label label, #widget_acf_box_light .acf-actions a {
+	font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif !important;
+}
+
 #widget_acf_box_light .acf_box_widgets_content .fa:before {
 	font-size: 40px;
 	float: left;
