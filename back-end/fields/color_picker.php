@@ -13,5 +13,5 @@ $field = array (
 		'class' => '',
 		'id' => '',
 		),
-	'default_value' => '#ee434c',
+	'default_value' => '',
 	);
