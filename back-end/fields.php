@@ -53,7 +53,7 @@ Class get_fields_acf_widgets {
 				if($key_field[0]=='repeater'){
 
 					if(empty($key_field[1])){
-						$key_field[1] = rand(0,100);
+						$key_field[1] = rand(100,1000);
 					}
 
 					$fd = get_fields_acf_widgets::sub_fields($fd,$key_field[1]);
@@ -67,14 +67,11 @@ Class get_fields_acf_widgets {
 
 		}
 
-		// var_dump($fields_return);
-
 		return $fields_return;
 
 	}
 
 	public function sub_fields($fd,$parent){
-
 
 		$subs_fields = array();
 
@@ -90,25 +87,27 @@ Class get_fields_acf_widgets {
 			}
 
 			if(!empty($field)){
+
 				$subs_fields[] = array_merge($field,$sub);
 			}
 		}
 
 		$fd['sub_fields'] = $subs_fields;
 
-		$sub_sub = array();
-		foreach ($fd['sub_fields'] as $field) {
+		foreach ($fd['sub_fields'] as $key_k_sub => $field) {
+
 			if($field['type']=='repeater'){
 
 				if(empty($key_sub[1])){
-					$key_sub[1] = rand(0,100);
+					$key_sub[1] = rand(100,1000);
 				}
 
-				$sub_sub[] = get_fields_acf_widgets::sub_fields($field,$key_sub[1]);
+				$fd['sub_fields'][$key_k_sub] = get_fields_acf_widgets::sub_fields($field,$key_sub[1]);
+
 			}
+
 		}
 
-		$fd['sub_fields'] = array_merge($fd['sub_fields'],$sub_sub);
 
 		return $fd;
 
