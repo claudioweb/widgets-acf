@@ -223,3 +223,7 @@
 	margin-top: 0 !important;
 	padding: 0 !important;
 }
+
+[data-key='field_linha_widgets'] .fixed_box_light {
+	display: none;
+}

@@ -9,24 +9,22 @@ jQuery(function(){
 
 function add_layout(){
   jQuery('div[data-key="field_the_contents"]').find('a[data-event="add-layout"], a[data-name="add-layout"]').click(function(){
-    console.log('clicou add layout');
+
 
     setTimeout(function(){
 
       jQuery(".acf-fc-popup li a").click(function(){
 
         jQuery('div[data-key="field_the_contents"]').find('a[data-event="add-layout"], a[data-name="add-layout"]').hide();
-        console.log('layout adicionado');
         setTimeout(function(){
-          
+
          set_widget_light_box();
 
          load_new_column();
          change_new_column();
 
-        jQuery('div[data-key="field_the_contents"]').find('a[data-event="add-layout"], a[data-name="add-layout"]').show();
+         jQuery('div[data-key="field_the_contents"]').find('a[data-event="add-layout"], a[data-name="add-layout"]').show();
 
-         console.log('lightbox criado');
        },500);
       });
 
@@ -38,10 +36,8 @@ function add_layout(){
 function change_layout(){
 
   jQuery('a[data-event="add-row"]').click(function(){
-    console.log('linha adicionado');
     setTimeout(function(){
      set_layout_light_box();
-     console.log('lightbox criado');
    },500);
 
   });
@@ -57,8 +53,7 @@ function set_widget_light_box(){
 
     var values_input = jQuery(this).parent().find('.acf-fields');
 
-    console.log(values_input.html());
-
+    
     values_input.find('select').prop('disabled', false);
 
     values_input.find('.select2-container').remove();
@@ -72,20 +67,14 @@ function set_widget_light_box(){
      );
 
     jQuery('.acf_box_widgets_content .wp-picker-container').remove();
+    // jQuery('.acf_box_widgets_content .wp-picker-container .wp-picker-holder').remove();
 
     var myOptions = {
     		// you can declare a default color here,
     		// or in the data-default-color attribute on the input
     		defaultColor: false,
     		// a callback to fire whenever the color changes to a valid color
-    		change: function(event, ui){
-    			console.log(jQuery(this));
-    			var name = jQuery(this).attr('name');
-    			var img_new = jQuery(this).parent().find('.show-if-value img').attr('src');
-    			jQuery(this_click).parent().find('.show-if-value img').attr('src',img_new);
-    			jQuery(this_click).find('[name="'+name+'"]').attr('value',jQuery(this).val());
-    			console.log(jQuery(this_click).find('[name="'+name+'"]').val());
-    		},
+    		change: function(event, ui){},
     		// a callback to fire when the input is emptied or an invalid color
     		clear: function() {},
     		// hide the color picker controls on load
@@ -94,11 +83,6 @@ function set_widget_light_box(){
     		// or, supply an array of colors to customize further
     		palettes: true
     	};
-
-      jQuery('.acf_box_widgets_content .acf-color_picker').find('input').wpColorPicker(myOptions);
-      jQuery('.acf_box_widgets_content .acf-color_picker').find('input.wp-color-picker').attr('type','text');
-      console.log(jQuery('.acf_box_widgets_content .acf-color_picker').find('input.wp-color-picker').val());
-
 
       jQuery('.mce-container-body,.wp-editor-tools, .mce-tinymce, .quicktags-toolbar').remove();
 
@@ -134,15 +118,26 @@ function set_widget_light_box(){
         timeFormat: jQuery('.acf-date-time-picker').attr('data-time_format')
       });
 
+      var_color_picker =jQuery('.acf_box_widgets_content .acf-color_picker, .acf_box_widgets_content .acf-color-picker').find('input').first();
+
+      var_color_picker.wpColorPicker(myOptions);
+      jQuery('.acf_box_widgets_content .acf-color_picker, .acf_box_widgets_content .acf-color-picker').find('input.wp-color-picker').attr('type','text');
+      jQuery('.acf_box_widgets_content .acf-color_picker, .acf_box_widgets_content .acf-color-picker').prepend(var_color_picker);
       
       jQuery(".acf_box_widgets_content .close").click(function(){
 
-        var html_box = jQuery('.acf_box_widgets_content').html();
-        values_input.html(html_box);
+       tinymce.remove('.wp-editor-container textarea');
 
-        jQuery('#widget_acf_box_light').remove();
 
-      });
+       var html_box = jQuery('.acf_box_widgets_content').html();
+       values_input.html(html_box);
+
+       var color_picker_html = jQuery('.acf_box_widgets_content .acf-color_picker, .acf_box_widgets_content .acf-color-picker').html();
+       values_input.find('.acf-color_picker, .acf-color-picker').html(color_picker_html);
+
+       jQuery('#widget_acf_box_light').remove();
+
+     });
 
     });
 
@@ -160,8 +155,7 @@ function set_layout_light_box(){
 
       var values_input = jQuery(this).parent().find('.acf-fields');
 
-      console.log(values_input.html());
-
+      
       values_input.find('select').prop('disabled', false);
 
       values_input.find('.select2-container').remove();
@@ -179,14 +173,7 @@ function set_layout_light_box(){
         // or in the data-default-color attribute on the input
         defaultColor: false,
         // a callback to fire whenever the color changes to a valid color
-        change: function(event, ui){
-          console.log(jQuery(this));
-          var name = jQuery(this).attr('name');
-          var img_new = jQuery(this).parent().find('.show-if-value img').attr('src');
-          jQuery(this_click).parent().find('.show-if-value img').attr('src',img_new);
-          jQuery(this_click).find('[name="'+name+'"]').attr('value',jQuery(this).val());
-          console.log(jQuery(this_click).find('[name="'+name+'"]').val());
-        },
+        change: function(event, ui){},
         // a callback to fire when the input is emptied or an invalid color
         clear: function() {},
         // hide the color picker controls on load
@@ -196,14 +183,18 @@ function set_layout_light_box(){
         palettes: true
       };
 
-      jQuery('.acf_box_widgets_content .acf-color_picker').find('input').wpColorPicker(myOptions);
-      jQuery('.acf_box_widgets_content .acf-color_picker').find('input.wp-color-picker').attr('type','text');
-      console.log(jQuery('.acf_box_widgets_content .acf-color_picker').find('input.wp-color-picker').val());
-    
+      var_color_picker =jQuery('.acf_box_widgets_content .acf-color_picker, .acf_box_widgets_content .acf-color-picker').find('input').first();
+
+      var_color_picker.wpColorPicker(myOptions);
+      jQuery('.acf_box_widgets_content .acf-color_picker, .acf_box_widgets_content .acf-color-picker').find('input.wp-color-picker').attr('type','text');
+      jQuery('.acf_box_widgets_content .acf-color_picker, .acf_box_widgets_content .acf-color-picker').prepend(var_color_picker);
 
       jQuery(".acf_box_widgets_content .close").click(function(){
 
+        tinymce.remove('.wp-editor-container textarea');
+
         var html_box = jQuery('.acf_box_widgets_content').html();
+        
         values_input.html(html_box);
 
         jQuery('#widget_acf_box_light').remove();
@@ -212,4 +203,4 @@ function set_layout_light_box(){
 
     });
 
-}
+  }
