@@ -52,7 +52,6 @@ function set_widget_light_box(){
     var this_click = jQuery(this).parent();
 
     var values_input = jQuery(this).parent().find('.acf-fields');
-
     
     values_input.find('select').prop('disabled', false);
 
@@ -74,7 +73,10 @@ function set_widget_light_box(){
     		// or in the data-default-color attribute on the input
     		defaultColor: false,
     		// a callback to fire whenever the color changes to a valid color
-    		change: function(event, ui){},
+    		change: function(event, ui){
+          // console.log(event);
+          // jquery(this).val(('#'+ui.color._color));
+        },
     		// a callback to fire when the input is emptied or an invalid color
     		clear: function() {},
     		// hide the color picker controls on load
@@ -118,26 +120,32 @@ function set_widget_light_box(){
         timeFormat: jQuery('.acf-date-time-picker').attr('data-time_format')
       });
 
-      var_color_picker =jQuery('.acf_box_widgets_content .acf-color_picker, .acf_box_widgets_content .acf-color-picker').find('input').first();
+      jQuery('.acf_box_widgets_content .acf-color_picker, .acf_box_widgets_content .acf-color-picker').each(function(){
+        var_color_picker =jQuery(this).find('input').first();
 
-      var_color_picker.wpColorPicker(myOptions);
-      jQuery('.acf_box_widgets_content .acf-color_picker, .acf_box_widgets_content .acf-color-picker').find('input.wp-color-picker').attr('type','text');
-      jQuery('.acf_box_widgets_content .acf-color_picker, .acf_box_widgets_content .acf-color-picker').prepend(var_color_picker);
-      
+        var_color_picker.wpColorPicker(myOptions);
+        jQuery(this).find('input.wp-color-picker').attr('type','text');
+        jQuery(this).prepend(var_color_picker);
+
+      });
+
       jQuery(".acf_box_widgets_content .close").click(function(){
 
-       tinymce.remove('.wp-editor-container textarea');
+        jQuery('.acf_box_widgets_content').find('input, textarea').each(function(){
+          jQuery(this).val(jQuery(this).val());
+          jQuery(this).attr('value',jQuery(this).val());
+          jQuery(this).text(jQuery(this).val());
+          jQuery(this).html(jQuery(this).val());
+        });
 
+        tinymce.remove('.wp-editor-container textarea');
 
-       var html_box = jQuery('.acf_box_widgets_content').html();
-       values_input.html(html_box);
+        var html_box = jQuery('.acf_box_widgets_content').html();
+        values_input.html(html_box);
 
-       var color_picker_html = jQuery('.acf_box_widgets_content .acf-color_picker, .acf_box_widgets_content .acf-color-picker').html();
-       values_input.find('.acf-color_picker, .acf-color-picker').html(color_picker_html);
+        jQuery('#widget_acf_box_light').remove();
 
-       jQuery('#widget_acf_box_light').remove();
-
-     });
+      });
 
     });
 
@@ -173,7 +181,9 @@ function set_layout_light_box(){
         // or in the data-default-color attribute on the input
         defaultColor: false,
         // a callback to fire whenever the color changes to a valid color
-        change: function(event, ui){},
+        change: function(event, ui){
+          // console.log(event);
+        },
         // a callback to fire when the input is emptied or an invalid color
         clear: function() {},
         // hide the color picker controls on load
@@ -183,13 +193,23 @@ function set_layout_light_box(){
         palettes: true
       };
 
-      var_color_picker =jQuery('.acf_box_widgets_content .acf-color_picker, .acf_box_widgets_content .acf-color-picker').find('input').first();
 
-      var_color_picker.wpColorPicker(myOptions);
-      jQuery('.acf_box_widgets_content .acf-color_picker, .acf_box_widgets_content .acf-color-picker').find('input.wp-color-picker').attr('type','text');
-      jQuery('.acf_box_widgets_content .acf-color_picker, .acf_box_widgets_content .acf-color-picker').prepend(var_color_picker);
+      jQuery('.acf_box_widgets_content .acf-color_picker, .acf_box_widgets_content .acf-color-picker').each(function(){
+        var_color_picker =jQuery(this).find('input').first();
+
+        var_color_picker.wpColorPicker(myOptions);
+        jQuery(this).find('input.wp-color-picker').attr('type','text');
+        jQuery(this).prepend(var_color_picker);
+      });
 
       jQuery(".acf_box_widgets_content .close").click(function(){
+
+        jQuery('.acf_box_widgets_content').find('input, textarea').each(function(){
+          jQuery(this).val(jQuery(this).val());
+          jQuery(this).attr('value',jQuery(this).val());
+          jQuery(this).text(jQuery(this).val());
+          jQuery(this).html(jQuery(this).val());
+        });
 
         tinymce.remove('.wp-editor-container textarea');
 
