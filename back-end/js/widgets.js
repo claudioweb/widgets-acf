@@ -55,7 +55,6 @@ function set_widget_light_box(){
     
     values_input.find('select').prop('disabled', false);
 
-
     values_input.find('.select2-container').remove();
 
     jQuery('body').append('<div id="widget_acf_box_light"></div>');
@@ -75,6 +74,16 @@ function set_widget_light_box(){
       jQuery(this).find('option[selected="selected"]').removeAttr("selected");
 
       jQuery(this).find('option[value="'+jQuery(this).val()+'"]').attr("selected","selected");
+
+    });
+
+    jQuery('.acf_box_widgets_content').find('input[type="radio"]').change(function(){
+
+      console.log(jQuery(this).val());
+
+      jQuery(this).parent().parent().parent().find('input[type="radio"]').removeAttr("checked");
+
+      jQuery(this).attr("checked","checked");
 
     });
 
@@ -156,11 +165,15 @@ function set_widget_light_box(){
         });
 
         tinymce.remove('.wp-editor-container textarea');
+        
+        jQuery('.fixed_box_light').remove();
 
         var html_box = jQuery('.acf_box_widgets_content').html();
         values_input.html(html_box);
 
         jQuery('#widget_acf_box_light').remove();
+
+        change_new_column();
 
       });
 
@@ -176,9 +189,9 @@ function set_layout_light_box(){
 
       jQuery('#widget_acf_box_light').remove();
 
-      var this_click = jQuery(this).parent();
+      var this_click = jQuery(this);
 
-      var values_input = jQuery(this).parent().find('.acf-fields');
+      var values_input = jQuery(this).find('.acf-fields');
 
       
       values_input.find('select').prop('disabled', false);
@@ -191,31 +204,39 @@ function set_layout_light_box(){
       .html('<div class="fixed_box_light"><h1>Ajustes de Layout</h1><div class="close button">Salvar</div></div>'+values_input.html()
        );
 
-      jQuery('.acf_box_widgets_content').find('select').select2().on('change', function (e) {
-        console.log(this.value);
-      });
+    // jQuery('.acf_box_widgets_content').find('select').select2();
 
-      jQuery('.acf_box_widgets_content').find('select').change(function(){
-        var name = jQuery(this).attr('name');
-        jQuery('.acf_box_widgets_content').find('[name="'+name+'"] option:selected').removeAttr("selected");
+    jQuery('.acf_box_widgets_content').find('select').change(function(){
 
-        for (var i = 0; i < jQuery(this).val().length; i++) {
-          jQuery('.acf_box_widgets_content').find('[name="'+name+'"] option[value="'+jQuery(this).val()[i]+'"]').attr("selected","selected");
-        }
+      console.log(jQuery(this).val());
 
-        jQuery('.acf_box_widgets_content').find('[name="'+name+'"]').parent().find('input').attr('value',jQuery(this).val());
-        console.log(jQuery(this).val());
-      });
+      jQuery(this).find('option[selected="selected"]').removeAttr("selected");
 
-      jQuery('.acf_box_widgets_content .wp-picker-container').remove();
+      jQuery(this).find('option[value="'+jQuery(this).val()+'"]').attr("selected","selected");
 
-      var myOptions = {
+    });
+
+    jQuery('.acf_box_widgets_content').find('input[type="radio"]').change(function(){
+
+      console.log(jQuery(this).val());
+
+      jQuery(this).parent().parent().parent().find('input[type="radio"]').removeAttr("checked");
+
+      jQuery(this).attr("checked","checked");
+
+    });
+
+    jQuery('.acf_box_widgets_content .wp-picker-container').remove();
+    // jQuery('.acf_box_widgets_content .wp-picker-container .wp-picker-holder').remove();
+
+    var myOptions = {
         // you can declare a default color here,
         // or in the data-default-color attribute on the input
         defaultColor: false,
         // a callback to fire whenever the color changes to a valid color
         change: function(event, ui){
           // console.log(event);
+          // jquery(this).val(('#'+ui.color._color));
         },
         // a callback to fire when the input is emptied or an invalid color
         clear: function() {},
@@ -226,13 +247,51 @@ function set_layout_light_box(){
         palettes: true
       };
 
+      jQuery('.mce-container-body,.wp-editor-tools, .mce-tinymce, .quicktags-toolbar').remove();
+
+      jQuery('.wp-editor-container textarea').show();
+
+
+      setTimeout(function(){
+        tinymce.remove('.wp-editor-container textarea');
+
+        tinymce.init({
+          selector: '.wp-editor-container textarea',
+          setup:function(ed) {
+           ed.on('change', function(e) {
+
+             jQuery('.wp-editor-container textarea').val(ed.getContent());
+             jQuery('.wp-editor-container textarea').text(ed.getContent());
+             jQuery('.wp-editor-container textarea').html(ed.getContent());
+
+           });
+         }
+       });
+
+      },500);
+
+      // jQuery('.mce-first').first().hide();
+
+      jQuery('.acf-date-time-picker').find('input[type="text"]').remove();
+      jQuery('.acf-date-time-picker').find('input[type="hidden"]').attr('type','text');
+      // jQuery('.acf-ui-datepicker').remove();
+
+      jQuery('.acf-date-time-picker').find('input[type="text"]').datetimepicker({
+        altFormat: jQuery('.acf-date-time-picker').attr('data-date_format'),
+        timeFormat: jQuery('.acf-date-time-picker').attr('data-time_format')
+      });
 
       jQuery('.acf_box_widgets_content .acf-color_picker, .acf_box_widgets_content .acf-color-picker').each(function(){
-        var_color_picker =jQuery(this).find('input').first();
 
-        var_color_picker.wpColorPicker(myOptions);
-        jQuery(this).find('input.wp-color-picker').attr('type','text');
-        jQuery(this).prepend(var_color_picker);
+        if(!jQuery(this).parent().parent().parent().parent().hasClass('acf-clone')){
+
+          var_color_picker = jQuery(this).find('input').first();
+
+          var_color_picker.wpColorPicker(myOptions);
+          jQuery(this).find('input.wp-color-picker').attr('type','text');
+          jQuery(this).prepend(var_color_picker);
+        }
+
       });
 
       jQuery(".acf_box_widgets_content .close").click(function(){
@@ -246,8 +305,9 @@ function set_layout_light_box(){
 
         tinymce.remove('.wp-editor-container textarea');
 
+        jQuery('.fixed_box_light').remove();
+
         var html_box = jQuery('.acf_box_widgets_content').html();
-        
         values_input.html(html_box);
 
         jQuery('#widget_acf_box_light').remove();
@@ -256,4 +316,4 @@ function set_layout_light_box(){
 
     });
 
-  }
+}

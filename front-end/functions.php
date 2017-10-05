@@ -73,9 +73,9 @@ Class TemplatesWidgets {
 				}
 			}
 
+			$html .='</div>';
+			$html .='</div>';
 			$html .='</section>';
-			$html .='</div>';
-			$html .='</div>';
 
 		}
 
