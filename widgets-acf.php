@@ -32,7 +32,7 @@ class WidgetsWidgets {
 			'menu_title' 	=> $plugin_nome,
 			'icon_url'		=> 'dashicons-layout',
 			'redirect' 		=> false
-			));
+		));
 
 		add_theme_support('post-thumbnails');
 		add_image_size( 'size_widget', 350, 350, array( 'center', 'center' ) );
@@ -69,23 +69,24 @@ class WidgetsWidgets {
 
 function widgetsWidgets_init() {
 
-	global $widgets, $acf_action, $actions, $duplicate;
+		global $widgets, $acf_action, $actions, $duplicate;
 
-	$widgets = new WidgetsWidgets();
-	$plugin_nome = $widgets::add_admin_menu();
-	
-	require("back-end/functions.php");
-	require("back-end/acf/fields_admin.php");
+		$widgets = new WidgetsWidgets();
+		$plugin_nome = $widgets::add_admin_menu();
 
-	require("back-end/actions.php");
-	require("back-end/painel.php");
-	$acf_action = new AcfAction();
+		require("back-end/functions.php");
+		require("back-end/acf/fields_admin.php");
 
-	require("front-end/actions.php");
-	$actions = new ActionWidgets();
+		require("back-end/actions.php");
+		require("back-end/painel.php");
+		$acf_action = new AcfAction();
 
-	require("back-end/duplicate.php");
-	$duplicate = new Duplicate_acf_widgets();
+		require("front-end/actions.php");
+		$actions = new ActionWidgets();
+
+		require("back-end/duplicate.php");
+		$duplicate = new Duplicate_acf_widgets();
+
 }
 
 if( function_exists('acf_add_local_field_group') ){
