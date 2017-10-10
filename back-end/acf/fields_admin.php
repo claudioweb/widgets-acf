@@ -4,6 +4,7 @@ if( function_exists('acf_add_local_field_group') ){
 	$types = WidgetsAdmin::get_post_types();
 	$pages = WidgetsAdmin::get_pages();
 	$categories = WidgetsAdmin::get_taxonomies();
+	$fonts = WidgetsAdmin::get_fonts();
 
 	acf_add_local_field_group(array (
 		'key' => 'group_widget',
@@ -21,32 +22,90 @@ if( function_exists('acf_add_local_field_group') ){
 					'width' => '',
 					'class' => '',
 					'id' => '',
-					),
+				),
 				'message' => '',
 				'default_value' => 0,
 				'ui' => 1,
 				'ui_on_text' => 'Sim',
 				'ui_off_text' => 'Não',
+			),
+			array (
+				'key' => 'widget_key_credenticalgoogle_widget_acf',
+				'label' => 'Key Credencial do Google',
+				'name' => 'widget_key_credenticalgoogle_widget_acf',
+				'type' => 'text',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => array (
+					array (
+						array (
+							'field' => 'widgets_acf_show_fonts',
+							'operator' => '==',
+							'value' => '1',
+						),
+					),
 				),
-			// array (
-			// 	'key' => 'widget_acf_show_css',
-			// 	'label' => 'Incorporar CSS do plugin',
-			// 	'name' => 'widgets_acf_show_css',
-			// 	'type' => 'true_false',
-			// 	'instructions' => '',
-			// 	'required' => 0,
-			// 	'conditional_logic' => 0,
-			// 	'wrapper' => array (
-			// 		'width' => '',
-			// 		'class' => '',
-			// 		'id' => '',
-			// 		),
-			// 	'message' => '',
-			// 	'default_value' => 0,
-			// 	'ui' => 1,
-			// 	'ui_on_text' => 'Sim',
-			// 	'ui_off_text' => 'Não',
-			// 	),
+				'wrapper' => array (
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'default_value' => '',
+				'placeholder' => '',
+				'prepend' => '',
+				'append' => '',
+				'maxlength' => '',
+			),
+			array (
+				'key' => 'widget_fonts_types_widget_acf',
+				'label' => 'Google Fonts',
+				'name' => 'fonts_types_widget_acf',
+				'type' => 'select',
+				'instructions' => 'Selecione as fontes para seu site *Clique em atualizar',
+				'required' => 0,
+				'conditional_logic' => array (
+					array (
+						array (
+							'field' => 'widgets_acf_show_fonts',
+							'operator' => '==',
+							'value' => '1',
+						),
+					),
+				),
+				'wrapper' => array (
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'choices' => $fonts,
+				'default_value' => array (
+				),
+				'allow_null' => 0,
+				'multiple' => 1,
+				'ui' => 1,
+				'ajax' => 0,
+				'return_format' => 'value',
+				'placeholder' => '',
+			),
+			array (
+				'key' => 'widgets_acf_show_fonts',
+				'label' => 'Incorporar Google Fonts',
+				'name' => 'widgets_acf_show_fonts',
+				'type' => 'true_false',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array (
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'message' => '',
+				'default_value' => 0,
+				'ui' => 1,
+				'ui_on_text' => 'Sim',
+				'ui_off_text' => 'Não',
+			),
 			array (
 				'key' => 'widget_type_widget_acf',
 				'label' => 'Post type',
@@ -59,17 +118,17 @@ if( function_exists('acf_add_local_field_group') ){
 					'width' => '',
 					'class' => '',
 					'id' => '',
-					),
+				),
 				'choices' => $types,
 				'default_value' => array (
-					),
+				),
 				'allow_null' => 0,
 				'multiple' => 1,
 				'ui' => 1,
 				'ajax' => 0,
 				'return_format' => 'value',
 				'placeholder' => '',
-				),
+			),
 			array (
 				'key' => 'widget_page_widget_acf',
 				'label' => 'Páginas',
@@ -82,17 +141,17 @@ if( function_exists('acf_add_local_field_group') ){
 					'width' => '',
 					'class' => '',
 					'id' => '',
-					),
+				),
 				'choices' => $pages,
 				'default_value' => array (
-					),
+				),
 				'allow_null' => 0,
 				'multiple' => 1,
 				'ui' => 1,
 				'ajax' => 0,
 				'return_format' => 'value',
 				'placeholder' => '',
-				),
+			),
 			array (
 				'key' => 'widget_tax_widget_acf',
 				'label' => 'Tipo de Categoria (taxonomy)',
@@ -105,27 +164,27 @@ if( function_exists('acf_add_local_field_group') ){
 					'width' => '',
 					'class' => '',
 					'id' => '',
-					),
+				),
 				'choices' => $categories,
 				'default_value' => array (
-					),
+				),
 				'allow_null' => 0,
 				'multiple' => 1,
 				'ui' => 1,
 				'ajax' => 0,
 				'return_format' => 'value',
 				'placeholder' => '',
-				),
 			),
+		),
 		'location' => array (
 			array (
 				array (
 					'param' => 'options_page',
 					'operator' => '==',
 					'value' => 'acf-options-'.sanitize_title($plugin_nome),
-					),
 				),
 			),
+		),
 		'menu_order' => 0,
 		'position' => 'normal',
 		'style' => 'default',
@@ -134,7 +193,7 @@ if( function_exists('acf_add_local_field_group') ){
 		'hide_on_screen' => '',
 		'active' => 1,
 		'description' => '',
-		));
+	));
 
 }
 ?>

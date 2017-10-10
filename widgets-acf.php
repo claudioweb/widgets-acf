@@ -17,6 +17,11 @@ class WidgetsWidgets {
 		add_action( 'admin_enqueue_scripts', array($this, 'load_custom_wp_admin_style') );
 		
 		add_action( 'wp_enqueue_scripts', array($this, 'load_theme_widget_style') );
+
+		// Definindo action ajax
+		add_action('wp_ajax_fonts_widgets_acf', array('WidgetsAdmin','get_fonts_ajax'));
+   		// Definindo action para acesso público
+		add_action('wp_ajax_nopriv_fonts_widgets_acf', array('WidgetsAdmin','get_fonts_ajax')); 
 	}
 
 	/*=========================================================
@@ -46,17 +51,28 @@ class WidgetsWidgets {
 	public function load_custom_wp_admin_style() {
 		wp_enqueue_style( 'custom_wp_admin_icon_css', plugins_url('back-end/css/icons.css', __FILE__) );
 		wp_enqueue_style( 'custom_wp_admin_css', plugins_url('back-end/css/widgets.css', __FILE__) );
+		wp_enqueue_script( 'ckeditor_widgets-acf', '//cdn.ckeditor.com/4.7.3/full/ckeditor.js');
 		wp_enqueue_script( 'custom_wp_admin_js', plugins_url('back-end/js/admin.js', __FILE__) );
 		wp_enqueue_script( 'custom_wp_widgets_js', plugins_url('back-end/js/widgets.js', __FILE__) );
+
 		
 	}
 
 	public function load_theme_widget_style() {
 
 		$show_bootstrap = get_field('widgets_acf_show_bootstrap','options');
+		$show_fonts = get_field('widgets_acf_show_fonts','options');
+
 		if($show_bootstrap==true){
 			wp_enqueue_style( 'front_end_widget_acf_bootstrap_css', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css');
 			wp_enqueue_script( 'front_end_widget_acf_bootstrap_js', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js');
+		}
+
+		if($show_fonts==true){
+			$fonts_selected = get_field('fonts_types_widget_acf', 'options');
+			foreach ($fonts_selected as $key => $font) {
+				wp_enqueue_style('font_google_widgets_acf'.$font,'https://fonts.googleapis.com/css?family='.$font.'|Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i');
+			}
 		}
 
 		$show_css = get_field('widgets_acf_show_css','options');
@@ -69,23 +85,23 @@ class WidgetsWidgets {
 
 function widgetsWidgets_init() {
 
-		global $widgets, $acf_action, $actions, $duplicate;
+	global $widgets, $acf_action, $actions, $duplicate;
 
-		$widgets = new WidgetsWidgets();
-		$plugin_nome = $widgets::add_admin_menu();
+	$widgets = new WidgetsWidgets();
+	$plugin_nome = $widgets::add_admin_menu();
 
-		require("back-end/functions.php");
-		require("back-end/acf/fields_admin.php");
+	require("back-end/functions.php");
+	require("back-end/acf/fields_admin.php");
 
-		require("back-end/actions.php");
-		require("back-end/painel.php");
-		$acf_action = new AcfAction();
+	require("back-end/actions.php");
+	require("back-end/painel.php");
+	$acf_action = new AcfAction();
 
-		require("front-end/actions.php");
-		$actions = new ActionWidgets();
+	require("front-end/actions.php");
+	$actions = new ActionWidgets();
 
-		require("back-end/duplicate.php");
-		$duplicate = new Duplicate_acf_widgets();
+	require("back-end/duplicate.php");
+	$duplicate = new Duplicate_acf_widgets();
 
 }
 

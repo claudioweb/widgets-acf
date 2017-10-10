@@ -171,20 +171,20 @@
 
 .acf-fields .acf-field[data-name="ajustes_de_layout"] {
 	width: 20%;
-    position: absolute;
-    top: 62px;
-    text-align: center;
-    left: 0%;
-    height: 25px;
-    z-index: 1;
-    font-size: 12px;
-    border: 1px #ddd solid;
-    padding: 0;
-    /* padding-top: 0px; */
-    cursor: pointer;
-    border-radius: 3px;
-    /* margin-top: 0; */
-    color: #fff !important;
+	position: absolute;
+	top: 62px;
+	text-align: center;
+	left: 0%;
+	height: 25px;
+	z-index: 1;
+	font-size: 12px;
+	border: 1px #ddd solid;
+	padding: 0;
+	/* padding-top: 0px; */
+	cursor: pointer;
+	border-radius: 3px;
+	/* margin-top: 0; */
+	color: #fff !important;
 }
 .acf-fields .acf-field[data-name="ajustes_de_layout"]:before {
 	background: #0073aa !important; 
@@ -205,14 +205,29 @@
 	display: none !important;
 }
 
+#widget_acf_box_light input[type="text"], #widget_acf_box_light textarea {
+	display: none;
+}
+
+#widget_acf_box_light .ckeditor_inline {
+	border: 1px #ccc solid;
+	font-size: 14px;
+	font-family: Arial;
+	border-radius: 3px;
+	padding: 5px;
+	max-height: 100px;
+	min-height: 30px;
+	overflow: auto;
+}
+
 .grid_widget_settings {
 	position: absolute !important;
 	z-index: 10;
 	top: 40px;
-    background: transparent !important;
-    height: 0;
-    padding: 0 !important;
-    right: 5px;
+	background: transparent !important;
+	height: 0;
+	padding: 0 !important;
+	right: 5px;
 }
 
 .grid_widget_settings .acf-label {

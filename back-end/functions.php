@@ -18,7 +18,7 @@ Class WidgetsAdmin {
 			$all_types['customize_changeset'],
 			$all_types['acf-field-group'],
 			$all_types['acf-field']
-			);
+		);
 
 		return $all_types;
 	}
@@ -36,6 +36,46 @@ Class WidgetsAdmin {
 		return $all_pages;
 	}
 
+	static function get_fonts(){
+
+		$credencial_default = 'AIzaSyApghjlJklghhHAwfHTPsqbEimDUIvdEXM';
+
+		if(!empty(get_field('widget_key_credenticalgoogle_widget_acf', 'options'))){
+			$credencial_default = get_field('widget_key_credenticalgoogle_widget_acf', 'options');
+		}
+
+		$url = "https://www.googleapis.com/webfonts/v1/webfonts?key=".$credencial_default;
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+		curl_setopt($ch, CURLOPT_HEADER, false);
+		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_REFERER, $url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+		$result = curl_exec($ch);
+		curl_close($ch);
+		$result_fonts = array();
+
+		$result = json_decode($result);
+
+		if(!empty($result->items)){
+			foreach ($result->items as $key => $font) {
+				$result_fonts[$font->family] = $font->family;
+			}
+		}	
+
+		return $result_fonts;
+
+	}
+
+	static function get_fonts_ajax(){
+		header( "Content-type: application/json");
+
+		$fonts_selected = get_field('fonts_types_widget_acf', 'options');
+
+		die(json_encode($fonts_selected));
+	}
+
 	static function get_taxonomies(){
 		
 		$all_taxonomies = get_taxonomies();
@@ -47,7 +87,7 @@ Class WidgetsAdmin {
 			$all_taxonomies['nav_menu'],
 			$all_taxonomies['link_category'],
 			$all_taxonomies['post_format']
-			);
+		);
 
 		return $all_taxonomies;
 	}

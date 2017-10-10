@@ -1,11 +1,48 @@
 jQuery(function(){
 
+  set_ajax_fonts();
+
   add_layout();
   change_layout();
-  set_widget_light_box();
   set_layout_light_box();
 
 });
+
+function set_ajax_fonts(){
+
+  var site_url = window.location.href.split('/wp-admin');
+
+  var settings_ajax = {
+    "async": true,
+    "crossDomain": true,
+    "url": site_url[0]+"/wp-admin/admin-ajax.php",
+    "method": "POST",
+    "headers": {
+     "content-type": "application/x-www-form-urlencoded",
+     "cache-control": "no-cache"},
+     "data": {
+      "action": "fonts_widgets_acf"
+    }
+  }
+
+  var fonts_selected = '';
+  jQuery.ajax(settings_ajax).done(function (resposta) {
+    for (var i = 0; i < resposta.length; i++) {
+      fonts_selected = resposta[i]+';'+fonts_selected;
+    }
+    console.log(fonts_selected);
+
+    if(!resposta){
+      fonts_selected='Arial;'
+    }
+
+    jQuery('body').append('<input type="hidden" id="fonts_selected_widget_acf" value="'+fonts_selected+'" />');
+
+    set_widget_light_box();
+
+  });
+
+}
 
 function add_layout(){
   jQuery('div[data-key="field_the_contents"]').find('a[data-event="add-layout"], a[data-name="add-layout"]').click(function(){
@@ -87,6 +124,8 @@ function set_widget_light_box(){
 
     });
 
+    jQuery('.mce-container-body,.wp-editor-tools, .mce-tinymce, .quicktags-toolbar').remove();
+
     jQuery('.acf_box_widgets_content .wp-picker-container').remove();
     // jQuery('.acf_box_widgets_content .wp-picker-container .wp-picker-holder').remove();
 
@@ -108,28 +147,35 @@ function set_widget_light_box(){
     		palettes: true
     	};
 
-      jQuery('.mce-container-body,.wp-editor-tools, .mce-tinymce, .quicktags-toolbar').remove();
-
       jQuery('.wp-editor-container textarea').show();
 
+        // editor de texto
 
-      setTimeout(function(){
-        tinymce.remove('.wp-editor-container textarea');
+        this_click.find('.acf-fields').html('');
 
-        tinymce.init({
-          selector: '.wp-editor-container textarea',
-          setup:function(ed) {
-           ed.on('change', function(e) {
+        jQuery(".acf_box_widgets_content").find('textarea, input[type="text"]').each(function(){
 
-             jQuery('.wp-editor-container textarea').val(ed.getContent());
-             jQuery('.wp-editor-container textarea').text(ed.getContent());
-             jQuery('.wp-editor-container textarea').html(ed.getContent());
+          if(!jQuery(this).parent().hasClass('acf-color-picker')){
+            var id_div = jQuery(this).attr('name');
+            jQuery(this).parent().append('<div id="'+id_div+'" class="ckeditor_inline" contenteditable="true" >'+jQuery(this).val()+'</div>');
+            jQuery(this).remove();
+          }
+        });
 
-           });
-         }
+        jQuery(".acf_box_widgets_content").find('div.ckeditor_inline').each(function(){
+         var txt = jQuery( this ).attr('id');
+
+         CKEDITOR.inline(txt, {
+          enterMode : CKEDITOR.ENTER_BR,
+          autoParagraph : false,
+          font_names : jQuery('#fonts_selected_widget_acf').val(),
+          toolbar: [
+          [ 'RemoveFormat', 'Bold', 'Italic', 'Underline', 'Link', 'Unlink', 'Font', 'FontSize' ]
+          ]
+        });
+
+         console.log(txt);
        });
-
-      },500);
 
       // jQuery('.mce-first').first().hide();
 
@@ -157,11 +203,19 @@ function set_widget_light_box(){
 
       jQuery(".acf_box_widgets_content .close").click(function(){
 
+        jQuery(".acf_box_widgets_content").find('div.ckeditor_inline').each(function(){
+         var id_div = jQuery( this ).attr('id');
+         CKEDITOR.instances[id_div].destroy();
+         jQuery(this).parent().append('<textarea name="'+id_div+'" id="'+id_div+'" >'+jQuery( this ).html()+'</textarea>');
+         jQuery( this ).remove();
+       });
+
         jQuery('.acf_box_widgets_content').find('input, textarea').each(function(){
           jQuery(this).val(jQuery(this).val());
           jQuery(this).attr('value',jQuery(this).val());
           jQuery(this).text(jQuery(this).val());
           jQuery(this).html(jQuery(this).val());
+
         });
 
         tinymce.remove('.wp-editor-container textarea');
@@ -193,6 +247,7 @@ function set_layout_light_box(){
 
       var values_input = jQuery(this).find('.acf-fields');
 
+      jQuery(this).find('.acf-fields').html('');
       
       values_input.find('select').prop('disabled', false);
 
@@ -226,6 +281,8 @@ function set_layout_light_box(){
 
     });
 
+    jQuery('.mce-container-body,.wp-editor-tools, .mce-tinymce, .quicktags-toolbar').remove();
+
     jQuery('.acf_box_widgets_content .wp-picker-container').remove();
     // jQuery('.acf_box_widgets_content .wp-picker-container .wp-picker-holder').remove();
 
@@ -247,28 +304,8 @@ function set_layout_light_box(){
         palettes: true
       };
 
-      jQuery('.mce-container-body,.wp-editor-tools, .mce-tinymce, .quicktags-toolbar').remove();
-
       jQuery('.wp-editor-container textarea').show();
 
-
-      setTimeout(function(){
-        tinymce.remove('.wp-editor-container textarea');
-
-        tinymce.init({
-          selector: '.wp-editor-container textarea',
-          setup:function(ed) {
-           ed.on('change', function(e) {
-
-             jQuery('.wp-editor-container textarea').val(ed.getContent());
-             jQuery('.wp-editor-container textarea').text(ed.getContent());
-             jQuery('.wp-editor-container textarea').html(ed.getContent());
-
-           });
-         }
-       });
-
-      },500);
 
       // jQuery('.mce-first').first().hide();
 
@@ -316,4 +353,4 @@ function set_layout_light_box(){
 
     });
 
-}
+  }
