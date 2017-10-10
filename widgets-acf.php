@@ -55,6 +55,14 @@ class WidgetsWidgets {
 		wp_enqueue_script( 'custom_wp_admin_js', plugins_url('back-end/js/admin.js', __FILE__) );
 		wp_enqueue_script( 'custom_wp_widgets_js', plugins_url('back-end/js/widgets.js', __FILE__) );
 
+		$show_fonts = get_field('widgets_acf_show_fonts','options');
+		
+		if($show_fonts==true){
+			$fonts_selected = get_field('fonts_types_widget_acf', 'options');
+			foreach ($fonts_selected as $key => $font) {
+				wp_enqueue_style('font_google_widgets_acf'.$font,'https://fonts.googleapis.com/css?family='.$font.'|Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i');
+			}
+		}
 		
 	}
 
