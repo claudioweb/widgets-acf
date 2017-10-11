@@ -275,7 +275,7 @@ function set_layout_light_box(){
       .html('<div class="fixed_box_light"><h1>Ajustes de Layout</h1><div class="close button">Salvar</div></div>'+values_input.html()
        );
 
-    // jQuery('.acf_box_widgets_content').find('select').select2();
+    jQuery('.acf_box_widgets_content').find('input[type="text"],textarea').show();
 
     jQuery('.acf_box_widgets_content').find('select').change(function(){
 
