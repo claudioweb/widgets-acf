@@ -71,6 +71,12 @@ Class WidgetsAdmin {
 	static function get_fonts_ajax(){
 		header( "Content-type: application/json");
 
+		$show_fonts = get_field('widgets_acf_show_fonts','options');
+		
+		if($show_fonts==false){
+			die(json_encode(array()));
+		}
+
 		$fonts_selected = get_field('fonts_types_widget_acf', 'options');
 
 		die(json_encode($fonts_selected));

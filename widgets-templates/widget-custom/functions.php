@@ -2,13 +2,15 @@
 
 $fields['icon'] = 'fa fa-picture-o';
 
-// $fields['repeater__1']['sub_fields']['image__1']['label'] = 'Imagem destacada Repeater';
+$fields['repeater__1']['sub_fields']['image__1']['label'] = 'Imagem destacada Repeater';
+
+$fields['repeater__1']['sub_fields']['text__1_repeat']['label'] = 'Texto destacada Repeater';
 
 
-// $fields['repeater__1']['sub_fields']['repeater__2']['sub_fields']['color_picker__1']['label'] = 'Cor destacada Repeater';
+$fields['repeater__1']['sub_fields']['repeater__2']['sub_fields']['color_picker__1']['label'] = 'Cor destacada Repeater';
 
 
-// $fields['image']['label'] = 'Imagem destacada ';
+$fields['image']['label'] = 'Imagem destacada ';
 $fields['color_picker']['label'] = 'Cor';
 // $fields['text']['label'] = 'Título do widget';
 $fields['text__1']['label'] = 'Link URL';

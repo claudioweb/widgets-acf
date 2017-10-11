@@ -105,6 +105,8 @@ Class TemplatesWidgets {
 
 						$images_sizes = get_intermediate_image_sizes();
 
+						$fields[$field_key]['sizes']['full'] = wp_get_attachment_image_src($id_image,'full')[0];
+
 						foreach ($images_sizes as $size) {
 							
 							$fields[$field_key]['sizes'][$size] = wp_get_attachment_image_src($id_image,$size)[0];

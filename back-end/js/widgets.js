@@ -80,6 +80,51 @@ function change_layout(){
   });
 }
 
+function set_ckeditor_inline(class_repeat=null){
+
+  var class_use_ckeditor = 'ckeditor_inline';
+  var find_use_ck_editor = class_use_ckeditor;
+
+  if(class_repeat!=null){
+    class_use_ckeditor = class_use_ckeditor+' '+class_repeat+'_ck_repeat';
+    find_use_ck_editor = class_repeat+'_ck_repeat';
+  }
+
+  setTimeout(function(){
+
+    jQuery(".acf_box_widgets_content").find('textarea, input[type="text"]').each(function(){
+
+      if(!jQuery(this).closest('.acf-color-picker')[0] && !jQuery(this).closest('.acf-clone')[0]){
+        console.log(class_repeat);
+        var id_div = jQuery(this).attr('name');
+        jQuery(this).parent().append('<div id="'+id_div+'" class="'+class_use_ckeditor+'" contenteditable="true" >'+jQuery(this).val()+'</div>');
+        jQuery(this).remove();
+      }
+    });
+    
+  },500);
+
+  setTimeout(function(){
+
+    jQuery(".acf_box_widgets_content").find('div.'+find_use_ck_editor).each(function(){
+     var txt = jQuery( this ).attr('id');
+
+     CKEDITOR.inline(txt, {
+      enterMode : CKEDITOR.ENTER_BR,
+      autoParagraph : false,
+      font_names : jQuery('#fonts_selected_widget_acf').val(),
+      toolbar: [
+      [ 'RemoveFormat', 'Bold', 'Italic', 'Underline', 'Link', 'Unlink', 'Font', 'FontSize' ]
+      ]
+    });
+
+     console.log(txt);
+   });
+
+  },1000);
+
+}
+
 function set_widget_light_box(){
 
   jQuery("[data-key='field_linha_widgets'] .layout .acf-fc-layout-handle").click(function(){
@@ -153,40 +198,13 @@ function set_widget_light_box(){
 
         this_click.find('.acf-fields').html('');
 
-        jQuery(".acf_box_widgets_content").find('textarea, input[type="text"]').each(function(){
+        set_ckeditor_inline();
 
-          if(!jQuery(this).parent().hasClass('acf-color-picker')){
-            var id_div = jQuery(this).attr('name');
-            jQuery(this).parent().append('<div id="'+id_div+'" class="ckeditor_inline" contenteditable="true" >'+jQuery(this).val()+'</div>');
-            jQuery(this).remove();
-          }
+        jQuery('.acf_box_widgets_content a[data-event="add-row"]').click(function(){
+          set_ckeditor_inline('ck_repeat');
         });
-
-        jQuery(".acf_box_widgets_content").find('div.ckeditor_inline').each(function(){
-         var txt = jQuery( this ).attr('id');
-
-         CKEDITOR.inline(txt, {
-          enterMode : CKEDITOR.ENTER_BR,
-          autoParagraph : false,
-          font_names : jQuery('#fonts_selected_widget_acf').val(),
-          toolbar: [
-          [ 'RemoveFormat', 'Bold', 'Italic', 'Underline', 'Link', 'Unlink', 'Font', 'FontSize' ]
-          ]
-        });
-
-         console.log(txt);
-       });
 
       // jQuery('.mce-first').first().hide();
-
-      jQuery('.acf-date-time-picker').find('input[type="text"]').remove();
-      jQuery('.acf-date-time-picker').find('input[type="hidden"]').attr('type','text');
-      // jQuery('.acf-ui-datepicker').remove();
-
-      jQuery('.acf-date-time-picker').find('input[type="text"]').datetimepicker({
-        altFormat: jQuery('.acf-date-time-picker').attr('data-date_format'),
-        timeFormat: jQuery('.acf-date-time-picker').attr('data-time_format')
-      });
 
       jQuery('.acf_box_widgets_content .acf-color_picker, .acf_box_widgets_content .acf-color-picker').each(function(){
 
@@ -246,8 +264,6 @@ function set_layout_light_box(){
       var this_click = jQuery(this);
 
       var values_input = jQuery(this).find('.acf-fields');
-
-      jQuery(this).find('.acf-fields').html('');
       
       values_input.find('select').prop('disabled', false);
 
@@ -308,10 +324,6 @@ function set_layout_light_box(){
 
 
       // jQuery('.mce-first').first().hide();
-
-      jQuery('.acf-date-time-picker').find('input[type="text"]').remove();
-      jQuery('.acf-date-time-picker').find('input[type="hidden"]').attr('type','text');
-      // jQuery('.acf-ui-datepicker').remove();
 
       jQuery('.acf-date-time-picker').find('input[type="text"]').datetimepicker({
         altFormat: jQuery('.acf-date-time-picker').attr('data-date_format'),
