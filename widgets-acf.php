@@ -51,7 +51,7 @@ class WidgetsWidgets {
 	public function load_custom_wp_admin_style() {
 		wp_enqueue_style( 'custom_wp_admin_icon_css', plugins_url('back-end/css/icons.css', __FILE__) );
 		wp_enqueue_style( 'custom_wp_admin_css', plugins_url('back-end/css/widgets.css', __FILE__) );
-		wp_enqueue_script( 'ckeditor_widgets-acf', '//cdn.ckeditor.com/4.7.3/full/ckeditor.js');
+		wp_enqueue_script( 'ckeditor_widgets-acf',  plugins_url('back-end/js/ckeditor/ckeditor.js', __FILE__));
 		wp_enqueue_script( 'custom_wp_admin_js', plugins_url('back-end/js/admin.js', __FILE__) );
 		wp_enqueue_script( 'custom_wp_widgets_js', plugins_url('back-end/js/widgets.js', __FILE__) );
 
@@ -60,7 +60,8 @@ class WidgetsWidgets {
 		if($show_fonts==true){
 			$fonts_selected = get_field('fonts_types_widget_acf', 'options');
 			foreach ($fonts_selected as $key => $font) {
-				wp_enqueue_style('font_google_widgets_acf'.$font,'https://fonts.googleapis.com/css?family='.$font.'|Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i');
+				$font_string  = explode('--',$font);
+				wp_enqueue_style('font_google_widgets_acf'.$font_string[0],'https://fonts.googleapis.com/css?family='.$font_string[0].'|'.$font_string[0].':'.$font_string[1].'');
 			}
 		}
 		
@@ -79,7 +80,8 @@ class WidgetsWidgets {
 		if($show_fonts==true){
 			$fonts_selected = get_field('fonts_types_widget_acf', 'options');
 			foreach ($fonts_selected as $key => $font) {
-				wp_enqueue_style('font_google_widgets_acf'.$font,'https://fonts.googleapis.com/css?family='.$font.'|Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i');
+				$font_string  = explode('--',$font);
+				wp_enqueue_style('font_google_widgets_acf'.$font_string[0],'https://fonts.googleapis.com/css?family='.$font_string[0].'|'.$font_string[0].':'.$font_string[1].'');
 			}
 		}
 

@@ -68,6 +68,10 @@ function change_new_column(){
 	jQuery('.grid_widget_settings select').change(function(){
 		var colunagem = jQuery(this).val();
 
+		jQuery(this).find('option[selected="selected"]').removeAttr("selected");
+
+        jQuery(this).find('option[value="'+jQuery(this).val()+'"]').attr("selected","selected");
+
 		jQuery(this).closest('.layout').attr("data-widget",colunagem);
 	});
 }

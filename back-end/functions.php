@@ -60,7 +60,7 @@ Class WidgetsAdmin {
 
 		if(!empty($result->items)){
 			foreach ($result->items as $key => $font) {
-				$result_fonts[$font->family] = $font->family;
+				$result_fonts[$font->family.'--'.implode(';',$font->variants)] = $font->family;
 			}
 		}	
 
@@ -79,7 +79,18 @@ Class WidgetsAdmin {
 
 		$fonts_selected = get_field('fonts_types_widget_acf', 'options');
 
-		die(json_encode($fonts_selected));
+		$fonts_selected_strings = array();
+
+		$weights = array();
+
+		foreach ($fonts_selected as $key => $font) {
+			$font_string = explode('--', $font);
+			$weights[] = array(str_replace(' ', '_', $font_string[0]) => $font_string[1]);
+			$fonts_selected_strings[] = $font_string[0];
+		}
+
+
+		die(json_encode(array('fonte'=>$fonts_selected_strings,'weights'=>$weights)));
 	}
 
 	static function get_taxonomies(){

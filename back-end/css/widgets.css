@@ -218,6 +218,7 @@
 	max-height: 100px;
 	min-height: 30px;
 	overflow: auto;
+	display: none;
 }
 
 .grid_widget_settings {
