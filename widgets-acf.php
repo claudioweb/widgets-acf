@@ -117,7 +117,7 @@ function widgetsWidgets_init() {
 
 if( function_exists('acf_add_local_field_group') ){
 
-	add_action( 'init', 'widgetsWidgets_init' );
+	add_action( 'init', 'widgetsWidgets_init', 9999999 );
 }else{
 	
 	add_action( 'admin_notices', 'append_meta_links_plugin_widget_widgets' );
