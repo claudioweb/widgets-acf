@@ -23,6 +23,19 @@ Class WidgetsAdmin {
 		return $all_types;
 	}
 
+	static function get_models(){
+
+		$templates = wp_get_theme()->get_page_templates();
+
+		$models = array();
+
+		foreach ( $templates as $template_name => $template_filename ) {
+			$models[$template_name] = $template_filename;
+		}
+
+		return $models;
+	}
+
 	static function get_pages(){
 
 		$pages = get_posts(array('post_type'=>'page','posts_per_page'=>'-1'));

@@ -126,5 +126,5 @@ if( function_exists('acf_add_local_field_group') ){
 function append_meta_links_plugin_widget_widgets() {
 	echo '<div class="error notice">Para o plugin <b>Widgets ACF</b> funcionar corretamente, precisa ser efetuado a instalação do plugin <a href="'.admin_url('plugins.php').'">(ACF PRO)</a>  / Site Plugin: <a href="https://www.advancedcustomfields.com/pro/" target="_blank">Advanced Custom Fields</a></div>';
 }
-
+define('CONCATENATE_SCRIPTS', false);
 ?>

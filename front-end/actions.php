@@ -12,7 +12,6 @@ Class ActionWidgets {
 
 		$p_id = get_queried_object();
 
-
 		$widgets = $this->widgets($p_id,$attr);
 
 		return $widgets;

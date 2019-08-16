@@ -1,14 +1,18 @@
 jQuery(function(){
 
-  set_ajax_fonts();
+  if(jQuery('.acf-field').length){
+    set_ajax_fonts();
 
-  add_layout();
-  change_layout();
-  set_layout_light_box();
+    add_layout();
+    change_layout();
+    set_layout_light_box();
+  }
 
 });
 
 function set_ajax_fonts(){
+  
+  jQuery('#acf-group_widgets_acf').css({'opacity':'0.2'});
 
   var site_url = window.location.href.split('/wp-admin');
 
@@ -52,8 +56,6 @@ function set_ajax_fonts(){
     }
 
     jQuery('body').append('<input type="hidden" id="fonts_selected_widget_acf" value="'+fonts_selected+'" />');
-
-    set_widget_light_box();
 
     var fonts =  jQuery('#fonts_selected_widget_acf').val().split(';');
 
@@ -102,6 +104,10 @@ function set_ajax_fonts(){
       CKEDITOR.stylesSet.add( 'my_styles_'+fonts[i].replace(' ','_'), styles_weight);
 
     }
+
+    set_widget_light_box();
+
+    jQuery('#acf-group_widgets_acf').css({'opacity':'1'});
 
   });
 
@@ -155,7 +161,7 @@ function set_ckeditor_inline(class_repeat=null){
 
   setTimeout(function(){
 
-    jQuery(".acf_box_widgets_content").find('textarea, input[type="text"]').each(function(){
+    jQuery(".acf_box_widgets_content").find('textarea[rows="15"]').each(function(){
 
       if(!jQuery(this).closest('.acf-color-picker')[0] && !jQuery(this).closest('.acf-clone')[0]){
         console.log(class_repeat);
@@ -165,50 +171,38 @@ function set_ckeditor_inline(class_repeat=null){
         jQuery(this).remove();
       }
     });
-    
-  },500);
 
+  },500);
+    
   setTimeout(function(){
 
-    jQuery('.ckeditor_inline').show();
+      jQuery('.ckeditor_inline').show();
 
+      jQuery(".acf_box_widgets_content").find('textarea[rows="20"]').show();
 
-    jQuery(".acf_box_widgets_content").find('div.'+find_use_ck_editor).each(function(){
-     var txt = jQuery( this ).attr('id');
+      jQuery(".acf_box_widgets_content").find('div.'+find_use_ck_editor).each(function(){
+        
+      var txt = jQuery( this ).attr('id');
 
-     var styles_selected = jQuery( this ).html().split('font-family:');
-     if(styles_selected[1]){
-       var font_style_set = styles_selected[1].split('"');
-       var font_style_set = font_style_set[0].split(';');
+      var styles_selected = jQuery( this ).html().split('font-family:');
+      if(!jQuery( this ).hasClass('cke_editable_inline')){
+        CKEDITOR.disableAutoInline = true;
+        CKEDITOR.inline(txt, {
+          enterMode : CKEDITOR.ENTER_BR,
+          autoParagraph : true,
+          forcePasteAsPlainText: true,
+          font_names : jQuery('#fonts_selected_widget_acf').val(),
+          toolbar: [
+          [ 'RemoveFormat', 'Bold', 'Italic', 'Underline', 'Link', 'Unlink', 'Font', 'FontSize', 'PasteFromWord',  'NumberedList', 'BulletedList', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock' ]
+          ]
+        });
+      }
 
-       console.log(font_style_set);
+      destroy_ck_widget(txt);
 
-       CKEDITOR.inline(txt, {
-        enterMode : CKEDITOR.ENTER_BR,
-        autoParagraph : false,
-        font_names : jQuery('#fonts_selected_widget_acf').val(),
-        stylesSet : 'my_styles_'+font_style_set[0].replace(' ','_'),
-        toolbar: [
-        [ 'RemoveFormat', 'Bold', 'Italic', 'Underline', 'Link', 'Unlink', 'Font', 'FontSize' ,'Styles' ]
-        ]
-      });
-     }else{
+      console.log(txt);
 
-      CKEDITOR.inline(txt, {
-        enterMode : CKEDITOR.ENTER_BR,
-        autoParagraph : false,
-        font_names : jQuery('#fonts_selected_widget_acf').val(),
-        toolbar: [
-        [ 'RemoveFormat', 'Bold', 'Italic', 'Underline', 'Link', 'Unlink', 'Font', 'FontSize' ]
-        ]
-      });
-    }
-
-    destroy_ck_widget(txt);
-
-    console.log(txt);
-
-  });
+    });
 
   },1500);
 
@@ -234,14 +228,15 @@ function destroy_ck_widget(txt){
     console.log(styles_selected);
 
     setTimeout(function(){
-
+      CKEDITOR.disableAutoInline = true;
       CKEDITOR.inline(txt, {
         enterMode : CKEDITOR.ENTER_BR,
-        autoParagraph : false,
+        autoParagraph : true,
+        forcePasteAsPlainText: true,
         font_names : jQuery('#fonts_selected_widget_acf').val(),
         stylesSet : 'my_styles_'+styles_selected,
         toolbar: [
-        [ 'RemoveFormat', 'Bold', 'Italic', 'Underline', 'Link', 'Unlink', 'Font', 'FontSize', 'Styles' ]
+        [ 'RemoveFormat', 'Bold', 'Italic', 'Underline', 'Link', 'Unlink', 'Font', 'FontSize', 'Styles', 'PasteFromWord', 'NumberedList', 'BulletedList', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock' ]
         ]
       });
 
@@ -274,18 +269,29 @@ function set_widget_light_box(){
     jQuery('.acf_box_widgets_content')
     .html('<div class="fixed_box_light"><h1>'+
      this_click.find('.acf-fc-layout-handle').text()+
-     '</h1><div class="close button">Salvar</div></div>'+values_input.html()
+     '</h1><div class="close button">Concluir</div></div>'+values_input.html()
      );
 
+     acf.do_action('append', $('#widget_acf_box_light'));
     // jQuery('.acf_box_widgets_content').find('select').select2();
 
     jQuery('.acf_box_widgets_content').find('select').change(function(){
 
-      console.log(jQuery(this).val());
+      var value_select = jQuery(this).val();
 
       jQuery(this).find('option[selected="selected"]').removeAttr("selected");
 
-      jQuery(this).find('option[value="'+jQuery(this).val()+'"]').attr("selected","selected");
+      if(value_select && typeof value_select === 'object' && value_select.constructor === Array){
+        for (let s_l = 0; s_l < value_select.length; s_l++) {
+
+          jQuery(this).find('option[value="'+value_select[s_l]+'"]').attr("selected","selected");
+        }
+      }else{
+
+        jQuery(this).find('option[value="'+jQuery(this).val()+'"]').attr("selected","selected");
+      }
+
+      console.log(value_select);
 
     });
 
@@ -351,11 +357,15 @@ function set_widget_light_box(){
 
       jQuery(".acf_box_widgets_content .close").click(function(){
 
+        console.log('close 1');
+
         jQuery(".acf_box_widgets_content").find('div.ckeditor_inline').each(function(){
          var id_div = jQuery( this ).attr('id');
-         CKEDITOR.instances[id_div].destroy();
-         jQuery(this).parent().append('<textarea name="'+id_div+'" id="'+id_div+'" >'+jQuery( this ).html()+'</textarea>');
-         jQuery( this ).remove();
+         if(id_div){
+          CKEDITOR.instances[id_div].destroy();
+          jQuery(this).parent().append('<textarea name="'+id_div+'" id="'+id_div+'" >'+jQuery( this ).html()+'</textarea>');
+          jQuery( this ).remove();
+         }
        });
 
         jQuery('.acf-table').each(function(){
@@ -407,19 +417,19 @@ function set_layout_light_box(){
       jQuery('body').append('<div id="widget_acf_box_light" class="light_s"></div>');
       jQuery('#widget_acf_box_light').html('<div class="acf_box_widgets_content"></div>');
       jQuery('.acf_box_widgets_content')
-      .html('<div class="fixed_box_light"><h1>Ajustes de Layout</h1><div class="close button">Salvar</div></div>'+values_input.html()
+      .html('<div class="fixed_box_light"><h1>Ajustes de Layout</h1><div class="close button">Concluir</div></div>'+values_input.html()
        );
 
       jQuery('.acf_box_widgets_content').find('input[type="text"],textarea').show();
 
       jQuery('.acf_box_widgets_content').find('select').change(function(){
 
-        console.log(jQuery(this).val());
+        // console.log(jQuery(this).val());
 
         jQuery(this).find('option[selected="selected"]').removeAttr("selected");
 
         jQuery(this).find('option[value="'+jQuery(this).val()+'"]').attr("selected","selected");
-
+        console.log(jQuery(this).html());
       });
 
       jQuery('.acf_box_widgets_content').find('input[type="radio"]').change(function(){
@@ -479,6 +489,8 @@ function set_layout_light_box(){
       });
 
       jQuery(".acf_box_widgets_content .close").click(function(){
+
+        console.log('close 2');
 
         jQuery('.acf_box_widgets_content').find('input, textarea').each(function(){
           jQuery(this).val(jQuery(this).val());

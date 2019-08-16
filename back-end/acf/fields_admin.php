@@ -3,6 +3,7 @@ if( function_exists('acf_add_local_field_group') ){
 
 	$types = WidgetsAdmin::get_post_types();
 	$pages = WidgetsAdmin::get_pages();
+	$models = WidgetsAdmin::get_models();
 	$categories = WidgetsAdmin::get_taxonomies();
 	$fonts = WidgetsAdmin::get_fonts();
 
@@ -143,6 +144,29 @@ if( function_exists('acf_add_local_field_group') ){
 					'id' => '',
 				),
 				'choices' => $pages,
+				'default_value' => array (
+				),
+				'allow_null' => 0,
+				'multiple' => 1,
+				'ui' => 1,
+				'ajax' => 0,
+				'return_format' => 'value',
+				'placeholder' => '',
+			),
+			array (
+				'key' => 'widget_models_widget_acf',
+				'label' => 'Modelos',
+				'name' => 'models_widget_acf',
+				'type' => 'select',
+				'instructions' => 'Widgets em modelos de páginas',
+				'required' => 0,
+				'conditional_logic' => array (),
+				'wrapper' => array (
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'choices' => $models,
 				'default_value' => array (
 				),
 				'allow_null' => 0,

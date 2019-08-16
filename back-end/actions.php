@@ -65,6 +65,34 @@ Class AcfAction {
 				}
 			}
 
+			// Define widget em  modelos selecionadas
+			if(!empty($widget_adm['models'])){
+
+				foreach ($widget_adm['models'] as $key => $model) {
+
+					$acf_base['location'][][] = array(
+						'param'=>'page_template',
+						'operator'=>'==',
+						'value'=>$model
+						);
+
+					$pages = get_posts(array(
+						'post_type' => 'page',
+						'meta_key' => '_wp_page_template',
+						'meta_value' => $model
+					));
+
+					foreach($pages as $page){
+
+						if($page->post_content!='[acf_widgets]'){
+							$my_post = array('ID' => $page->ID, 'post_content' => '[acf_widgets]');
+							wp_update_post($my_post);
+						}
+					}
+
+				}
+			}
+
 			// Define widget em categorias selecionadas
 			if(!empty($widget_adm['taxonomy'])){
 				foreach ($widget_adm['taxonomy'] as $key => $page) {
@@ -109,12 +137,14 @@ Class AcfAction {
 
 		$posttypes_admin = get_field('type_widget_acf','options');
 		$pages_admin = get_field('page_widget_acf','options');
+		$models_admin = get_field('models_widget_acf','options');
 		$taxonomies_admin = get_field('tax_widget_acf','options');
 
 		$pgs = array();
 
 		$pgs['post_type'] = $posttypes_admin;
 		$pgs['page'] = $pages_admin;
+		$pgs['models'] = $models_admin;
 		$pgs['taxonomy'] = $taxonomies_admin;
 
 		return $pgs;
@@ -130,7 +160,7 @@ Class AcfAction {
 
 	public function get_folders_widgets(){
 
-		$path = plugin_dir_path( __FILE__ )."../widgets-templates";
+		$path = plugin_dir_path( __FILE__ )."../more-widgets-templates";
 		$dir = new DirectoryIterator($path);
 
 		$dir_plugin = array();
@@ -165,6 +195,8 @@ Class AcfAction {
 
 	public function get_folders_widgets_theme($widgets,$dir_plugin){
 
+		add_action('admin_head', array($this, 'my_custom_css_widget'), 1);
+
 		$path =  get_template_directory()."/widgets-templates";
 
 		if(is_dir($path)){
@@ -186,6 +218,29 @@ Class AcfAction {
 		}
 
 		return $widgets;
+	}
+
+	public function my_custom_css_widget() {
+
+		$path =  get_template_directory()."/widgets-templates";
+
+		if(is_dir($path)){
+
+			$dir = new DirectoryIterator($path);
+
+			foreach ($dir as $fileinfo) {
+
+				$widget_name = $fileinfo->getFilename();
+
+				$widget_class = str_replace('-','_', str_replace('-','_', str_replace('-','_',$widget_name)));
+
+				echo '<style>
+					.acf-field-the-contents .acf-flexible-content .values .layout[data-layout="'.$widget_class.'_widget_acf"] .acf-fc-layout-handle, .acf-fc-popup a[data-layout="'.$widget_class.'_widget_acf"]:hover {
+					background-image: url("'.get_template_directory_uri().'/widgets-templates/'.$widget_name.'/main.png") !important;
+				}
+				</style>';
+			}
+	  }
 	}
 
 }

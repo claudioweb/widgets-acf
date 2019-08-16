@@ -16,6 +16,6 @@ $field = array (
 	'default_value' => '',
 	'placeholder' => '',
 	'maxlength' => '',
-	'rows' => '',
+	'rows' => '15',
 	'new_lines' => 'br',
 	);

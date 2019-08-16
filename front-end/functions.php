@@ -21,7 +21,7 @@ Class TemplatesWidgets {
 			if($layout['attr']['largura_layout_setting']=='container'){
 				$html .='<div class="container">';
 			}else{
-				$html .='<div class="container-fluid">';
+				$html .='<div class="container-fluid" style="padding: 0;">';
 			}
 
 			$html .='<div class="row">';
