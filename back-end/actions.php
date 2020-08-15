@@ -201,6 +201,8 @@ Class AcfAction {
 
 		if(is_dir($path)){
 
+			$widgets = array();
+
 			$dir = new DirectoryIterator($path);
 
 			foreach ($dir as $fileinfo) {
