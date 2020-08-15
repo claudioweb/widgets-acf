@@ -32,10 +32,12 @@
 }
 
 [data-key='field_linha_widgets'] .fa:before {
-	font-size: 23px;
-    position: absolute;
-    right: 70px;
-    top: 6px;
+	font-size: 90px;
+    position: relative;
+    right: 7px;
+    top: 30px;
+    display: table;
+    margin: 0 auto;
 }
 
 
@@ -197,7 +199,7 @@
 	padding:15px;
 	width: 800px;
 	left: 23%;
-	top: 44px;
+	top: 15px;
 	height: 450px;
 	background: rgba(255,255,255,1);
 	border-radius: 5px;
@@ -211,7 +213,7 @@
 	z-index: 999;
 	background: #fff;
 	width: 795px;
-	top: 75px;
+	top: 50px;
 	height: 50px;
 }
 
@@ -236,7 +238,7 @@
 	z-index: 999;
 	display: block;
 	position: fixed;
-	top: 170px;
+	top: 145px;
 }
 
 #widget_acf_box_light .acf_box_widgets_content h1 {
@@ -251,6 +253,7 @@
 	position: absolute;
 	right: 18px;
 	top: 11px;
+	line-height: 30px;
 	width: 95px;
 }
 
@@ -281,35 +284,57 @@
 [data-key='field_linha_widgets'] .acf-flexible-content .layout .acf-fc-layout-controls .acf-icon.-minus {
 	visibility: initial;
 	z-index: 9;
-	right: 10px;
+	right: 1px;
 }
 
 [data-key='field_linha_widgets'] .acf-table > tbody > tr > td {
 	border-width: 1px 0 35px 1px;
 }
-
+.acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-1'] {
+	width: 7.8% !important;
+}
 .acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-2'] {
-	width: 14.55% !important;
+	width: 15.16% !important;
 }
 
 .acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-3'] {
-	width: 22.55% !important;
+	width: 23.4% !important;
 }
 
 .acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-4'] {
-	width: 30.55% !important;
+	width: 31.2% !important;
+}
+
+.acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-5'] {
+	width: 39% !important;
 }
 
 .acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-6'] {
-	width: 46.55% !important;
+	width: 46.8% !important;
+}
+
+.acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-7'] {
+	width: 54.6% !important;
 }
 
 .acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-8'] {
-	width: 62.55% !important;
+	width: 62.4% !important;
+}
+
+.acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-9'] {
+	width: 70.2% !important;
+}
+
+.acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-10'] {
+	width: 78% !important;
+}
+
+.acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-11'] {
+	width: 85.8% !important;
 }
 
 .acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-12'] {
-	width: 94.6% !important;
+	width: 93.6% !important;
 }
 
 .acf-field-the-contents .acf-flexible-content .layout[data-widget='full-widget-acf'] {

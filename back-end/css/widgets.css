@@ -154,7 +154,7 @@
 	/*color: #000 !important;*/
 	text-shadow: inherit !important;
 	font-weight: bold;
-	margin-left: -305%;
+	/* margin-left: -305%; */
 	margin-top:15px;
 }
 
@@ -243,8 +243,12 @@
 }
 
 [data-key='field_linha_widgets'] .acf-table .grid_widget_settings .acf-input {
-	margin-top: 0 !important;
+	margin-top: 30px !important;
 	padding: 0 !important;
+}
+
+[data-key='field_linha_widgets'] .acf-table .grid_widget_settings .acf-input select {
+	width: 70px;
 }
 
 [data-key='field_linha_widgets'] .fixed_box_light {

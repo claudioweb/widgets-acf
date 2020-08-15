@@ -1,6 +1,7 @@
 jQuery(function(){
 
   if(jQuery('.acf-field').length){
+
     set_ajax_fonts();
 
     add_layout();
@@ -32,79 +33,81 @@ function set_ajax_fonts(){
   var fonts_selected = '';
   jQuery.ajax(settings_ajax).done(function (resposta) {
 
+    if(resposta.length!=0){
+      
+      for (var i = 0; i < resposta['fonte'].length; i++) {
+        fonts_selected = resposta['fonte'][i]+';'+fonts_selected;
+      }
+      console.log(fonts_selected);
 
-    for (var i = 0; i < resposta['fonte'].length; i++) {
-      fonts_selected = resposta['fonte'][i]+';'+fonts_selected;
-    }
-    console.log(fonts_selected);
+      for (var w = 0; w < resposta['weights'].length; w++) {
 
-    for (var w = 0; w < resposta['weights'].length; w++) {
+        var w_k = 0;
+        for (var key_w in resposta['weights'][w]){
 
-      var w_k = 0;
-      for (var key_w in resposta['weights'][w]){
+          jQuery('body').append('<input type="hidden" id="fontsweight_selected_widget_acf_'+key_w+'" value="'+resposta['weights'][w][key_w]+'" />');
 
-        jQuery('body').append('<input type="hidden" id="fontsweight_selected_widget_acf_'+key_w+'" value="'+resposta['weights'][w][key_w]+'" />');
+          console.log(key_w);
+          w_k++;
+        }
 
-        console.log(key_w);
-        w_k++;
       }
 
-    }
-
-    if(!resposta['fonte']){
-      fonts_selected='Arial;'
-    }
-
-    jQuery('body').append('<input type="hidden" id="fonts_selected_widget_acf" value="'+fonts_selected+'" />');
-
-    var fonts =  jQuery('#fonts_selected_widget_acf').val().split(';');
-
-    for (var i = 0; i < fonts.length-1; i++) {
-
-      var name_hidden_variant = jQuery('#fontsweight_selected_widget_acf_'+fonts[i].replace(' ','_')).val();
-
-      console.log(name_hidden_variant);
-      var weight_fonts = name_hidden_variant.split(';');
-
-      var styles_weight = [];
-
-      var names = {
-        '100':'Thin 100',
-        '100italic':'Thin 100 Italic',
-        '200':'Thin 200',
-        '200italic':'Thin 200 Italic',
-        '300':'Thin 300',
-        '300italic':'Thin 300 Italic',
-        'regular':'Regular',
-        'italic':'Italic',
-        '400':'Regular 400',
-        '400italic':'Regular 400 Italic',
-        '500':'Medium 500',
-        '500italic':'Medium 500 Italic',
-        '600':'Semi-bold 600',
-        '600italic':'Semi-bold 600 Italic',
-        '700':'Bold 700',
-        '700italic':'Bold 700 Italic',
-        '800':'Bold 800',
-        '800italic':'Bold 800 Italic',
-        '900':'Bold 900',
-        '900italic':'Bold 900 Italic',
-      };
-
-      for (var w = 0; w < weight_fonts.length; w++) {
-        styles_weight.push({
-          name: names[weight_fonts[w]],
-          element: 'font',
-          styles: {
-            'font-weight': weight_fonts[w]
-          }
-        });
+      if(!resposta['fonte']){
+        fonts_selected='Arial;'
       }
 
-      CKEDITOR.stylesSet.add( 'my_styles_'+fonts[i].replace(' ','_'), styles_weight);
+      jQuery('body').append('<input type="hidden" id="fonts_selected_widget_acf" value="'+fonts_selected+'" />');
 
+      var fonts =  jQuery('#fonts_selected_widget_acf').val().split(';');
+
+      for (var i = 0; i < fonts.length-1; i++) {
+
+        var name_hidden_variant = jQuery('#fontsweight_selected_widget_acf_'+fonts[i].replace(' ','_')).val();
+
+        console.log(name_hidden_variant);
+        var weight_fonts = name_hidden_variant.split(';');
+
+        var styles_weight = [];
+
+        var names = {
+          '100':'Thin 100',
+          '100italic':'Thin 100 Italic',
+          '200':'Thin 200',
+          '200italic':'Thin 200 Italic',
+          '300':'Thin 300',
+          '300italic':'Thin 300 Italic',
+          'regular':'Regular',
+          'italic':'Italic',
+          '400':'Regular 400',
+          '400italic':'Regular 400 Italic',
+          '500':'Medium 500',
+          '500italic':'Medium 500 Italic',
+          '600':'Semi-bold 600',
+          '600italic':'Semi-bold 600 Italic',
+          '700':'Bold 700',
+          '700italic':'Bold 700 Italic',
+          '800':'Bold 800',
+          '800italic':'Bold 800 Italic',
+          '900':'Bold 900',
+          '900italic':'Bold 900 Italic',
+        };
+
+        for (var w = 0; w < weight_fonts.length; w++) {
+          styles_weight.push({
+            name: names[weight_fonts[w]],
+            element: 'font',
+            styles: {
+              'font-weight': weight_fonts[w]
+            }
+          });
+        }
+
+        CKEDITOR.stylesSet.add( 'my_styles_'+fonts[i].replace(' ','_'), styles_weight);
+
+      }
     }
-
+    
     set_widget_light_box();
 
     jQuery('#acf-group_widgets_acf').css({'opacity':'1'});
@@ -161,7 +164,7 @@ function set_ckeditor_inline(class_repeat=null){
 
   setTimeout(function(){
 
-    jQuery(".acf_box_widgets_content").find('textarea[rows="15"]').each(function(){
+    jQuery(".acf_box_widgets_content").find('textarea[rows="15"], input[type=text]').each(function(){
 
       if(!jQuery(this).closest('.acf-color-picker')[0] && !jQuery(this).closest('.acf-clone')[0]){
         console.log(class_repeat);
@@ -178,7 +181,7 @@ function set_ckeditor_inline(class_repeat=null){
 
       jQuery('.ckeditor_inline').show();
 
-      jQuery(".acf_box_widgets_content").find('textarea[rows="20"]').show();
+      jQuery(".acf_box_widgets_content").find('textarea[rows="20"], input[type=text]').show();
 
       jQuery(".acf_box_widgets_content").find('div.'+find_use_ck_editor).each(function(){
         
@@ -272,7 +275,7 @@ function set_widget_light_box(){
      '</h1><div class="close button">Concluir</div></div>'+values_input.html()
      );
 
-     acf.do_action('append', $('#widget_acf_box_light'));
+     acf.do_action('append', jQuery('#widget_acf_box_light'));
     // jQuery('.acf_box_widgets_content').find('select').select2();
 
     jQuery('.acf_box_widgets_content').find('select').change(function(){
@@ -305,7 +308,7 @@ function set_widget_light_box(){
 
     });
 
-    jQuery('.mce-container-body,.wp-editor-tools, .mce-tinymce, .quicktags-toolbar').remove();
+    jQuery('.mce-container-body, .mce-tinymce').remove();
 
     jQuery('.acf_box_widgets_content .wp-picker-container').remove();
     // jQuery('.acf_box_widgets_content .wp-picker-container .wp-picker-holder').remove();
@@ -347,7 +350,6 @@ function set_widget_light_box(){
         if(!jQuery(this).parent().parent().parent().parent().hasClass('acf-clone')){
 
           var_color_picker = jQuery(this).find('input').first();
-
           var_color_picker.wpColorPicker(myOptions);
           jQuery(this).find('input.wp-color-picker').attr('type','text');
           jQuery(this).prepend(var_color_picker);
