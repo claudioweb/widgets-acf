@@ -32,12 +32,11 @@
 }
 
 [data-key='field_linha_widgets'] .fa:before {
-	font-size: 90px;
-    position: relative;
-    right: 7px;
-    top: 30px;
-    display: table;
-    margin: 0 auto;
+	font-size: 65px;
+	font-size: 23px;
+    position: absolute;
+    right: 40px;
+    top: 6px;
 }
 
 
@@ -291,55 +290,377 @@
 	border-width: 1px 0 35px 1px;
 }
 .acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-1'] {
-	width: 7.8% !important;
+	width: 7.6% !important;
 }
+.acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-1'] .acf-fields .fa:before {
+	font-size: 13px;
+	right: 35px;
+	top: 11px;
+}
+.acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-1'] .acf-fc-layout-handle {
+	padding-top: 40px;
+    font-size: 12px !important;
+    padding-right: 7px;
+	background-position-y: 77px !important;
+    padding-left: 8px;
+    height: 167px !important;
+}
+.acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-1'] .acf-fields .grid_widget_settings {
+	margin-top: 31px;
+    width: 90%;
+    top: 45px;
+    right: 2px;
+}
+.acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-1'] .acf-fields .grid_widget_settings .acf-input select {
+	margin-top: -40px !important;
+}
+
 .acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-2'] {
 	width: 15.16% !important;
+}
+.acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-2'] .acf-fields .fa:before {
+	font-size: 13px;
+	right: 35px;
+	top: 11px;
+}
+.acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-2'] .acf-fc-layout-handle {
+	padding-top: 40px;
+	font-size: 12px !important;
+	padding-right: 7px;
+    background-position-y: 77px !important;
+	padding-left: 8px;
+	height: 167px !important;
+}
+.acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-2'] .acf-fields .grid_widget_settings {
+	margin-top: 31px;
+	width: 90%;
+	top: 45px;
+	right: 2px;
+}
+.acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-2'] .acf-fields .grid_widget_settings .acf-input select {
+	margin-top: -25px !important;
+    right: 0 !important;
+    position: absolute;
 }
 
 .acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-3'] {
 	width: 23.4% !important;
 }
+.acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-3'] .acf-fields .fa:before {
+	font-size: 13px;
+	right: 35px;
+	top: 11px;
+}
+.acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-3'] .acf-fc-layout-handle {
+	padding-top: 40px;
+	font-size: 15px !important;
+	line-height: 17px;
+	padding-right: 7px;
+	background-position-y: 77px !important;
+	padding-left: 8px;
+	height: 167px !important;
+}
+.acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-3'] .acf-fields .grid_widget_settings {
+	margin-top: 31px;
+	width: 90%;
+	top: 45px;
+	right: 2px;
+}
+.acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-3'] .acf-fields .grid_widget_settings .acf-input select {
+	margin-top: -25px !important;
+    right: 0 !important;
+    position: absolute;
+}
 
 .acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-4'] {
 	width: 31.2% !important;
+}
+.acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-4'] .acf-fields .fa:before {
+	font-size: 13px;
+	right: 35px;
+	top: 11px;
+}
+.acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-4'] .acf-fc-layout-handle {
+	padding-top: 10px;
+    font-size: 15px !important;
+    line-height: 17px;
+    padding-right: 7px;
+	background-position-y: 50px !important;
+    padding-left: 8px;
+    height: 197px !important;
+}
+.acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-4'] .acf-fields .grid_widget_settings {
+	margin-top: 1px;
+	width: 90%;
+	top: 45px;
+	right: 2px;
+}
+.acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-4'] .acf-fields .grid_widget_settings .acf-input select {
+	margin-top: -25px !important;
+    right: 0 !important;
+    position: absolute;
 }
 
 .acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-5'] {
 	width: 39% !important;
 }
+.acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-5'] .acf-fields .fa:before {
+	font-size: 13px;
+	right: 35px;
+	top: 11px;
+}
+.acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-5'] .acf-fc-layout-handle {
+	padding-top: 10px;
+    font-size: 17px !important;
+    line-height: 17px;
+    padding-right: 7px;
+    background-position-y: 50px !important;
+    padding-left: 8px;
+    height: 197px !important;
+}
+.acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-5'] .acf-fields .grid_widget_settings {
+	margin-top: 1px;
+	width: 90%;
+	top: 45px;
+	right: 2px;
+}
+.acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-5'] .acf-fields .grid_widget_settings .acf-input select {
+	margin-top: -25px !important;
+    right: 0 !important;
+    position: absolute;
+}
 
 .acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-6'] {
 	width: 46.8% !important;
+}
+.acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-6'] .acf-fields .fa:before {
+	font-size: 13px;
+	right: 35px;
+	top: 11px;
+}
+.acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-6'] .acf-fc-layout-handle {
+	padding-top: 10px;
+	font-size: 21px !important;
+    line-height: 30px;
+    padding-right: 7px;
+    background-position-y: 50px !important;
+    padding-left: 8px;
+    height: 197px !important;
+}
+.acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-6'] .acf-fields .grid_widget_settings {
+	margin-top: 1px;
+	width: 90%;
+	top: 45px;
+	right: 2px;
+}
+.acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-6'] .acf-fields .grid_widget_settings .acf-input select {
+	margin-top: -25px !important;
+    right: 0 !important;
+    position: absolute;
 }
 
 .acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-7'] {
 	width: 54.6% !important;
 }
+.acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-7'] .acf-fields .fa:before {
+	font-size: 13px;
+	right: 35px;
+	top: 11px;
+}
+.acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-7'] .acf-fc-layout-handle {
+	padding-top: 10px;
+	font-size: 21px !important;
+    line-height: 30px;
+    padding-right: 7px;
+    background-position-y: 50px !important;
+    padding-left: 8px;
+    height: 197px !important;
+}
+.acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-7'] .acf-fields .grid_widget_settings {
+	margin-top: 1px;
+	width: 90%;
+	top: 45px;
+	right: 2px;
+}
+.acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-7'] .acf-fields .grid_widget_settings .acf-input select {
+	margin-top: -25px !important;
+    right: 0 !important;
+    position: absolute;
+}
 
 .acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-8'] {
 	width: 62.4% !important;
+}
+.acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-8'] .acf-fields .fa:before {
+	font-size: 13px;
+	right: 35px;
+	top: 11px;
+}
+.acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-8'] .acf-fc-layout-handle {
+	padding-top: 10px;
+	font-size: 21px !important;
+    line-height: 30px;
+    padding-right: 7px;
+    background-position-y: 50px !important;
+    padding-left: 8px;
+    height: 197px !important;
+}
+.acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-8'] .acf-fields .grid_widget_settings {
+	margin-top: 1px;
+	width: 90%;
+	top: 45px;
+	right: 2px;
+}
+.acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-8'] .acf-fields .grid_widget_settings .acf-input select {
+	margin-top: -25px !important;
+    right: 0 !important;
+    position: absolute;
 }
 
 .acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-9'] {
 	width: 70.2% !important;
 }
+.acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-9'] .acf-fields .fa:before {
+	font-size: 13px;
+	right: 35px;
+	top: 11px;
+}
+.acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-9'] .acf-fc-layout-handle {
+	padding-top: 10px;
+	font-size: 21px !important;
+    line-height: 30px;
+    padding-right: 7px;
+    background-position-y: 50px !important;
+    padding-left: 8px;
+    height: 197px !important;
+}
+.acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-9'] .acf-fields .grid_widget_settings {
+	margin-top: 1px;
+	width: 90%;
+	top: 45px;
+	right: 2px;
+}
+.acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-9'] .acf-fields .grid_widget_settings .acf-input select {
+	margin-top: -25px !important;
+    right: 0 !important;
+    position: absolute;
+}
 
 .acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-10'] {
 	width: 78% !important;
+}
+.acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-10'] .acf-fields .fa:before {
+	font-size: 13px;
+	right: 35px;
+	top: 11px;
+}
+.acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-10'] .acf-fc-layout-handle {
+	padding-top: 10px;
+	font-size: 21px !important;
+    line-height: 30px;
+    padding-right: 7px;
+    background-position-y: 50px !important;
+    padding-left: 8px;
+    height: 197px !important;
+}
+.acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-10'] .acf-fields .grid_widget_settings {
+	margin-top: 1px;
+	width: 90%;
+	top: 45px;
+	right: 2px;
+}
+.acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-10'] .acf-fields .grid_widget_settings .acf-input select {
+	margin-top: -25px !important;
+    right: 0 !important;
+    position: absolute;
 }
 
 .acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-11'] {
 	width: 85.8% !important;
 }
+.acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-11'] .acf-fields .fa:before {
+	font-size: 13px;
+	right: 35px;
+	top: 11px;
+}
+.acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-11'] .acf-fc-layout-handle {
+	padding-top: 10px;
+	font-size: 21px !important;
+    line-height: 30px;
+    padding-right: 7px;
+    background-position-y: 50px !important;
+    padding-left: 8px;
+    height: 197px !important;
+}
+.acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-11'] .acf-fields .grid_widget_settings {
+	margin-top: 1px;
+	width: 90%;
+	top: 45px;
+	right: 2px;
+}
+.acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-11'] .acf-fields .grid_widget_settings .acf-input select {
+	margin-top: -25px !important;
+    right: 0 !important;
+    position: absolute;
+}
 
 .acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-12'] {
 	width: 93.6% !important;
+}
+.acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-12'] .acf-fields .fa:before {
+	font-size: 13px;
+	right: 35px;
+	top: 11px;
+}
+.acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-12'] .acf-fc-layout-handle {
+	padding-top: 10px;
+	font-size: 28px !important;
+    line-height: 26px;
+    padding-right: 7px;
+    background-position-y: 50px !important;
+    padding-left: 8px;
+    height: 197px !important;
+}
+.acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-12'] .acf-fields .grid_widget_settings {
+	margin-top: 1px;
+	width: 90%;
+	top: 45px;
+	right: 2px;
+}
+.acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-12'] .acf-fields .grid_widget_settings .acf-input select {
+	margin-top: -25px !important;
+    right: 0 !important;
+    position: absolute;
 }
 
 .acf-field-the-contents .acf-flexible-content .layout[data-widget='full-widget-acf'] {
 	width: 104% !important;
 	margin-left: -1.2% !important;
+}
+.acf-field-the-contents .acf-flexible-content .layout[data-widget='full-widget-acf'] .acf-fields .fa:before {
+	font-size: 13px;
+	right: 35px;
+	top: 11px;
+}
+.acf-field-the-contents .acf-flexible-content .layout[data-widget='full-widget-acf'] .acf-fc-layout-handle {
+	padding-top: 10px;
+	font-size: 28px !important;
+    line-height: 26px;
+    padding-right: 7px;
+    background-position-y: 50px !important;
+    padding-left: 8px;
+    height: 197px !important;
+}
+.acf-field-the-contents .acf-flexible-content .layout[data-widget='full-widget-acf'] .acf-fields .grid_widget_settings {
+	margin-top: 1px;
+	width: 90%;
+	top: 45px;
+	right: 2px;
+}
+.acf-field-the-contents .acf-flexible-content .layout[data-widget='full-widget-acf'] .acf-fields .grid_widget_settings .acf-input select {
+	margin-top: -25px !important;
+    right: 0 !important;
+    position: absolute;
 }
 
 .ckeditor_inline ul, .ckeditor_inline ol {

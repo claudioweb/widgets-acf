@@ -228,6 +228,15 @@ Class AcfAction {
 
 		if(is_dir($path)){
 
+			$temp = get_template_directory_uri().'/widgets-templates/';
+		}else{
+
+			$path = plugin_dir_path( __FILE__ )."../more-widgets-templates";
+
+			$temp = plugins_url( '/more-widgets-templates/' , dirname(__FILE__));
+			
+		}
+
 			$dir = new DirectoryIterator($path);
 
 			foreach ($dir as $fileinfo) {
@@ -238,11 +247,11 @@ Class AcfAction {
 
 				echo '<style>
 					.acf-field-the-contents .acf-flexible-content .values .layout[data-layout="'.$widget_class.'_widget_acf"] .acf-fc-layout-handle, .acf-fc-popup a[data-layout="'.$widget_class.'_widget_acf"]:hover {
-					background-image: url("'.get_template_directory_uri().'/widgets-templates/'.$widget_name.'/main.png") !important;
+					background-image: url("'.$temp.$widget_name.'/main.png") !important;
 				}
 				</style>';
 			}
-	  }
+	  
 	}
 
 }

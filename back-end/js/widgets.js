@@ -164,7 +164,7 @@ function set_ckeditor_inline(class_repeat=null){
 
   setTimeout(function(){
 
-    jQuery(".acf_box_widgets_content").find('textarea[rows="15"], input[type=text]').each(function(){
+    jQuery(".acf_box_widgets_content").find('textarea[rows="15"]').each(function(){
 
       if(!jQuery(this).closest('.acf-color-picker')[0] && !jQuery(this).closest('.acf-clone')[0]){
         console.log(class_repeat);
