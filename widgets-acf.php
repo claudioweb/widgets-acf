@@ -105,6 +105,56 @@ class WidgetsWidgets {
 			wp_enqueue_style( 'front_end_widget_acf', plugins_url('front-end/css/widget-acf.css', __FILE__) );
 		}
 	}
+	
+	/**
+	 * parseWidgetHeaders Realiza o parse do header com informações do widget
+	 *
+	 * @param  mixed $widgetController Widget que será realizado o parse
+	 * @return array Array com as informações do widget
+	 */
+	public static function parseWidgetHeaders($widgetController) {
+		$name = basename(dirname($widgetController));
+		$name = self::cleanWidgetName($name);
+
+		$headers['name'] = $name;
+
+		return array_merge(
+				$headers, 
+				get_file_data(
+					$widgetController, [
+						'title' => 'Title',
+						'description' => 'Description',
+						'category' => 'Category',
+						'icon' => 'Icon',
+						'keywords' => 'Keywords',
+						// 'mode' => 'Mode',
+						// 'align' => 'Align',
+						// 'post_types' => 'PostTypes',
+						// 'supports_align' => 'SupportsAlign',
+						// 'supports_anchor' => 'SupportsAnchor',
+						// 'supports_mode' => 'SupportsMode',
+						// 'supports_multiple' => 'SupportsMultiple',
+						// 'enqueue_style'     => 'EnqueueStyle',
+						// 'enqueue_script'    => 'EnqueueScript',
+						// 'enqueue_assets'    => 'EnqueueAssets',
+					]
+				)
+		);
+	}
+	
+	/**
+	 * cleanWidgetName Limpa o nome do widget
+	 *
+	 * @param  mixed $widgetName Nome do widget
+	 * @return string Nome do widget sem espaços, hífens e em letras minúsculas
+	 */
+	public static function cleanWidgetName($widgetName) {
+		$widgetName = str_replace(' ', '_', $widgetName);
+		$widgetName = str_replace('-', '_', $widgetName);
+		$widgetName = strtolower($widgetName); // Convert to lowercase
+ 
+		return $widgetName;
+	}
 
 }
 

@@ -14,10 +14,14 @@ Class AcfAction {
 	public function set_widgets_list(){
 
 		if( function_exists('acf_add_local_field_group') ){
+			add_action('admin_head', array($this, 'my_custom_css_widget'), 1);
 
 			$acf_base = AcfWidget::get_base();
 
-			$directory_widgets = $this->get_folders_widgets();
+			$directory_widgets = array_merge(
+				$this->getWidgets(plugin_dir_path(__FILE__) . '../more-widgets-templates'),
+				$this->getWidgets(get_template_directory() . '/widgets-templates')
+			);
 
 			$widget_adm = $this->get_pages_selected();
 
@@ -120,6 +124,8 @@ Class AcfAction {
 				$acf_base['fields'][0]['sub_fields'][2]['layouts'][] = $widget;
 			}
 
+			// var_dump($acf_base);
+
 			$layouts_widget = acf_add_local_field_group($acf_base);
 
 			if($layouts_widget){
@@ -156,65 +162,32 @@ Class AcfAction {
 
 		return $sub_fields;
 	}
-
-	public function get_folders_widgets(){
-
-		$path = plugin_dir_path( __FILE__ )."../more-widgets-templates";
-		$dir = new DirectoryIterator($path);
-
-		$dir_plugin = array();
-
+	
+	/**
+	 * getWidgets Recupera todos os widgets do caminho informado
+	 *
+	 * @param  mixed $path Caminho dos widgets
+	 * @return array Array de widgets encontrados no diretório informado
+	 */
+	public function getWidgets($path) {
 		$widgets = array();
 
-		foreach ($dir as $fileinfo) {
-			if ($fileinfo->isDir() && !$fileinfo->isDot()) {
-				$fields = array();
-				require($path."/".$fileinfo->getFilename()."/functions.php");
+		if(!is_dir($path))
+			return $widgets;
 
-				$widget_name = str_replace('-', '_', $fileinfo->getFilename());
-				
-				$widgets_fields = get_fields_acf_widgets::get_field($widget_name,$fields);
+		$dir = new DirectoryIterator($path);
 
-				if(!empty($widgets_fields)){
-					$widgets[$widget_name] = $widgets_fields;
-				}
+		foreach($dir as $fileinfo):
+			if($fileinfo->isDir() && !$fileinfo->isDot()):
+				$fields=array();
+				$file = "{$path}/{$fileinfo->getFilename()}/functions.php";
+				$widget = WidgetsWidgets::parseWidgetHeaders($file);
 
-				$dir_plugin[] = $fileinfo->getFilename();
-			}
+				require($file);
 
-		}
-
-		// get widgets theme
-		$widgets = AcfAction::get_folders_widgets_theme($widgets,$dir_plugin);
-
-		return $widgets;
-	}
-
-	public function get_folders_widgets_theme($widgets,$dir_plugin){
-
-		add_action('admin_head', array($this, 'my_custom_css_widget'), 1);
-
-		$path =  get_template_directory()."/widgets-templates";
-
-		if(is_dir($path)){
-
-			$widgets = array();
-
-			$dir = new DirectoryIterator($path);
-
-			foreach ($dir as $fileinfo) {
-
-				if ($fileinfo->isDir() && !$fileinfo->isDot()) {
-					$fields=array();
-					require($path."/".$fileinfo->getFilename()."/functions.php");
-
-					$widget_name =  str_replace('-', '_',$fileinfo->getFilename());
-
-					$widgets[$widget_name] = get_fields_acf_widgets::get_field($widget_name,$fields);
-
-				}
-			}
-		}
+				$widgets[$widget['name']] = get_fields_acf_widgets::get_field($widget, $fields);
+			endif;
+		endforeach;
 
 		return $widgets;
 	}
