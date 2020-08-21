@@ -6,7 +6,6 @@ include "fields.php";
 Class AcfAction {
 
 	public function __construct() {
-
 		require("acf/widgets_base.php");
 
 		return $this->set_widgets_list();

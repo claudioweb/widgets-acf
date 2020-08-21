@@ -13,13 +13,40 @@ Class get_fields_acf_widgets {
 			'sub_fields' => $fields,
 			'min' => '',
 			'max' => '',
-			);
+		);
 
 		return $fields_base;
 	}
+	
+	/**
+	 * getFieldsGroups Retorna todos os campos de grupos cadastrados para o widget
+	 *
+	 * @param  mixed $widget Nome do widget
+	 * @return array Array de campos cadastrados
+	 */
+	public function getFieldsGroups($widget) {		
+		$result = array();
+		$all_field_groups = acf_get_field_groups();
 
-	public function set_field($widget,$fields){
+		foreach($all_field_groups as $field_group):
+			foreach($field_group['location'] as $group_location_rules):
+				foreach($group_location_rules as $rule):
+					if($rule['param'] == 'widget_acf' && $rule['operator'] == '==' && $rule['value'] == $widget):
+						$fields = acf_get_fields($field_group['ID']);
 
+						foreach($fields as $field):
+							$field['key'] = $field['name'] . '_' . $widget;
+							array_push($result, $field);
+						endforeach;
+					endif;
+				endforeach;
+			endforeach;
+		endforeach;
+		
+		return $result;
+	}
+
+	public function set_field($widget, $fields){
 		$fields_return = array();
 
 		if(!empty($fields)){
@@ -27,7 +54,6 @@ Class get_fields_acf_widgets {
 			$icon = $fields['icon'];
 			unset($fields['icon']);
 
-			// var_dump($fields);
 			foreach ($fields as $key_field => $field) {
 
 				$field['icon'] = $icon;
@@ -65,9 +91,11 @@ Class get_fields_acf_widgets {
 			}
 
 		}
-
+		
+		// Mescla os campos cadastrados no functions do widget com os campos cadastrados pelo admin
+		$fields_return = array_merge($fields_return, get_fields_acf_widgets::getFieldsGroups($widget));
+		
 		return $fields_return;
-
 	}
 
 	public function sub_fields($fd,$parent){
