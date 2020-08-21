@@ -22,6 +22,21 @@ class WidgetsWidgets {
 		add_action('wp_ajax_fonts_widgets_acf', array('WidgetsAdmin','get_fonts_ajax'));
    		// Definindo action para acesso público
 		add_action('wp_ajax_nopriv_fonts_widgets_acf', array('WidgetsAdmin','get_fonts_ajax')); 
+
+		$this->registerLocation();
+	}
+	
+	/**
+	 * registerLocation Registra um novo local para cadastrar grupos de campos ACF
+	 *
+	 * @return void
+	 */
+	public function registerLocation() {
+		// Check function exists, then include and register the custom location type class.
+		if(function_exists('acf_register_location_type')) {
+			include_once('back-end/acf/WidgetsLocation.php');
+			acf_register_location_type('WidgetsLocation');
+		}
 	}
 
 	/*=========================================================

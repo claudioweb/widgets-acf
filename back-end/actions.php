@@ -6,7 +6,6 @@ include "fields.php";
 Class AcfAction {
 
 	public function __construct() {
-
 		require("acf/widgets_base.php");
 
 		return $this->set_widgets_list();
@@ -168,14 +167,12 @@ Class AcfAction {
 		$widgets = array();
 
 		foreach ($dir as $fileinfo) {
-
-
 			if ($fileinfo->isDir() && !$fileinfo->isDot()) {
 				$fields = array();
 				require($path."/".$fileinfo->getFilename()."/functions.php");
 
 				$widget_name = str_replace('-', '_', $fileinfo->getFilename());
-
+				
 				$widgets_fields = get_fields_acf_widgets::get_field($widget_name,$fields);
 
 				if(!empty($widgets_fields)){
