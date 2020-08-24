@@ -20,7 +20,9 @@ Class AcfAction {
 
 			$directory_widgets = array_merge(
 				$this->getWidgets(plugin_dir_path(__FILE__) . '../more-widgets-templates'),
-				$this->getWidgets(get_template_directory() . '/widgets-templates')
+				function_exists('\App\template') || function_exists('\Roots\view') ? 
+					$this->getWidgets(get_template_directory() . '/views/widgets-templates') :
+					$this->getWidgets(get_template_directory() . '/widgets-templates')
 			);
 
 			$widget_adm = $this->get_pages_selected();

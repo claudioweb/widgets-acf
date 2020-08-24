@@ -31,9 +31,15 @@ Class TemplatesWidgets {
 				$layout_widget = str_replace('_widget_acf', '', $w_content['layout']);
 				$widget_name = str_replace('_', '-', $layout_widget);
 				$dir_widget = get_template_directory() . "/widgets-templates/{$widget_name}";
+				$plugin_widget = false;
 
-				if(!is_dir($dir_widget))
-					$dir_widget = plugin_dir_path(__FILE__) . "../widgets-templates/{$widget_name}";
+				if(function_exists('\App\template') || function_exists('\Roots\view'))
+					$dir_widget = get_template_directory() . "/views/widgets-templates/{$widget_name}";
+
+				if(!is_dir($dir_widget)):
+					$dir_widget = plugin_dir_path(__FILE__) . "../more-widgets-templates/{$widget_name}";
+					$plugin_widget = true;
+				endif;
 
 				$files = glob("{$dir_widget}/index.*");
 
@@ -56,8 +62,18 @@ Class TemplatesWidgets {
 
 				$fields = $w_content['content'];
 				$widget->fields = TemplatesWidgets::get_image($fields);
+				
+				if(function_exists('\App\template') && !$plugin_widget):
+					$template = "widgets-templates.{$widget_name}.index";
 
-				include "{$files[0]}";
+					echo \App\template($template, ['widget' => $widget]);
+				elseif(function_exists('\Roots\view') && !$plugin_widget):
+					$template = "widgets-templates.{$widget_name}.index";
+
+					echo \Roots\view($template, ['widget' => $widget]);
+				else:
+					include "{$files[0]}";
+				endif;
 
 				$html .= ob_get_clean();
 				$html .= '</div>';
