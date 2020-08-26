@@ -181,8 +181,12 @@ Class AcfAction {
 
 		foreach($dir as $fileinfo):
 			if($fileinfo->isDir() && !$fileinfo->isDot()):
-				$fields=array();
 				$file = "{$path}/{$fileinfo->getFilename()}/functions.php";
+				
+				if(!file_exists($file))
+					continue;
+
+				$fields=array();
 				$widget = WidgetsWidgets::parseWidgetHeaders($file);
 
 				require($file);
