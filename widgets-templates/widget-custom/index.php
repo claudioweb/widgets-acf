@@ -1,1 +1,1 @@
-<pre><?php var_dump($fields); ?></pre>
+<pre><?php var_dump($widget); ?></pre>

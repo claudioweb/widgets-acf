@@ -31,11 +31,11 @@ Class get_fields_acf_widgets {
 		foreach($all_field_groups as $field_group):
 			foreach($field_group['location'] as $group_location_rules):
 				foreach($group_location_rules as $rule):
-					if($rule['param'] == 'widget_acf' && $rule['operator'] == '==' && $rule['value'] == $widget):
+					if($rule['param'] == 'widget_acf' && $rule['operator'] == '==' && $rule['value'] == $widget['name']):
 						$fields = acf_get_fields($field_group['ID']);
 
 						foreach($fields as $field):
-							$field['key'] = $field['name'] . '_' . $widget;
+							$field['key'] = $field['name'] . '_' . $widget['name'];
 							array_push($result, $field);
 						endforeach;
 					endif;
