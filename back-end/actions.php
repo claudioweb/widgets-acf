@@ -23,7 +23,7 @@ Class AcfAction {
 					$this->getWidgets(get_template_directory() . '/views/widgets-templates') :
 					$this->getWidgets(get_template_directory() . '/widgets-templates');
 
-			if(!is_dir($directory_widgets)){
+			if(empty($directory_widgets)){
 				$directory_widgets = $this->getWidgets(plugin_dir_path(__FILE__) . '../more-widgets-templates');
 			}
 
