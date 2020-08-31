@@ -37,20 +37,15 @@ class WidgetsWidgets {
 		include_once('back-end/acf/WidgetsLocation.php');
 		
 		// Check function exists, then include and register the custom location type class.
-		if(function_exists('acf_register_location_type')) {
 
-			acf_register_location_type('WidgetsLocation');
-		}else{
+		$location = new WidgetsLocation;
 
-			$location = new WidgetsLocation;
+		$label = $location->initialize();
 
-			$label = $location->initialize();
-
-			$choices[__($label->category, 'acf')][$label->name] = $label->label;
+		$choices[__($label->category, 'acf')][$label->name] = $label->label;
 
 
-			return $choices; 
-		}
+		return $choices; 
 
 	}
 
@@ -61,7 +56,7 @@ class WidgetsWidgets {
 		$location = new WidgetsLocation;
 
 		$choices = $location->get_values();
-		
+
 		return $choices;
 	}
 
