@@ -5,15 +5,27 @@ if(!defined('ABSPATH')) exit;
 class WidgetsLocation extends ACF_Location {
 
     public function initialize() {
+        $this->category = 'Forms';
         $this->name = 'widget_acf';
         $this->label = 'Widget ACF';
-        $this->category = 'forms';
         // $this->object_type = 'post';
+
+        return $this;
     }
 
-    public function get_values($rule) {
+    public function get_values($rule=null) {
+
         $widgets = array();
-        $path =  get_template_directory()."/widgets-templates";
+
+        $path =
+        function_exists('\App\template') || function_exists('\Roots\view') ? 
+            get_template_directory() . '/views/widgets-templates' :
+            get_template_directory() . '/widgets-templates';
+
+
+        if(!is_dir($path)){
+            $path = plugin_dir_path(__FILE__) . '../../more-widgets-templates';
+        }
 
         if(!is_dir($path))
             return $widgets;
@@ -24,7 +36,9 @@ class WidgetsLocation extends ACF_Location {
             if($fileinfo->isDir() && !$fileinfo->isDot()):
                 $widget_name =  str_replace('-', '_', $fileinfo->getFilename());
 
-                $widgets[$widget_name] = $widget_name;
+                $widget_label = WidgetsWidgets::parseWidgetHeaders($path.'/'.$fileinfo->getFilename().'/functions.php');
+
+                $widgets[$widget_name] = $widget_label['title'];
             endif;
         endforeach;
         

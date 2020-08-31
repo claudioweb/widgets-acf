@@ -23,7 +23,8 @@ class WidgetsWidgets {
    		// Definindo action para acesso público
 		add_action('wp_ajax_nopriv_fonts_widgets_acf', array('WidgetsAdmin','get_fonts_ajax')); 
 
-		$this->registerLocation();
+		add_filter('acf/location/rule_types', array($this, 'registerLocation'));
+		add_filter('acf/location/rule_values/widget_acf', array($this, 'registerLocationFields'));
 	}
 	
 	/**
@@ -31,12 +32,37 @@ class WidgetsWidgets {
 	 *
 	 * @return void
 	 */
-	public function registerLocation() {
+	public function registerLocation($choices) {
+
+		include_once('back-end/acf/WidgetsLocation.php');
+		
 		// Check function exists, then include and register the custom location type class.
 		if(function_exists('acf_register_location_type')) {
-			include_once('back-end/acf/WidgetsLocation.php');
+
 			acf_register_location_type('WidgetsLocation');
+		}else{
+
+			$location = new WidgetsLocation;
+
+			$label = $location->initialize();
+
+			$choices[__($label->category, 'acf')][$label->name] = $label->label;
+
+
+			return $choices; 
 		}
+
+	}
+
+	public function registerLocationFields($choices){
+
+		include_once('back-end/acf/WidgetsLocation.php');
+
+		$location = new WidgetsLocation;
+
+		$choices = $location->get_values();
+		
+		return $choices;
 	}
 
 	/*=========================================================

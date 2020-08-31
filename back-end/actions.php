@@ -18,12 +18,14 @@ Class AcfAction {
 
 			$acf_base = AcfWidget::get_base();
 
-			$directory_widgets = array_merge(
-				$this->getWidgets(plugin_dir_path(__FILE__) . '../more-widgets-templates'),
+			$directory_widgets = 
 				function_exists('\App\template') || function_exists('\Roots\view') ? 
 					$this->getWidgets(get_template_directory() . '/views/widgets-templates') :
-					$this->getWidgets(get_template_directory() . '/widgets-templates')
-			);
+					$this->getWidgets(get_template_directory() . '/widgets-templates');
+
+			if(!is_dir($directory_widgets)){
+				$directory_widgets = $this->getWidgets(plugin_dir_path(__FILE__) . '../more-widgets-templates');
+			}
 
 			$widget_adm = $this->get_pages_selected();
 
