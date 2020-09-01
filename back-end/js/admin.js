@@ -1,5 +1,68 @@
 jQuery(function(){
-	
+
+	setTimeout(function(){
+
+		if( jQuery('#acf-group_widgets_all  .acf-code-external').length ) {
+			
+
+			jQuery('#acf-group_widgets_all .acf-code-external .acf-tab-group li').click(function(){
+
+				var poisition_tab = jQuery(this).index();
+
+				var mode_codemirror = 'application/x-httpd-php';
+
+				if(poisition_tab==0){
+					
+					var mode_codemirror = 'css';
+				}else if(poisition_tab==1){
+
+					var mode_codemirror = 'htmlmixed';
+				}else if(poisition_tab==2){
+
+					var mode_codemirror = 'jsx';
+				}
+				
+				var editorSettings = wp.codeEditor.defaultSettings ? _.clone( wp.codeEditor.defaultSettings ) : {};
+				editorSettings.codemirror = _.extend(
+					{},
+					editorSettings.codemirror,
+					{
+						theme: 'monokai',
+						tabSize: 2,
+						lineNumbers: true,
+						styleActiveLine: true,
+						matchBrackets: true,
+						autoCloseBrackets: true,
+						mode: mode_codemirror,
+						indentWithTabs: true
+					}
+				);
+				
+				var closest = jQuery(this).closest('.acf-code-external');
+
+				var textarea = closest.find('.acf-field-textarea').eq(poisition_tab);
+
+				if(!textarea.find('.CodeMirror').length){
+				
+					var editor = wp.codeEditor.initialize( textarea.find('textarea'), editorSettings);
+				}
+				
+			});
+
+			jQuery('#acf-group_widgets_all .acf-tab-group').first().find('li').click(function(){
+
+				var poisition_tab = jQuery(this).index();
+				
+				console.log(poisition_tab);
+				jQuery('#acf-group_widgets_all .acf-code-external').eq(poisition_tab).find('.acf-tab-group li.active').click();
+			});
+
+			jQuery('#acf-group_widgets_all .acf-tab-group').first().find('li.active').click();
+
+		}
+
+	},500);
+
 	jQuery('.acf-field-the-contents').parent().parent().parent().parent().parent().find('.postarea').hide();
 	jQuery('.acf-field-the-contents').parent().parent().parent().parent().parent().find('#pageparentdiv').hide();
 	jQuery('.acf-field-the-contents').parent().parent().parent().parent().parent().find('#postimagediv').hide();
