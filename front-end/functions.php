@@ -6,6 +6,8 @@ Class TemplatesWidgets {
 
 	static function get_templates($layout_content, $attr = null) {
 		$html = '';
+		$css_widgets = '';
+		$js_widgets = '';
 
 		foreach($layout_content as $key => $layout):
 			include "styles_layout.php";
@@ -85,9 +87,9 @@ Class TemplatesWidgets {
 				$html .= ob_get_clean();
 				$html .= '</div>';
 
-				self::enqueueStyle($dir_widget, $url_widget, $widget_name);
-				self::enqueueScript($dir_widget, $url_widget, $widget_name);
-				
+				$css_widgets .= self::enqueueStyle($dir_widget, $url_widget, $widget_name);
+				$js_widgets .= self::enqueueScript($dir_widget, $url_widget, $widget_name);
+
 				$widget_count++;
 				$count_column++;
 			endforeach;
@@ -96,6 +98,32 @@ Class TemplatesWidgets {
 			$html .= '</div>';
 			$html .= '</section>';
 		endforeach;
+
+		$url_widgets = get_template_directory();
+
+		// css widgets
+		require  plugin_dir_path(__FILE__) . "../scssphp/scss.inc.php";
+		$scss = new scssc();
+		$scss->setFormatter("scss_formatter_compressed");
+		$css_widgets = $scss->compile($css_widgets);
+		$dir_css_widget = $url_widgets.'/widgets_acf.css';
+		$fp = fopen($dir_css_widget, 'w');
+		fwrite($fp, $css_widgets);
+		fclose($fp);
+
+		// js widgets
+		require plugin_dir_path(__FILE__) . '../JShrink/Minifier.php';
+		$js_widgets = \JShrink\Minifier::minify($js_widgets);
+		$dir_js_widget = $url_widgets.'/widgets_acf.js';
+		$fp = fopen($dir_js_widget, 'w');
+		fwrite($fp, $js_widgets);
+		fclose($fp);
+
+		// Enqueue style
+		wp_enqueue_style("widget/widgets_acf", get_template_directory_uri().'/widgets_acf.css', array(), false, 'all');
+
+		// Enqueue script
+		wp_enqueue_script("widget/widgets_acf", get_template_directory_uri().'/widgets_acf.js', array(), false, true);
 
 		return $html;
 	}
@@ -109,13 +137,17 @@ Class TemplatesWidgets {
 	 * @return void
 	 */
 	private static function enqueueStyle($dir_widget, $url_widget, $widget_name) {
-		$style = "/style.css";
+
+		$style = "/style.scss";
 
 		if(!file_exists($dir_widget . $style))
 			return;
 
-		// Enqueue style
-		wp_enqueue_style("widget/{$widget_name}", $url_widget . $style, array(), false, 'all');
+		include_once('../back-end/acf/WidgetsLocation.php');
+		$location = new WidgetsLocation;
+		
+		return $location->fopen_r($dir_widget . $style);
+
 	}
 	
 	/**
@@ -127,13 +159,16 @@ Class TemplatesWidgets {
 	 * @return void
 	 */
 	private static function enqueueScript($dir_widget, $url_widget, $widget_name) {
-		$script = "/script.js";
+		$script = "/app.js";
 
 		if(!file_exists($dir_widget . $script))
 			return;
+		
+		include_once('../back-end/acf/WidgetsLocation.php');
+		$location = new WidgetsLocation;
+		
+		return $location->fopen_r($dir_widget . $script);
 
-		// Enqueue script
-		wp_enqueue_script("widget/{$widget_name}", $url_widget . $script, array(), false, true);
 	}
 
 	static function get_image($fields){

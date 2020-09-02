@@ -68,6 +68,10 @@ class WidgetsLocation extends ACF_Location {
                 
                 $widget_label = WidgetsWidgets::parseWidgetHeaders($path.'/'.$fileinfo->getFilename().'/functions.php');
                 
+                if(!$widget_label['title']){
+                    $widget_label['title'] = ucfirst(str_replace('_', ' ', $widget_label['name']));
+                }
+
                 $widgets[$widget_name]['title'] = $widget_label['title'];
                 
                 $dir_widget = $path.'/'.$fileinfo->getFilename();

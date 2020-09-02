@@ -34,11 +34,34 @@ class WidgetsWidgets {
 		$screen = $_GET['page'];
 		if (strpos($screen, "options-todos-os-widgets") == true) {
 			
-			$option_external = get_field("widgets_acf_fields_external","options");
-			if($option_external==true){
+			if($_GET['del']){
+
+				$path =
+				function_exists('\App\template') || function_exists('\Roots\view') ? 
+				get_template_directory() . '/views/widgets-templates/'.$_GET['del'] :
+				get_template_directory() . '/widgets-templates/'.$_GET['del'];
+				
+				if(is_dir($path)){
+
+					$arquivos = glob($path."/*.*");
+					foreach ($arquivos as $key => $arquivo) {
+						unlink($arquivo);
+					}
+					$handle = opendir($path);
+					closedir($handle);
+					rmdir($path);
+
+					echo '<script>alert("Widget deletado com sucesso!");window.location="'.admin_url('admin.php?page=acf-options-todos-os-widgets').'";</script>';
+					die();
+				}
+
+			}
+
+			// $option_external = get_field("widgets_acf_fields_external","options");
+			// if($option_external==true){
 				
 				add_filter( 'pre_update_option', array($this, 'editor_external'));
-			}
+			// }
 		}
 	}
 	
@@ -54,7 +77,7 @@ class WidgetsWidgets {
 			
 			mkdir($path, 0777, true);
 		}
-		
+
 		$widgets = $_POST['acf'];
 		
 		if(!empty($widgets['field_salvar_widget_acf'])){
@@ -64,17 +87,17 @@ class WidgetsWidgets {
 			$new_widget = $dir_widget."/functions.php";
 			$title_widget = $widgets['field_salvar_widget_acf'];
 			$file_default = '<?php 
-			/*
-				Title: Lista de posts
-			*/';
+	/*
+		Title: '.$title_widget.'
+	*/';
 			$this->fwrite_widget($new_widget, $file_default);
 		}
 
-		unset($widget['field_salvar_widget_acf']);
-		delete_field($widget['field_salvar_widget_acf'], 'option');
+		unset($widgets['field_salvar_widget_acf']);
+		delete_field('field_salvar_widget_acf', 'option');
 
-		unset($widget['field_button_salvar_widget_acf']);
-		delete_field($widget['field_button_salvar_widget_acf'], 'option');
+		unset($widgets['field_button_salvar_widget_acf']);
+		delete_field('field_button_salvar_widget_acf', 'option');
 		
 		foreach($widgets as $key => $widget){
 			
@@ -83,9 +106,8 @@ class WidgetsWidgets {
 			if(!$alert){
 				
 				$dir_widget = $path.'/'.str_replace('_','-',str_replace('field_group_','',$key));
-				
+				$key = str_replace('field_group_','',$key);
 				$style = $dir_widget."/style.scss";
-				
 				$this->fwrite_widget($style, $widget['field_style_'.$key]);
 				
 				$index = glob("{$dir_widget}/index.*");

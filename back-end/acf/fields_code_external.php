@@ -12,7 +12,7 @@ foreach ($widgets as $key => $widget) {
 
     $fields[] = array(
         'key' => 'field_aba_'.$key,
-        'label' => $widget['title'],
+        'label' => $widget['title'].'<span class="aba_widgets_acf_delete">X</span>',
         'name' => '',
         'type' => 'tab',
         'instructions' => '',
@@ -26,12 +26,13 @@ foreach ($widgets as $key => $widget) {
         'placement' => 'left',
         'endpoint' => 0,
     );
+
     $fields[] = array(
         'key' => 'field_group_'.$key,
         'label' => $widget['title'],
         'name' => 'widget_'.$key,
         'type' => 'group',
-        'instructions' => '',
+        'instructions' => 'cuidado para não inserir código impeditivos de funcionamento do wordpress como <b>die(); break();</b>',
         'required' => 0,
         'conditional_logic' => 0,
         'wrapper' => array(

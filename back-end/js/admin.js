@@ -2,6 +2,13 @@ jQuery(function(){
 
 	setTimeout(function(){
 
+		jQuery('#acf-group_widgets_all .acf-tab-group li span.aba_widgets_acf_delete').click(function(){
+			if(confirm('Tem certeza que deseja excluir o widget ?')){
+				var key_widget = jQuery(this).closest('a').data('key').replace('field_aba_','').replaceAll('_','-');
+				window.location.href = window.location.href + '&del=' + key_widget;
+			}
+		});
+
 		jQuery(".external-field-save label.selected").click(function(){
 			jQuery(this).closest("form").submit();
 		});
