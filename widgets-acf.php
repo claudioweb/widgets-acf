@@ -44,11 +44,6 @@ class WidgetsWidgets {
 	
 	public function editor_external(){
 		
-		// $filename = 'teste.txt';
-		// if (!is_writable($filename)) {
-		// 	$alert = 'Servidor sem permissão de escrita!';
-		// }
-		
 		$path =
 		function_exists('\App\template') || function_exists('\Roots\view') ? 
 		get_template_directory() . '/views/widgets-templates' :
@@ -56,10 +51,30 @@ class WidgetsWidgets {
 		
 		
 		if(!is_dir($path)){
-			$path = plugin_dir_path(__FILE__) . '../../more-widgets-templates';
+			
+			mkdir($path, 0777, true);
 		}
 		
 		$widgets = $_POST['acf'];
+		
+		if(!empty($widgets['field_salvar_widget_acf'])){
+
+			$dir_widget = $path."/".sanitize_title($widgets['field_salvar_widget_acf']);
+			mkdir($dir_widget, 0777, true);
+			$new_widget = $dir_widget."/functions.php";
+			$title_widget = $widgets['field_salvar_widget_acf'];
+			$file_default = '<?php 
+			/*
+				Title: Lista de posts
+			*/';
+			$this->fwrite_widget($new_widget, $file_default);
+		}
+
+		unset($widget['field_salvar_widget_acf']);
+		delete_field($widget['field_salvar_widget_acf'], 'option');
+
+		unset($widget['field_button_salvar_widget_acf']);
+		delete_field($widget['field_button_salvar_widget_acf'], 'option');
 		
 		foreach($widgets as $key => $widget){
 			
@@ -71,7 +86,7 @@ class WidgetsWidgets {
 				
 				$style = $dir_widget."/style.scss";
 				
-				$this->fwrite_widget($style, $widget['field_style']);
+				$this->fwrite_widget($style, $widget['field_style_'.$key]);
 				
 				$index = glob("{$dir_widget}/index.*");
 				if(!$index){
@@ -79,13 +94,13 @@ class WidgetsWidgets {
 				}else{
 					$index = $index[0];
 				}
-				$this->fwrite_widget($index, $widget['field_index']);
+				$this->fwrite_widget($index, $widget['field_index_'.$key]);
 				
 				$js = $dir_widget."/app.js";
-				$this->fwrite_widget($js, $widget['field_javascript']);
+				$this->fwrite_widget($js, $widget['field_javascript_'.$key]);
 
 				$functions = $dir_widget."/functions.php";
-				$this->fwrite_widget($functions, $widget['field_functions']);
+				$this->fwrite_widget($functions, $widget['field_functions_'.$key]);
 
 				$alert = 'Widgets atualizados com sucesso!';
 

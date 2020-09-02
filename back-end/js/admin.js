@@ -2,8 +2,11 @@ jQuery(function(){
 
 	setTimeout(function(){
 
+		jQuery(".external-field-save label.selected").click(function(){
+			jQuery(this).closest("form").submit();
+		});
+
 		if( jQuery('#acf-group_widgets_all  .acf-code-external').length ) {
-			
 
 			jQuery('#acf-group_widgets_all .acf-code-external .acf-tab-group li').click(function(){
 
@@ -53,7 +56,6 @@ jQuery(function(){
 
 				var poisition_tab = jQuery(this).index();
 				
-				console.log(poisition_tab);
 				jQuery('#acf-group_widgets_all .acf-code-external').eq(poisition_tab).find('.acf-tab-group li.active').click();
 			});
 

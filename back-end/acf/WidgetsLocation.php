@@ -55,11 +55,6 @@ class WidgetsLocation extends ACF_Location {
         get_template_directory() . '/views/widgets-templates' :
         get_template_directory() . '/widgets-templates';
         
-        
-        if(!is_dir($path)){
-            $path = plugin_dir_path(__FILE__) . '../../more-widgets-templates';
-        }
-        
         if(!is_dir($path)){
             return $widgets;
         }
@@ -68,6 +63,7 @@ class WidgetsLocation extends ACF_Location {
         
         foreach($dir as $fileinfo):            
             if($fileinfo->isDir() && !$fileinfo->isDot()):
+
                 $widget_name =  str_replace('-', '_', $fileinfo->getFilename());
                 
                 $widget_label = WidgetsWidgets::parseWidgetHeaders($path.'/'.$fileinfo->getFilename().'/functions.php');
