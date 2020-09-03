@@ -86,10 +86,7 @@ class WidgetsWidgets {
 			mkdir($dir_widget, 0777, true);
 			$new_widget = $dir_widget."/functions.php";
 			$title_widget = $widgets['field_salvar_widget_acf'];
-			$file_default = '<?php 
-	/*
-		Title: '.$title_widget.'
-	*/';
+			$file_default = '<?php ?>';
 			$this->fwrite_widget($new_widget, $file_default);
 		}
 
@@ -137,6 +134,10 @@ class WidgetsWidgets {
 
 					$this->fwrite_widget($capa, $capa_img);
 				}
+
+				// name
+				$name = $widget['field_name_'.$key];
+				rename($dir_widget, $path.'/'.$name);
 
 				$alert = 'Widgets atualizados com sucesso!';
 

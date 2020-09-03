@@ -42,6 +42,25 @@ foreach ($widgets as $key => $widget) {
         ),
         'layout' => 'block',
         'sub_fields' => array(
+            array (
+                'key' => 'field_name_'.$key,
+                'label' => 'Nome do widget',
+                'name' => 'name',
+                'type' => 'text',
+                'instructions' => '',
+                'required' => 0,
+                'conditional_logic' => 0,
+                'wrapper' => array (
+                    'width' => '40%',
+                    'class' => '',
+                    'id' => '',
+                    ),
+                'default_value' => $widget['name'],
+                'placeholder' => '',
+                'prepend' => '',
+                'append' => '',
+                'maxlength' => '',
+                ),
             array(
                 'key' => 'field_capa_'.$key,
                 'label' => 'Imagem de capa',
@@ -51,7 +70,7 @@ foreach ($widgets as $key => $widget) {
                 'required' => 0,
                 'conditional_logic' => 0,
                 'wrapper' => array(
-                    'width' => '',
+                    'width' => '60%',
                     'class' => '',
                     'id' => '',
                 ),
