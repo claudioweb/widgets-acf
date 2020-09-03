@@ -2,6 +2,15 @@ jQuery(function(){
 
 	setTimeout(function(){
 
+		var location_widget_acf = new RegExp('[\?&]location_widget_acf=([^&#]*)').exec(window.location.href);
+		if(location_widget_acf){
+
+			jQuery("#title-prompt-text").hide();
+			jQuery('input[name="post_title"]').val('Campos personalizados - '+location_widget_acf[1]);
+			jQuery("#acf_field_group-location-group_0-rule_0-param").val('widget_acf').change();
+			jQuery("#acf_field_group-location-group_0-rule_0-value").val(location_widget_acf[1]).change();
+			
+		}
 		jQuery('#acf-group_widgets_all .acf-tab-group li span.aba_widgets_acf_delete').click(function(){
 			if(confirm('Tem certeza que deseja excluir o widget ?')){
 				var key_widget = jQuery(this).closest('a').data('key').replace('field_aba_','').replaceAll('_','-');

@@ -84,9 +84,17 @@ class WidgetsWidgets {
 
 			$dir_widget = $path."/".sanitize_title($widgets['field_salvar_widget_acf']);
 			mkdir($dir_widget, 0777, true);
+
+			// functions.php
 			$new_widget = $dir_widget."/functions.php";
 			$title_widget = $widgets['field_salvar_widget_acf'];
 			$file_default = '<?php ?>';
+			$this->fwrite_widget($new_widget, $file_default);
+
+			// style.scss
+			$new_widget = $dir_widget."/style.scss";
+			$title_widget = $widgets['field_salvar_widget_acf'];
+			$file_default = '.widget-acf.'.sanitize_title($title_widget).' {}';
 			$this->fwrite_widget($new_widget, $file_default);
 		}
 
