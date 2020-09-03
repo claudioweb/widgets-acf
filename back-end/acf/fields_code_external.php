@@ -32,7 +32,7 @@ foreach ($widgets as $key => $widget) {
         'label' => $widget['title'],
         'name' => 'widget_'.$key,
         'type' => 'group',
-        'instructions' => 'cuidado para não inserir código impeditivos de funcionamento do wordpress como <b>die(); break();</b><br><br><div class="acf-button-group"><label class="selected" style="padding: 7px 10px;" onclick="javascript:window.open(\''.admin_url('post-new.php?post_type=acf-field-group&location_widget_acf='.$key).'\',\'_blank\');"">Adicionar Campos no ACF</label></div> ou Utilize o <a href="https://github.com/wordplate/extended-acf" target="_blank">Extend ACF</a> para criar seus campos na aba <b>PHP</b>',
+        'instructions' => 'Cuidado para não inserir código impeditivos de funcionamento do wordpress como <b>die(); break();</b><br><br><div class="acf-button-group"><label class="selected" style="padding: 7px 10px;" onclick="javascript:window.open(\''.admin_url('post-new.php?post_type=acf-field-group&location_widget_acf='.$key).'\',\'_blank\');"">Adicionar Campos no ACF</label></div> | Utilize o <a href="'.admin_url('edit.php?post_type=acf-field-group&page=acf-tools').'" target="_blank">Generate PHP</a> para exportar seus campos na aba <b>PHP</b>',
         'required' => 0,
         'conditional_logic' => 0,
         'wrapper' => array(
