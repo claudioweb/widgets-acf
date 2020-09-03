@@ -58,6 +58,11 @@ class WidgetsLocation extends ACF_Location {
         if(!is_dir($path)){
             return $widgets;
         }
+
+        $path_uri =
+        function_exists('\App\template') || function_exists('\Roots\view') ? 
+        get_template_directory_uri() . '/views/widgets-templates' :
+        get_template_directory_uri() . '/widgets-templates';
         
         $dir = new DirectoryIterator($path);
         
@@ -94,6 +99,11 @@ class WidgetsLocation extends ACF_Location {
                 $functions = glob("{$dir_widget}/functions.php");
                 if($functions){
                     $widgets[$widget_name]['functions'] = $this->fopen_r($functions[0]);
+                }
+
+                $capa = glob("{$dir_widget}/main.png");
+                if($capa){
+                    $widgets[$widget_name]['capa'] = $path_uri.'/'.$fileinfo->getFilename().'/main.png';
                 }
                 
             endif;

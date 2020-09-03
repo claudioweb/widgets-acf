@@ -107,22 +107,36 @@ class WidgetsWidgets {
 				
 				$dir_widget = $path.'/'.str_replace('_','-',str_replace('field_group_','',$key));
 				$key = str_replace('field_group_','',$key);
-				$style = $dir_widget."/style.scss";
-				$this->fwrite_widget($style, $widget['field_style_'.$key]);
 				
+				// style.scss
+				$style = $dir_widget."/style.scss";
+				$this->fwrite_widget($style, stripslashes($widget['field_style_'.$key]) );
+				
+				// index.blade.php
 				$index = glob("{$dir_widget}/index.*");
 				if(!$index){
 					$index = $dir_widget."/index.php";
 				}else{
 					$index = $index[0];
 				}
-				$this->fwrite_widget($index, $widget['field_index_'.$key]);
+				$this->fwrite_widget($index, stripslashes($widget['field_index_'.$key]) );
 				
+				// app.js
 				$js = $dir_widget."/app.js";
-				$this->fwrite_widget($js, $widget['field_javascript_'.$key]);
+				$this->fwrite_widget($js, stripslashes($widget['field_javascript_'.$key]) );
 
+				// functions.php
 				$functions = $dir_widget."/functions.php";
-				$this->fwrite_widget($functions, $widget['field_functions_'.$key]);
+				$this->fwrite_widget($functions, stripslashes($widget['field_functions_'.$key]) );
+
+				// capa.png
+				$capa = $dir_widget."/main.png";
+				$url_capa = wp_get_attachment_image_src($widget['field_capa_'.$key], 'full');
+				if(!empty($url_capa)){
+					$capa_img = $this->fopen_widget($url_capa[0]);
+
+					$this->fwrite_widget($capa, $capa_img);
+				}
 
 				$alert = 'Widgets atualizados com sucesso!';
 
@@ -137,9 +151,23 @@ class WidgetsWidgets {
 	public function fwrite_widget($file, $text){
 		
 		$fp = fopen($file, 'w');
-		fwrite($fp, stripslashes($text) );
+		fwrite($fp, $text );
 		fclose($fp);
 	}
+
+	public function fopen_widget($file){
+        
+        $file  = fopen($file, 'r');
+        $lines_file = '';
+        while(! feof($file)) {
+            $line = fgets($file);
+            $lines_file .= $line;
+        }
+        
+        fclose($file);
+
+        return $lines_file;
+    }
 	
 	/**
 	* registerLocation Registra um novo local para cadastrar grupos de campos ACF
