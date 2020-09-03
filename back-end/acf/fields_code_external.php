@@ -8,6 +8,11 @@ $widgets = $location->get_codes();
 
 $fields = array();
 
+$label_index = 'index.php';
+if(function_exists('\App\template') || function_exists('\Roots\view')){
+    $label_index = 'index.blade.php - <b>Utiliza o Template Engine <a href="https://laravel.com/docs/7.x/blade" target="_blank">Blade<a></b>';
+}
+
 foreach ($widgets as $key => $widget) {
 
     $fields[] = array(
@@ -138,7 +143,7 @@ foreach ($widgets as $key => $widget) {
             ),
             array(
                 'key' => 'field_index_'.$key,
-                'label' => 'index.php',
+                'label' => $label_index,
                 'name' => 'index',
                 'type' => 'textarea',
                 'instructions' => '',

@@ -85,10 +85,26 @@ class WidgetsWidgets {
 			$dir_widget = $path."/".sanitize_title($widgets['field_salvar_widget_acf']);
 			mkdir($dir_widget, 0777, true);
 
+			// index.php
+			$new_widget = $dir_widget."/index.php";
+			$title_widget = $widgets['field_salvar_widget_acf'];
+			$file_default = '<?php var_dump($widget); ?>';
+			if(function_exists('\App\template') || function_exists('\Roots\view')){
+				$new_widget = $dir_widget."/index.blade.php";
+				$file_default = '@php var_dump($widget); @endphp';
+			}
+			$this->fwrite_widget($new_widget, $file_default);
+
+			// app.js
+			$new_widget = $dir_widget."/app.js";
+			$title_widget = $widgets['field_salvar_widget_acf'];
+			$file_default = '';
+			$this->fwrite_widget($new_widget, $file_default);
+
 			// functions.php
 			$new_widget = $dir_widget."/functions.php";
 			$title_widget = $widgets['field_salvar_widget_acf'];
-			$file_default = '<?php ?>';
+			$file_default = '<?php //... ?>';
 			$this->fwrite_widget($new_widget, $file_default);
 
 			// style.scss
@@ -119,11 +135,14 @@ class WidgetsWidgets {
 				
 				// index.blade.php
 				$index = glob("{$dir_widget}/index.*");
-				if(!$index){
-					$index = $dir_widget."/index.php";
+				if(function_exists('\App\template') || function_exists('\Roots\view')){
+
+					$index = $dir_widget."/index.blade.php";
 				}else{
-					$index = $index[0];
+
+					$index = $dir_widget."/index.php";
 				}
+				
 				$this->fwrite_widget($index, stripslashes($widget['field_index_'.$key]) );
 				
 				// app.js
