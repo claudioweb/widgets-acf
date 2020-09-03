@@ -3,12 +3,13 @@
 Class get_fields_acf_widgets {
 
 	public function get_field($widget, $fields) {
+
 		$fields = get_fields_acf_widgets::set_field($widget, $fields);
 
 		$fields_base = array (
 			'key' => $widget['name'].'_widget_acf_key',
 			'name' => $widget['name'].'_widget_acf',
-			'label' => key_exists('title', $widget) && !empty($widget['title']) ? $widget['title'] : ucfirst(str_replace('-',' ',str_replace('_', ' ', $widget['name']))),
+			'label' => str_replace('-',' ',str_replace('_', ' ', $widget['name'])),
 			'display' => 'line',
 			'sub_fields' => $fields,
 			'min' => '',
@@ -47,6 +48,7 @@ Class get_fields_acf_widgets {
 	}
 
 	public function set_field($widget, $fields){
+		
 		$fields_return = array();
 
 		if(!empty($fields)){

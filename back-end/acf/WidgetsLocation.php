@@ -34,10 +34,12 @@ class WidgetsLocation extends ACF_Location {
         
         foreach($dir as $fileinfo):            
             if($fileinfo->isDir() && !$fileinfo->isDot()):
-                $widget_name =  str_replace('-', '_', $fileinfo->getFilename());
                 
                 $widget_label = WidgetsWidgets::parseWidgetHeaders($path.'/'.$fileinfo->getFilename().'/functions.php');
                 
+                $widget_name =  $widget_label['name'];
+                
+                $widget_label['title'] = ucfirst(str_replace('_', ' ', $widget_label['name']));
                 $widgets[$widget_name] = $widget_label['title'];
             endif;
         endforeach;

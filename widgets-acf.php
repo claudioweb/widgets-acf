@@ -137,7 +137,7 @@ class WidgetsWidgets {
 
 				// name
 				$name = $widget['field_name_'.$key];
-				rename($dir_widget, $path.'/'.$name);
+				rename($dir_widget, $path.'/'.sanitize_title($name) );
 
 				$alert = 'Widgets atualizados com sucesso!';
 
