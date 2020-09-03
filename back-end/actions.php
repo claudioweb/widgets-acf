@@ -202,12 +202,17 @@ Class AcfAction {
 
 	public function my_custom_css_widget() {
 
-		$path =  get_template_directory()."/widgets-templates";
+		$path =
+        function_exists('\App\template') || function_exists('\Roots\view') ? 
+        get_template_directory() . '/views/widgets-templates' :
+		get_template_directory() . '/widgets-templates';
+		
+		$temp =
+        function_exists('\App\template') || function_exists('\Roots\view') ? 
+        get_template_directory_uri() . '/views/widgets-templates/' :
+        get_template_directory_uri() . '/widgets-templates/';
 
-		if(is_dir($path)){
-
-			$temp = get_template_directory_uri().'/widgets-templates/';
-		}else{
+		if(!is_dir($path)){
 
 			$path = plugin_dir_path( __FILE__ )."../more-widgets-templates";
 
