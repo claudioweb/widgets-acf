@@ -38,7 +38,12 @@ class WidgetsWidgets {
 		
 		$screen = $_GET['page'];
 		if (strpos($screen, "options-todos-os-widgets") == true) {
-			
+
+			require("back-end/acf/fields_code_external.php");
+			if($_GET['export']){
+				$location = new WidgetsLocation;
+				$location->export_zip($_GET['export']);
+			}
 			if($_GET['del']){
 				
 				$path =
@@ -61,12 +66,8 @@ class WidgetsWidgets {
 				}
 				
 			}
-			
-			// $option_external = get_field("widgets_acf_fields_external","options");
-			// if($option_external==true){
 				
-				add_filter( 'pre_update_option', array($this, 'editor_external'));
-				// }
+			add_filter( 'pre_update_option', array($this, 'editor_external'));
 			}
 		}
 		
@@ -226,10 +227,10 @@ class WidgetsWidgets {
 					if($widget_location == $group['location'][0][0]['value']){
 						
 						// Fetch the fields for the given group key
-						$fields = acf_get_field_groups($group['key']);
-						
+						$fields = acf_get_fields($group['key']);
+
 						// Remove unecessary key value pair with key "ID"
-						unset($group['ID']);
+						unset($fields['ID']);
 						
 						// Add the fields as an array to the group
 						$group['fields'] = $fields;
@@ -239,27 +240,21 @@ class WidgetsWidgets {
 					}
 				}
 			}
-			
-			$json = json_encode($json, JSON_PRETTY_PRINT);
-			// Optional - echo the JSON data to the page
-			// echo "<pre>";
-			// echo $json;
-			// echo "</pre>";
+			if(!empty($json)){
 
-			// Write output to file for easy import into ACF.
-			// The file must be writable by the server process. In this case, the file is located in
-			// the current theme directory.
+				$json = json_encode($json, JSON_PRETTY_PRINT);
 
-			$widget_dir = str_replace('_', '-', $widget_location);
+				$widget_dir = str_replace('_', '-', $widget_location);
 
-			$path =
-				function_exists('\App\template') || function_exists('\Roots\view') ? 
-				get_template_directory() . '/views/widgets-templates/' :
-				get_template_directory() . '/widgets-templates/';
+				$path =
+					function_exists('\App\template') || function_exists('\Roots\view') ? 
+					get_template_directory() . '/views/widgets-templates/' :
+					get_template_directory() . '/widgets-templates/';
 
-			$file = $path . $widget_dir . '/fields.json';
+				$file = $path . $widget_dir . '/fields.json';
 
-			file_put_contents($file, $json );
+				file_put_contents($file, $json );
+			}
 		}
 		
 		/**
@@ -433,7 +428,6 @@ class WidgetsWidgets {
 				
 				require("back-end/functions.php");
 				require("back-end/acf/fields_admin.php");
-				require("back-end/acf/fields_code_external.php");
 				
 				require("back-end/actions.php");
 				require("back-end/painel.php");

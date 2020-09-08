@@ -10,10 +10,42 @@ $fields = array();
 
 $label_index = 'index.php';
 if(function_exists('\App\template') || function_exists('\Roots\view')){
-    $label_index = 'index.blade.php - <b>Utiliza o Template Engine <a href="https://laravel.com/docs/7.x/blade" target="_blank">Blade<a></b>';
+    $label_index = 'index.blade.php - <b>Utiliza o Template Engine <a href="https://laravel.com/docs/7.x/blade" target="_blank">Blade</a></b>';
 }
 
+$groups_fields = acf_get_field_groups();
+
+
 foreach ($widgets as $key => $widget) {
+
+    $fields_code = array();
+
+    $groups = array();
+
+    foreach($groups_fields as $group){
+
+        if($group['location'][0][0]['param']=='widget_acf' && $group['location'][0][0]['value']==$key){
+            $groups[admin_url('/post.php?post='.$group['ID'].'&action=edit')] = $group['title'];
+
+            foreach (acf_get_fields($group['key']) as $ff) {
+
+                $code = "&lt;?php var_dump(\$widget->fields[&quot;".$ff['name']."_".$key."&quot;]); ?&gt;";
+                if(function_exists('\App\template') || function_exists('\Roots\view')){
+                    
+                    $code = "{{var_dump(\$widget->fields[&quot;".$ff['name']."_".$key."&quot;])}}";
+                }
+
+                $fields_code[$ff['key']] = array("title"=>$ff['label'].' - '.$ff['type'], "code"=> $code);
+            }
+        }
+    }
+    $label_index .= '<br><br>Campos personalizados:';
+    $label_index .= '<ul style="width:100%; display: block;">';
+
+    foreach($fields_code as $fc_k => $fc){
+        $label_index .= '<li onclick="insert_line_codemirror(\''.$fc['code'].'\')" style="float: left;"><div class="acf-button-group" style="width: auto;"><label class="selected" style="padding: 3px 5px;font-size: 9px;">'.$fc['title'].'</label></div></li>';
+    }
+    $label_index .= '</ul><hr style="clear: left;">';
 
     $fields[] = array(
         'key' => 'field_aba_'.$key,
@@ -34,10 +66,10 @@ foreach ($widgets as $key => $widget) {
 
     $fields[] = array(
         'key' => 'field_group_'.$key,
-        'label' => $widget['title'],
+        'label' => $widget['title']. '<div class="acf-button-group" style="width: auto; float: right;"><a target="_blank" href="'.admin_url('admin.php?page=acf-options-todos-os-widgets&export='.$key).'"><label class="selected" style="padding: 7px 10px;">Exportar .zip</label></a></div>',
         'name' => 'widget_'.$key,
         'type' => 'group',
-        'instructions' => 'Cuidado para não inserir código impeditivos de funcionamento do wordpress como <b>die(); break();</b><br><br><div class="acf-button-group"><label class="selected" style="padding: 7px 10px;" onclick="javascript:window.open(\''.admin_url('post-new.php?post_type=acf-field-group&location_widget_acf='.$key).'\',\'_blank\');"">Adicionar Campos no ACF</label></div> | Utilize o <a href="'.admin_url('edit.php?post_type=acf-field-group&page=acf-tools').'" target="_blank">Generate PHP</a> para exportar seus campos na aba <b>PHP</b>',
+        'instructions' => 'Cuidado para não inserir código impeditivos de funcionamento do wordpress como <b>die(); break();',
         'required' => 0,
         'conditional_logic' => 0,
         'wrapper' => array(
@@ -229,6 +261,41 @@ foreach ($widgets as $key => $widget) {
                 'maxlength' => '',
                 'rows' => '',
                 'new_lines' => '',
+            ),
+            array(
+                'key' => 'field_json_aba_'.$key,
+                'label' => 'Campos personalizados',
+                'name' => '',
+                'type' => 'tab',
+                'instructions' => '',
+                'required' => 0,
+                'conditional_logic' => 0,
+                'wrapper' => array(
+                    'width' => '',
+                    'class' => '',
+                    'id' => '',
+                ),
+                'placement' => 'top',
+                'endpoint' => 0,
+            ),
+            array(
+                'key' => 'field_json_'.$key,
+                'label' => 'fields.json',
+                'name' => 'fields_json',
+                'type' => 'button_group',
+                'instructions' => 'Clique em editar os campos para recriar o arquivo fields.json em seu widget automaticamente. <div class="acf-button-group" style="width: auto;float: right;margin: 15px 0;"><label class="selected" style="padding: 7px 10px;" onclick="javascript:window.open(\''.admin_url('post-new.php?post_type=acf-field-group&location_widget_acf='.$key).'\',\'_blank\');"">Adicionar Grupo de Campos</label></div>',
+                'required' => 0,
+                'conditional_logic' => 0,
+                'wrapper' => array(
+                    'width' => '',
+                    'class' => 'choices_fields_group',
+                    'id' => '',
+                ),
+                'choices' => $groups,
+                'allow_null' => 1,
+                'default_value' => '',
+                'layout' => 'vertical',
+                'return_format' => 'value',
             ),
         ),
     );

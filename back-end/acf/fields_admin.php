@@ -11,25 +11,6 @@ if( function_exists('acf_add_local_field_group') ){
 		'key' => 'group_widget',
 		'title' => 'Widget config',
 		'fields' => array (
-			// array (
-			// 	'key' => 'widget_acf_fields_external',
-			// 	'label' => 'Widgets em arquivos fisicos',
-			// 	'name' => 'widgets_acf_fields_external',
-			// 	'type' => 'true_false',
-			// 	'instructions' => 'Todos os widgets serão inseridos em arquivos no theme em diretorios /widgets-templates/ e não utilizaram mais o banco de dados',
-			// 	'required' => 0,
-			// 	'conditional_logic' => 0,
-			// 	'wrapper' => array (
-			// 		'width' => '',
-			// 		'class' => '',
-			// 		'id' => '',
-			// 	),
-			// 	'message' => '',
-			// 	'default_value' => 0,
-			// 	'ui' => 1,
-			// 	'ui_on_text' => 'Sim',
-			// 	'ui_off_text' => 'Não',
-			// ),
 			array (
 				'key' => 'widget_acf_show_bootstrap',
 				'label' => 'Incorporar Bootstrap via plugin',

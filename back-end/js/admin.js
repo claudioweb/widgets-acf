@@ -1,4 +1,49 @@
+function insert_line_codemirror(data){
+
+	var cm = jQuery('.CodeMirror')[0].CodeMirror;
+	var doc = cm.getDoc();
+    var cursor = doc.getCursor(); // gets the line number in the cursor position
+    var line = doc.getLine(cursor.line); // get the line contents
+    console.log(doc);
+    var pos = { // create a new object to avoid mutation of the original selection
+        line: (doc.size+5),
+        ch: line.length - 1 // set the character position to the end of the line
+    }
+    doc.replaceRange('\n'+data+'\n', pos); // adds a new line
+}
+
 jQuery(function(){
+
+	function change_refresh_rule(change){
+
+		setTimeout(function(){
+
+			if(change==true){
+				if(jQuery(".refresh-location-rule").val()=="widget_acf"){
+					jQuery('.rule-groups .rule-group[data-id!="group_0"]').remove();
+					jQuery('.rule-groups .acf-table tr[data-id!="rule_0"]').remove();
+					jQuery(".add-location-group, .add-location-rule").hide();
+				}else{
+					jQuery(".add-location-group, .add-location-rule").show();
+				}
+				
+			}
+			
+			jQuery(".refresh-location-rule").change(function(){
+
+				if(jQuery(this).val()=="widget_acf"){
+					jQuery('.rule-groups .rule-group[data-id!="group_0"]').remove();
+					jQuery('.rule-groups .acf-table tr[data-id!="rule_0"]').remove();
+					jQuery(".add-location-group, .add-location-rule").hide();
+				}else{
+					jQuery(".add-location-group, .add-location-rule").show();
+				}
+				change_refresh_rule(false);
+			});
+		},500);
+	}
+	change_refresh_rule(true);
+	
 
 	setTimeout(function(){
 
@@ -23,6 +68,10 @@ jQuery(function(){
 		});
 
 		if( jQuery('#acf-group_widgets_all  .acf-code-external').length ) {
+
+			jQuery('.choices_fields_group .acf-input input[type="radio"]').click(function(){
+				window.location.href = jQuery(this).val();
+			});
 
 			jQuery('#acf-group_widgets_all .acf-code-external .acf-tab-group li').click(function(){
 

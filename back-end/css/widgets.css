@@ -1,3 +1,6 @@
+.choices_fields_group .acf-button-group {
+	width: 100%;
+}
 #acf-group_widgets_all .acf-tab-group li span.aba_widgets_acf_delete {
 	display: none;
 }

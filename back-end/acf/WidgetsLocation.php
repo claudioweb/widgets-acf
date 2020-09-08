@@ -47,6 +47,32 @@ class WidgetsLocation extends ACF_Location {
         return $widgets;
     }
     
+    public function export_zip($widget_name){
+
+        $path =
+        function_exists('\App\template') || function_exists('\Roots\view') ? 
+        get_template_directory() . '/views/widgets-templates' :
+        get_template_directory() . '/widgets-templates';
+
+        $dir = $path.'/'.$dir_widget;
+        $zip = new ZipArchive();
+        $zipname = $widget_name . '.zip';
+        $res = $zip->open($zipname, ZipArchive::CREATE | ZipArchive::OVERWRITE);
+        if ($res === TRUE) {
+            foreach (glob($dir . '/*') as $file) {
+                $zip->addFile($file, basename($file));
+            }
+            $zip->close();
+        } else {
+            echo 'Failed to create to zip. Error: ' . $res;
+        }
+
+        header('Content-Type: application/zip');
+        header('Content-disposition: attachment; filename='.$zipname);
+        header('Content-Length: ' . filesize($zipname));
+        readfile($zipname);       
+
+    }
     
     public function get_codes($rule=null) {
         
@@ -60,7 +86,7 @@ class WidgetsLocation extends ACF_Location {
         if(!is_dir($path)){
             return $widgets;
         }
-
+        
         $path_uri =
         function_exists('\App\template') || function_exists('\Roots\view') ? 
         get_template_directory_uri() . '/views/widgets-templates' :
@@ -70,44 +96,62 @@ class WidgetsLocation extends ACF_Location {
         
         foreach($dir as $fileinfo):            
             if($fileinfo->isDir() && !$fileinfo->isDot()):
-
+                
                 $widget_name =  str_replace('-', '_', $fileinfo->getFilename());
                 
                 $widget_label = WidgetsWidgets::parseWidgetHeaders($path.'/'.$fileinfo->getFilename().'/functions.php');
                 
                 $widget_label['title'] = ucfirst(str_replace('_', ' ', $widget_label['name']));
-
+                
                 $widgets[$widget_name]['title'] = $widget_label['title'];
                 
                 $dir_widget = $path.'/'.$fileinfo->getFilename();
-
+                
                 $style = glob("{$dir_widget}/style.*");
                 if($style){
                     $widgets[$widget_name]['style'] = $this->fopen_r($style[0]);
                 }
-
+                
                 $index = glob("{$dir_widget}/index.*");
                 if($index){
                     $widgets[$widget_name]['index'] = $this->fopen_r($index[0]);
                 }
-
+                
                 $js = glob("{$dir_widget}/app.js");
                 if($js){
                     $widgets[$widget_name]['js'] = $this->fopen_r($js[0]);
                 }
-
+                
                 $functions = glob("{$dir_widget}/functions.php");
                 if($functions){
                     $widgets[$widget_name]['functions'] = $this->fopen_r($functions[0]);
                 }
-
+                
                 $capa = glob("{$dir_widget}/main.png");
                 if($capa){
                     $widgets[$widget_name]['capa'] = $path_uri.'/'.$fileinfo->getFilename().'/main.png';
                 }
-
+                
+                $json = glob("{$dir_widget}/fields.json");
+                if($json){
+                    
+                    $json = json_decode($this->fopen_r($json[0]), true);
+                    foreach($json as $field_group){
+                        
+                        // Search database for existing field group.
+                        $post = acf_get_field_group_post( $field_group['key'] );
+                        if( $post ) {
+                            $field_group['ID'] = $post->ID;
+                        }
+                        
+                        // Import field group.
+                        $field_group = acf_import_field_group( $field_group );
+                    }
+                    
+                }
+                
                 $widgets[$widget_name]['name'] = $widget_label['title'];
-
+                
             endif;
         endforeach;
         
@@ -124,7 +168,7 @@ class WidgetsLocation extends ACF_Location {
         }
         
         fclose($file);
-
+        
         return $lines_file;
     }
     

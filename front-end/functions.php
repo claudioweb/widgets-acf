@@ -142,8 +142,9 @@ Class TemplatesWidgets {
 
 		if(!file_exists($dir_widget . $style))
 			return;
+		
+		include_once(plugin_dir_path(__FILE__).'../back-end/acf/WidgetsLocation.php');
 
-		include_once('../back-end/acf/WidgetsLocation.php');
 		$location = new WidgetsLocation;
 		
 		return $location->fopen_r($dir_widget . $style);
