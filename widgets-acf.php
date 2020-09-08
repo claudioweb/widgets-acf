@@ -230,7 +230,12 @@ class WidgetsWidgets {
 						$fields = acf_get_fields($group['key']);
 
 						// Remove unecessary key value pair with key "ID"
-						unset($fields['ID']);
+						unset($group['ID']);
+
+						foreach ($fields as $key_f => $field) {
+							unset($fields[$key_f]['ID']);
+							unset($fields[$key_f]['parent']);
+						}
 						
 						// Add the fields as an array to the group
 						$group['fields'] = $fields;

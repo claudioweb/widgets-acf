@@ -283,7 +283,7 @@ foreach ($widgets as $key => $widget) {
                 'label' => 'fields.json',
                 'name' => 'fields_json',
                 'type' => 'button_group',
-                'instructions' => 'Clique em editar os campos para recriar o arquivo fields.json em seu widget automaticamente. <div class="acf-button-group" style="width: auto;float: right;margin: 15px 0;"><label class="selected" style="padding: 7px 10px;" onclick="javascript:window.open(\''.admin_url('post-new.php?post_type=acf-field-group&location_widget_acf='.$key).'\',\'_blank\');"">Adicionar Grupo de Campos</label></div>',
+                'instructions' => 'Clique em editar os campos para recriar o arquivo fields.json em seu widget automaticamente. <div class="acf-button-group" style="width: auto;float: right;margin: 15px 0;"><label class="selected" style="padding: 7px 10px;" onclick="javascript:window.open(\''.admin_url('post-new.php?post_type=acf-field-group&location_widget_acf='.$key).'\',\'_self\');"">Adicionar Grupo de Campos</label></div>',
                 'required' => 0,
                 'conditional_logic' => 0,
                 'wrapper' => array(

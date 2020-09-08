@@ -134,7 +134,6 @@ class WidgetsLocation extends ACF_Location {
                 
                 $json = glob("{$dir_widget}/fields.json");
                 if($json){
-                    
                     $json = json_decode($this->fopen_r($json[0]), true);
                     foreach($json as $field_group){
                         
