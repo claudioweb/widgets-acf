@@ -69,7 +69,7 @@ foreach ($widgets as $key => $widget) {
         'label' => $widget['title']. '<div class="acf-button-group" style="width: auto; float: right;"><a target="_blank" href="'.admin_url('admin.php?page=acf-options-todos-os-widgets&export='.$key).'"><label class="selected" style="padding: 7px 10px;">Exportar .zip</label></a></div>',
         'name' => 'widget_'.$key,
         'type' => 'group',
-        'instructions' => 'Cuidado para não inserir código impeditivos de funcionamento do wordpress como <b>die(); break();',
+        'instructions' => 'Cuidado para não inserir código impeditivos de funcionamento do wordpress como <b>die(); break();</b>',
         'required' => 0,
         'conditional_logic' => 0,
         'wrapper' => array(

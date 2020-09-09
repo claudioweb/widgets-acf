@@ -63,7 +63,7 @@ class WidgetsWidgets {
 
 							wp_delete_post($_GET['del_group_field'], true);
 
-							$this->ExportJsonFields(null,null,null, $widget_location);
+							$this->ExportJsonFields(null,null,null, null, $widget_location);
 
 							echo '<script>alert("Grupo de Campos deletado com sucesso!"); window.location.href="'.admin_url('admin.php?page=acf-options-todos-os-widgets').'";</script>';
 						}
@@ -233,7 +233,7 @@ class WidgetsWidgets {
 		return $lines_file;
 	}
 	
-	public function ExportJsonFields($meta_id, $id_post, $meta_key, $widget_location=''){
+	public function ExportJsonFields($meta_id, $id_post, $meta_key, $number, $widget_location=''){
 		
 		$groups = acf_get_field_groups();
 		
