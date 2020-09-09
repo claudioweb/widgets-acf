@@ -67,10 +67,18 @@ jQuery(function(){
 			jQuery(this).closest("form").submit();
 		});
 
-		if( jQuery('#acf-group_widgets_all  .acf-code-external').length ) {
+		if( jQuery('#acf-group_widgets_all .acf-code-external').length ) {
 
-			jQuery('.choices_fields_group .acf-input input[type="radio"]').click(function(){
-				window.location.href = jQuery(this).val();
+			jQuery(".aba_widgets_acf_delete_group_field").click(function(){
+				if(confirm("Tem certeza que deseja excluir permanentemente o Grupo de campos ?")){
+					
+					var id_group_field = jQuery(this).data("group_id");
+					window.location.href = window.location.href + '&del_group_field=' + id_group_field;
+				}
+			});
+
+			jQuery('.choices_fields_group .acf-input .option_group').click(function(){
+				window.location.href = jQuery(this).parent().find("input").val();
 			});
 
 			jQuery('#acf-group_widgets_all .acf-code-external .acf-tab-group li').click(function(){

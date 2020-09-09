@@ -25,7 +25,7 @@ foreach ($widgets as $key => $widget) {
     foreach($groups_fields as $group){
 
         if($group['location'][0][0]['param']=='widget_acf' && $group['location'][0][0]['value']==$key){
-            $groups[admin_url('/post.php?post='.$group['ID'].'&action=edit')] = $group['title'];
+            $groups[admin_url('/post.php?post='.$group['ID'].'&action=edit')] = '<div class="option_group">'.$group['title'] . '</div><span data-group_id="'.$group['ID'].'" class="aba_widgets_acf_delete_group_field">X</span>';
 
             foreach (acf_get_fields($group['key']) as $ff) {
 

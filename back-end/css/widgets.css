@@ -1,10 +1,10 @@
 .choices_fields_group .acf-button-group {
 	width: 100%;
 }
-#acf-group_widgets_all .acf-tab-group li span.aba_widgets_acf_delete {
+#acf-group_widgets_all .acf-tab-group li span.aba_widgets_acf_delete, .choices_fields_group .acf-button-group label .aba_widgets_acf_delete_group_field  {
 	display: none;
 }
-#acf-group_widgets_all .acf-tab-group li:hover span.aba_widgets_acf_delete {
+#acf-group_widgets_all .acf-tab-group li:hover span.aba_widgets_acf_delete, .choices_fields_group .acf-button-group label:hover .aba_widgets_acf_delete_group_field {
 	display: block;
 	padding: 10px;
     top: 0;
@@ -12,6 +12,10 @@
     right: 0;
     background: #f00;
     color: #fff;
+}
+.choices_fields_group .acf-button-group label:hover .aba_widgets_acf_delete_group_field {
+	padding: 5px 10px;
+	z-index: 999;
 }
 #wp-admin-bar-new-content, #wp-admin-bar-comments, .user-profile-picture {
 	display: none;
