@@ -66,7 +66,7 @@ foreach ($widgets as $key => $widget) {
 
     $fields[] = array(
         'key' => 'field_group_'.$key,
-        'label' => $widget['title']. '<div class="acf-button-group" style="width: auto; float: right;"><a target="_blank" href="'.admin_url('admin.php?page=acf-options-todos-os-widgets&export='.$key).'"><label class="selected" style="padding: 7px 10px;">Exportar .zip</label></a></div>',
+        'label' => $widget['title']. '<div class="acf-button-group" style="width: auto;float: right;position: absolute;right: 0px;top: -10px;"><a target="_blank" href="'.admin_url('admin.php?page=acf-options-todos-os-widgets&export='.$key).'"><label class="selected" style="padding: 7px 10px;">Exportar .zip</label></a></div>',
         'name' => 'widget_'.$key,
         'type' => 'group',
         'instructions' => 'Cuidado para não inserir código impeditivos de funcionamento do wordpress como <b>die(); break();</b>',
