@@ -431,7 +431,7 @@
 }
 
 .acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-6'] {
-	width: 46.8% !important;
+	width: 48.5% !important;
 }
 .acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-6'] .acf-fields .fa:before {
 	font-size: 13px;
@@ -460,7 +460,7 @@
 }
 
 .acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-7'] {
-	width: 54.6% !important;
+	width: 58% !important;
 }
 .acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-7'] .acf-fields .fa:before {
 	font-size: 13px;
@@ -489,7 +489,7 @@
 }
 
 .acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-8'] {
-	width: 62.4% !important;
+	width: 65.5% !important;
 }
 .acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-8'] .acf-fields .fa:before {
 	font-size: 13px;
@@ -518,7 +518,7 @@
 }
 
 .acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-9'] {
-	width: 70.2% !important;
+	width: 73.5% !important;
 }
 .acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-9'] .acf-fields .fa:before {
 	font-size: 13px;
@@ -547,7 +547,7 @@
 }
 
 .acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-10'] {
-	width: 78% !important;
+	width: 82% !important;
 }
 .acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-10'] .acf-fields .fa:before {
 	font-size: 13px;
@@ -576,7 +576,7 @@
 }
 
 .acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-11'] {
-	width: 85.8% !important;
+	width: 89.5% !important;
 }
 .acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-11'] .acf-fields .fa:before {
 	font-size: 13px;
@@ -605,7 +605,7 @@
 }
 
 .acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-12'] {
-	width: 93.6% !important;
+	width: 99.5% !important;
 }
 .acf-field-the-contents .acf-flexible-content .layout[data-widget='col-sm-12'] .acf-fields .fa:before {
 	font-size: 13px;
@@ -634,8 +634,8 @@
 }
 
 .acf-field-the-contents .acf-flexible-content .layout[data-widget='full-widget-acf'] {
-	width: 104% !important;
-	margin-left: -1.2% !important;
+    width: 102% !important;
+    margin-left: -0.2% !important;
 }
 .acf-field-the-contents .acf-flexible-content .layout[data-widget='full-widget-acf'] .acf-fields .fa:before {
 	font-size: 13px;
