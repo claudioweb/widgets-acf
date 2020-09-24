@@ -312,11 +312,11 @@ function set_widget_light_box(){
 
     });
 
-    jQuery('.acf_box_widgets_content').find('input[type="radio"]').change(function(){
+    jQuery('.acf_box_widgets_content').find('input[type="radio"], input[type="checkbox"]').change(function(){
 
       console.log(jQuery(this).val());
 
-      jQuery(this).parent().parent().parent().find('input[type="radio"]').removeAttr("checked");
+      jQuery(this).parent().parent().parent().find('input[type="radio"], input[type="checkbox"]').removeAttr("checked");
 
       jQuery(this).attr("checked","checked");
 
