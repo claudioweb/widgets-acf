@@ -355,7 +355,7 @@ class WidgetsWidgets {
 		wp_enqueue_style( 'custom_wp_admin_codemirrordark_css', plugins_url('back-end/css/codemirror-dark.css', __FILE__) );
 		wp_enqueue_style( 'custom_wp_admin_icon_css', plugins_url('back-end/css/icons.css', __FILE__) );
 		wp_enqueue_style( 'custom_wp_admin_css', plugins_url('back-end/css/widgets.css', __FILE__) );
-		// wp_enqueue_script( 'ckeditor_widgets-acf',  plugins_url('back-end/js/ckeditor/ckeditor.js', __FILE__));
+		wp_enqueue_script( 'ckeditor_widgets-acf',  plugins_url('back-end/js/ckeditor/ckeditor.js', __FILE__));
 		wp_enqueue_script( 'custom_wp_admin_js', plugins_url('back-end/js/admin.js', __FILE__) );
 		wp_enqueue_script( 'custom_wp_widgets_js', plugins_url('back-end/js/widgets.js', __FILE__) );
 		

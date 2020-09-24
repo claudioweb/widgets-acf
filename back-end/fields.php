@@ -25,7 +25,7 @@ Class get_fields_acf_widgets {
 	 * @param  mixed $widget Nome do widget
 	 * @return array Array de campos cadastrados
 	 */
-	public function getFieldsGroups($widget) {		
+	public function getFieldsGroups($widget, $front=false) {		
 		$result = array();
 		$all_field_groups = acf_get_field_groups();
 
@@ -36,7 +36,10 @@ Class get_fields_acf_widgets {
 						$fields = acf_get_fields($field_group['ID']);
 
 						foreach($fields as $field):
-							$field['key'] = $field['name'] . '_' . $widget['name'];
+
+							if($front==true){
+								$field['key'] = $field['name'] . '_' . $widget['name'];
+							}
 							array_push($result, $field);
 						endforeach;
 					endif;

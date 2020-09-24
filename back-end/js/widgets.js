@@ -144,6 +144,10 @@ function add_layout(){
 
 function change_layout(){
 
+  jQuery("#acf-group_widgets_acf").find('select[data-ajax="1"]').each(function(){
+    jQuery(this).attr('data-ajax_bkp', 1);
+  });
+
   jQuery('a[data-event="add-row"]').click(function(){
     setTimeout(function(){
      set_layout_light_box();
@@ -164,7 +168,7 @@ function set_ckeditor_inline(class_repeat=null){
 
   setTimeout(function(){
 
-    jQuery(".acf_box_widgets_content").find('textarea[rows="15"]').each(function(){
+    jQuery(".acf_box_widgets_content").find('textarea').each(function(){
 
       if(!jQuery(this).closest('.acf-color-picker')[0] && !jQuery(this).closest('.acf-clone')[0]){
         console.log(class_repeat);
@@ -255,6 +259,7 @@ function destroy_ck_widget(txt){
 
 function set_widget_light_box(){
 
+
   jQuery("[data-key='field_linha_widgets'] .layout .acf-fc-layout-handle").click(function(){
 
     jQuery('#widget_acf_box_light').remove();
@@ -263,7 +268,13 @@ function set_widget_light_box(){
 
     var values_input = jQuery(this).parent().find('.acf-fields');
 
-    values_input.find('select').prop('disabled', false);
+    values_input.find('select').each(function(){
+      jQuery(this).prop('disabled', false);
+    });
+
+    values_input.find('select[data-ajax_bkp="1"]').each(function(){
+      jQuery(this).attr('data-ajax',1);
+    });
 
     values_input.find('.select2-container').remove();
 
@@ -274,10 +285,13 @@ function set_widget_light_box(){
      this_click.find('.acf-fc-layout-handle').text()+
      '</h1><div class="close button">Concluir</div></div>'+values_input.html()
      );
+    
+    jQuery(this).parent().find('.acf-fields').html('');
 
-     acf.do_action('append', jQuery('#widget_acf_box_light'));
-    // jQuery('.acf_box_widgets_content').find('select').select2();
+    acf.do_action('append', jQuery('#widget_acf_box_light'));
 
+    // jQuery('.acf_box_widgets_content select[data-ui="1"]').select2();
+     
     jQuery('.acf_box_widgets_content').find('select').change(function(){
 
       var value_select = jQuery(this).val();
@@ -358,8 +372,6 @@ function set_widget_light_box(){
       });
 
       jQuery(".acf_box_widgets_content .close").click(function(){
-
-        console.log('close 1');
 
         jQuery(".acf_box_widgets_content").find('div.ckeditor_inline').each(function(){
          var id_div = jQuery( this ).attr('id');

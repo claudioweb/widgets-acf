@@ -28,6 +28,7 @@ Class TemplatesWidgets {
 			$widget_count = 1;
 
 			foreach($layout as $w_content):
+
 				if(!array_key_exists('content', $w_content))
 					continue;
 
@@ -174,7 +175,10 @@ Class TemplatesWidgets {
 
 	static function get_image($fields){
 
+		$name_fields = array();
+
 		foreach ($fields as $field_key => $field) {
+
 			
 			if(strpos($field_key,'image__') || count($field)>0){
 
@@ -205,9 +209,16 @@ Class TemplatesWidgets {
 					}
 				}
 			}
+
+			$name = get_field_object($field_key)['name'];
+			if($name){
+				$name_fields[$name] = $field;
+			}else{
+				$name_fields[$field_key] = $field;
+			}
 		}
 		
-		return $fields;
+		return $name_fields;
 	}
 }
 
