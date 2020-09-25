@@ -18,7 +18,7 @@ class WidgetsWidgets {
 		add_action( 'admin_menu', array( $this, 'add_admin_menu' ) );
 		add_action( 'admin_enqueue_scripts', array($this, 'load_custom_wp_admin_style') );
 		
-		add_action( 'wp_enqueue_scripts', array($this, 'load_theme_widget_style') );
+		add_action( 'wp_enqueue_scripts', array($this, 'load_theme_widget_style') , 999);
 		
 		// Definindo action ajax
 		add_action('wp_ajax_fonts_widgets_acf', array('WidgetsAdmin','get_fonts_ajax'));
