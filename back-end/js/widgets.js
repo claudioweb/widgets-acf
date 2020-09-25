@@ -103,7 +103,9 @@ function set_ajax_fonts(){
           });
         }
 
-        CKEDITOR.stylesSet.add( 'my_styles_'+fonts[i].replace(' ','_'), styles_weight);
+        if(styles_weight){
+          CKEDITOR.stylesSet.add( 'my_styles_'+fonts[i].replace(' ','_'), styles_weight);
+        }
 
       }
     }
@@ -155,11 +157,37 @@ function change_layout(){
 
   });
 }
+function set_ckeditor_inline(class_repeat=null, txt=null, styleset_var=null){
 
-function set_ckeditor_inline(class_repeat=null){
+  if(!jQuery('#fonts_selected_widget_acf').val()){
+    jQuery('body').append('<input type="hidden" id="fonts_selected_widget_acf" value=";" />');
+  }
 
   var class_use_ckeditor = 'ckeditor_inline';
   var find_use_ck_editor = class_use_ckeditor;
+  if(styleset_var){
+    var toolbarText = [
+      [
+      'Bold', 'Italic', 'Underline', 'Strike', 'RemoveFormat', 'Anchor', 'Font','Styles','FontSize',
+      'Link', 'TextColor',
+      'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', 'lineheight',
+      'BGColor']
+    ];
+    var toolbarTextArea = [
+      ['RemoveFormat', 'Bold', 'Italic', 'Underline', 'Link', 'PasteFromWord', 'Font', 'Styles','FontSize',  'NumberedList', 'BulletedList', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock']
+    ];
+  }else{
+    var toolbarText = [
+      [
+      'Bold', 'Italic', 'Underline', 'Strike','RemoveFormat',
+      'Anchor', 'Font','FontSize', 'Link', 'TextColor',
+      'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', 'lineheight',
+      'BGColor']
+    ];
+    var toolbarTextArea = [
+      ['RemoveFormat', 'Bold', 'Italic', 'Underline', 'Link', 'PasteFromWord', 'Font','FontSize',  'NumberedList', 'BulletedList', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock']
+    ];
+  }
 
   if(class_repeat!=null){
     class_use_ckeditor = class_use_ckeditor+' '+class_repeat+'_ck_repeat';
@@ -167,51 +195,76 @@ function set_ckeditor_inline(class_repeat=null){
   }
 
   setTimeout(function(){
-
-    jQuery(".acf_box_widgets_content").find('textarea').each(function(){
-
-      if(!jQuery(this).closest('.acf-color-picker')[0] && !jQuery(this).closest('.acf-clone')[0]){
-        console.log(class_repeat);
+    jQuery('.acf_box_widgets_content').find('textarea, input[type="text"]').each(function() {
+      if(!jQuery(this).closest('.acf-color-picker')[0] && !jQuery(this).closest('.acf-clone')[0]) {
         var id_div = jQuery(this).attr('name');
-        jQuery("#"+id_div).remove();
-        jQuery(this).parent().append('<div id="'+id_div+'" class="'+class_use_ckeditor+'" contenteditable="true" >'+jQuery(this).val()+'</div>');
+        var isTextInput = jQuery(this).attr('type') == 'text';
+
+        jQuery("#" + id_div).remove();
+        jQuery(this).parent().append('<div id="' + id_div + '" class="' + class_use_ckeditor + (isTextInput ? ' ckeditor_inline_input_text' : '') + '" contenteditable="true" >' + jQuery(this).val() + '</div>');
         jQuery(this).remove();
       }
     });
 
-  },500);
+  }, 0);
     
-  setTimeout(function(){
-
+  setTimeout(() => {
+      
       jQuery('.ckeditor_inline').show();
 
-      jQuery(".acf_box_widgets_content").find('textarea[rows="20"], input[type=text]').show();
-
-      jQuery(".acf_box_widgets_content").find('div.'+find_use_ck_editor).each(function(){
-        
-      var txt = jQuery( this ).attr('id');
-
-      var styles_selected = jQuery( this ).html().split('font-family:');
-      if(!jQuery( this ).hasClass('cke_editable_inline')){
-        CKEDITOR.disableAutoInline = true;
-        CKEDITOR.inline(txt, {
-          enterMode : CKEDITOR.ENTER_BR,
-          autoParagraph : true,
-          forcePasteAsPlainText: true,
-          font_names : jQuery('#fonts_selected_widget_acf').val(),
-          toolbar: [
-          [ 'RemoveFormat', 'Bold', 'Italic', 'Underline', 'Link', 'Unlink', 'Font', 'FontSize', 'PasteFromWord',  'NumberedList', 'BulletedList', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock' ]
-          ]
-        });
+      jQuery('.acf_box_widgets_content').find('textarea[rows="20"], input[type=text]').show();
+      
+      if(txt){
+        jQuery('.acf_box_widgets_content').append('<input type="hidden" name="txt_widgets_acf" value="'+txt+'">');
       }
 
-      destroy_ck_widget(txt);
+      jQuery('.acf_box_widgets_content').find('div.' + find_use_ck_editor).each(function(){
 
-      console.log(txt);
+        var txt = jQuery('input[name="txt_widgets_acf"]').val();
+       
+        if(!txt){
+          var txt = jQuery(this).attr('id');
+        }
 
+        if(jQuery(this).attr('id')==txt){
+
+          var styles_selected = jQuery(this).html().split('font-family:');
+          var toolbar = jQuery(this).hasClass('ckeditor_inline_input_text') ? toolbarText : toolbarTextArea;
+
+          if(!jQuery(this).hasClass('cke_editable_inline')) {
+
+            CKEDITOR.disableAutoInline = true;
+
+            if(styleset_var){
+
+              CKEDITOR.inline(txt, {
+                enterMode : CKEDITOR.ENTER_BR,
+                autoParagraph : true,
+                forcePasteAsPlainText: true,
+                stylesSet : styleset_var,
+                font_names : jQuery('#fonts_selected_widget_acf').val(),
+                toolbar: toolbar
+              });
+
+            }else{
+
+              CKEDITOR.inline(txt, {
+                enterMode : CKEDITOR.ENTER_BR,
+                autoParagraph : true,
+                forcePasteAsPlainText: true,
+                font_names : jQuery('#fonts_selected_widget_acf').val(),
+                toolbar: toolbar
+              });
+            }
+          }
+          if(jQuery('input[name="txt_widgets_acf"]')){
+            jQuery('input[name="txt_widgets_acf"]').remove();
+          }
+        destroy_ck_widget(txt);
+      }
     });
 
-  },1500);
+  },1000);
 
 }
 
@@ -226,30 +279,13 @@ function destroy_ck_widget(txt){
 
   if(CKEDITOR.instances[txt].toolbar[0].items[6]['_'].value){
 
-
     var styles_selected = CKEDITOR.instances[txt].toolbar[0].items[6]['_'].value.replace(' ','_');
-
 
     CKEDITOR.instances[txt].destroy();
 
     console.log(styles_selected);
 
-    setTimeout(function(){
-      CKEDITOR.disableAutoInline = true;
-      CKEDITOR.inline(txt, {
-        enterMode : CKEDITOR.ENTER_BR,
-        autoParagraph : true,
-        forcePasteAsPlainText: true,
-        font_names : jQuery('#fonts_selected_widget_acf').val(),
-        stylesSet : 'my_styles_'+styles_selected,
-        toolbar: [
-        [ 'RemoveFormat', 'Bold', 'Italic', 'Underline', 'Link', 'Unlink', 'Font', 'FontSize', 'Styles', 'PasteFromWord', 'NumberedList', 'BulletedList', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock' ]
-        ]
-      });
-
-      destroy_ck_widget(txt);
-
-    },200);
+    set_ckeditor_inline(null, txt, 'my_styles_'+styles_selected);
 
   }
 
@@ -285,8 +321,6 @@ function set_widget_light_box(){
      this_click.find('.acf-fc-layout-handle').text()+
      '</h1><div class="close button">Concluir</div></div>'+values_input.html()
      );
-    
-    jQuery(this).parent().find('.acf-fields').html('');
 
     acf.do_action('append', jQuery('#widget_acf_box_light'));
 
@@ -312,11 +346,20 @@ function set_widget_light_box(){
 
     });
 
-    jQuery('.acf_box_widgets_content').find('input[type="radio"], input[type="checkbox"]').change(function(){
+    jQuery('.acf_box_widgets_content').find('input[type="checkbox"]').change(function(){
 
-      console.log(jQuery(this).val());
+      if(jQuery(this).attr("checked")){
 
-      jQuery(this).parent().parent().parent().find('input[type="radio"], input[type="checkbox"]').removeAttr("checked");
+        jQuery(this).attr("checked","checked");
+      }else{
+        
+        jQuery(this).removeAttr("checked");
+      }
+    });
+
+    jQuery('.acf_box_widgets_content').find('input[type="radio"]').change(function(){
+
+      jQuery(this).parent().parent().parent().find('input[type="radio"]').removeAttr("checked");
 
       jQuery(this).attr("checked","checked");
 

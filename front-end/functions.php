@@ -5,11 +5,13 @@ Class TemplatesWidgets {
 	public function __construct() {}
 
 	static function get_templates($layout_content, $attr = null) {
+		
 		$html = '';
 		$css_widgets = '';
 		$js_widgets = '';
 
 		foreach($layout_content as $key => $layout):
+
 			include "styles_layout.php";
 
 			if($layout['attr']['field_radio_mobile_setting'] == 0)
@@ -102,30 +104,6 @@ Class TemplatesWidgets {
 
 		$url_widgets = get_template_directory();
 
-		// css widgets
-		require  plugin_dir_path(__FILE__) . "../scssphp/scss.inc.php";
-		$scss = new scssc();
-		$scss->setFormatter("scss_formatter_compressed");
-		$css_widgets = $scss->compile($css_widgets);
-		$dir_css_widget = $url_widgets.'/widgets_acf.css';
-		$fp = fopen($dir_css_widget, 'w');
-		fwrite($fp, $css_widgets);
-		fclose($fp);
-
-		// js widgets
-		require plugin_dir_path(__FILE__) . '../JShrink/Minifier.php';
-		$js_widgets = \JShrink\Minifier::minify($js_widgets);
-		$dir_js_widget = $url_widgets.'/widgets_acf.js';
-		$fp = fopen($dir_js_widget, 'w');
-		fwrite($fp, $js_widgets);
-		fclose($fp);
-
-		// Enqueue style
-		wp_enqueue_style("widget/widgets_acf", get_template_directory_uri().'/widgets_acf.css', array(), false, 'all');
-
-		// Enqueue script
-		wp_enqueue_script("widget/widgets_acf", get_template_directory_uri().'/widgets_acf.js', array(), false, true);
-
 		return $html;
 	}
 
@@ -166,7 +144,7 @@ Class TemplatesWidgets {
 		if(!file_exists($dir_widget . $script))
 			return;
 		
-		include_once('../back-end/acf/WidgetsLocation.php');
+		include_once(plugin_dir_path(__FILE__).'../back-end/acf/WidgetsLocation.php');
 		$location = new WidgetsLocation;
 		
 		return $location->fopen_r($dir_widget . $script);
@@ -212,7 +190,20 @@ Class TemplatesWidgets {
 
 			$name = get_field_object($field_key)['name'];
 			if($name){
+
 				$name_fields[$name] = $field;
+
+				if(count($name_fields[$name])>1){
+					foreach($name_fields[$name] as $ff_key => $ff){
+						
+						foreach($ff as $fff_key => $fff){
+
+							$two_name = get_field_object($fff_key)['name'];
+							$name_fields[$name][$ff_key][$two_name] = $fff;
+							unset($name_fields[$name][$ff_key][$fff_key]);
+						}
+					}
+				}
 			}else{
 				$name_fields[$field_key] = $field;
 			}

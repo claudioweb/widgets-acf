@@ -94,7 +94,11 @@ class WidgetsLocation extends ACF_Location {
         
         $dir = new DirectoryIterator($path);
         
-        foreach($dir as $fileinfo):            
+        $css_widgets = '';
+        $js_widgets = '';
+
+        foreach($dir as $fileinfo):
+                      
             if($fileinfo->isDir() && !$fileinfo->isDot()):
                 
                 $widget_name =  str_replace('-', '_', $fileinfo->getFilename());
@@ -110,6 +114,7 @@ class WidgetsLocation extends ACF_Location {
                 $style = glob("{$dir_widget}/style.*");
                 if($style){
                     $widgets[$widget_name]['style'] = $this->fopen_r($style[0]);
+                    $css_widgets .= $widgets[$widget_name]['style'];
                 }
                 
                 $index = glob("{$dir_widget}/index.*");
@@ -120,6 +125,7 @@ class WidgetsLocation extends ACF_Location {
                 $js = glob("{$dir_widget}/app.js");
                 if($js){
                     $widgets[$widget_name]['js'] = $this->fopen_r($js[0]);
+                    $js_widgets .= $widgets[$widget_name]['js'];
                 }
                 
                 $functions = glob("{$dir_widget}/functions.php");
@@ -153,6 +159,43 @@ class WidgetsLocation extends ACF_Location {
                 
             endif;
         endforeach;
+        
+        $url_widgets = get_template_directory();
+        
+		$enquee_css = get_field('widgets_acf_enquee_css','options');
+        
+        if($enquee_css==true){
+            // css widgets
+            require  plugin_dir_path(__FILE__) . "../../scssphp/scss.inc.php";
+            $scss = new scssc();
+            $scss->setFormatter("scss_formatter_compressed");
+            $css_widgets = $scss->compile($css_widgets);
+            $dir_css_widget = $url_widgets.'/widgets_acf.css';
+            $fp = fopen($dir_css_widget, 'w');
+            fwrite($fp, $css_widgets);
+            fclose($fp);
+
+            // Enqueue style
+            wp_enqueue_style("widget/widgets_acf", get_template_directory_uri().'/widgets_acf.css', array(), false, 'all');
+        }
+
+		$enquee_js = get_field('widgets_acf_enquee_js','options');
+        if($enquee_js==true){
+            // js widgets
+            require plugin_dir_path(__FILE__) . '../../JShrink/Minifier.php';
+            $js_widgets = \JShrink\Minifier::minify($js_widgets);
+            $dir_js_widget = $url_widgets.'/widgets_acf.js';
+            $fp = fopen($dir_js_widget, 'w');
+            fwrite($fp, $js_widgets);
+            fclose($fp);
+
+            // Enqueue script
+            wp_enqueue_script("widget/widgets_acf", get_template_directory_uri().'/widgets_acf.js', array(), false, true);
+        }
+
+
+
+       
         
         return $widgets;
     }

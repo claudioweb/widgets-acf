@@ -377,13 +377,20 @@ class WidgetsWidgets {
 	}
 	
 	public function load_theme_widget_style() {
+
+		include_once('back-end/acf/WidgetsLocation.php');
 		
 		$show_bootstrap = get_field('widgets_acf_show_bootstrap','options');
 		$show_fonts = get_field('widgets_acf_show_fonts','options');
-		
+
+		$codes = new WidgetsLocation;
+
+		$codes->get_codes();
+
 		if($show_bootstrap==true){
-			wp_enqueue_style( 'front_end_widget_acf_bootstrap_css', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css');
-			wp_enqueue_script( 'front_end_widget_acf_bootstrap_js', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js');
+			wp_enqueue_style( 'front_end_widget_acf_bootstrap_css', 'https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css');
+			wp_enqueue_script( 'front_end_widget_acf_bootstrap_popper_js', 'https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js');
+			wp_enqueue_script( 'front_end_widget_acf_bootstrap_js', 'https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js');
 		}
 		
 		if($show_fonts==true){
