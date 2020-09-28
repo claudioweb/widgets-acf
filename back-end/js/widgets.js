@@ -322,10 +322,23 @@ function set_widget_light_box(){
      '</h1><div class="close button">Concluir</div></div>'+values_input.html()
      );
 
+    jQuery('.acf_box_widgets_content div[data-conditions]').each(function(){
+      var json = jQuery(this).data('conditions');
+      for (let j = 0; j < json.length; j++) {
+
+        for (let js = 0; js < json[j].length; js++) {
+         
+          var data_key = jQuery('.acf_box_widgets_content').find('.'+json[j][js].field).data('key');
+          json[0][0].field = data_key;
+          jQuery(this).attr('data-conditions', JSON.stringify(json));
+        }
+      }
+    });
+
     acf.do_action('append', jQuery('#widget_acf_box_light'));
 
     // jQuery('.acf_box_widgets_content select[data-ui="1"]').select2();
-     
+
     jQuery('.acf_box_widgets_content').find('select').change(function(){
 
       var value_select = jQuery(this).val();
