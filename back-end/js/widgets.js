@@ -195,7 +195,7 @@ function set_ckeditor_inline(class_repeat=null, txt=null, styleset_var=null){
   }
 
   setTimeout(function(){
-    jQuery('.acf_box_widgets_content').find('textarea, input[type="text"]').each(function() {
+    jQuery('.acf_box_widgets_content').find('textarea, input[type="text"]:not(.wp-color-picker)').each(function() {
       if(!jQuery(this).closest('.acf-color-picker')[0] && !jQuery(this).closest('.acf-clone')[0]) {
         var id_div = jQuery(this).attr('name');
         var isTextInput = jQuery(this).attr('type') == 'text';
@@ -212,7 +212,7 @@ function set_ckeditor_inline(class_repeat=null, txt=null, styleset_var=null){
       
       jQuery('.ckeditor_inline').show();
 
-      jQuery('.acf_box_widgets_content').find('textarea, input[type=text]').show();
+      jQuery('.acf_box_widgets_content').find('textarea, input[type="text"]:not(.wp-color-picker)').show();
       
       if(txt){
         jQuery('.acf_box_widgets_content').append('<input type="hidden" name="txt_widgets_acf" value="'+txt+'">');
@@ -490,7 +490,7 @@ function set_layout_light_box(){
       .html('<div class="fixed_box_light"><h1>Ajustes de Layout</h1><div class="close button">Concluir</div></div>'+values_input.html()
        );
 
-      jQuery('.acf_box_widgets_content').find('input[type="text"],textarea').show();
+      jQuery('.acf_box_widgets_content').find('textarea, input[type="text"]:not(.wp-color-picker)').show();
 
       jQuery('.acf_box_widgets_content').find('select').change(function(){
 
