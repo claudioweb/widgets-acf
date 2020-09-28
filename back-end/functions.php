@@ -25,7 +25,8 @@ Class WidgetsAdmin {
 
 	static function get_models(){
 
-		$templates = wp_get_theme()->get_page_templates();
+		$templates = ['default' => 'Modelo padrão'];
+		$templates = array_merge($templates, wp_get_theme()->get_page_templates());
 
 		$models = array();
 

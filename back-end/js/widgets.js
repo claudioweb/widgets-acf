@@ -212,7 +212,7 @@ function set_ckeditor_inline(class_repeat=null, txt=null, styleset_var=null){
       
       jQuery('.ckeditor_inline').show();
 
-      jQuery('.acf_box_widgets_content').find('textarea[rows="20"], input[type=text]').show();
+      jQuery('.acf_box_widgets_content').find('textarea, input[type=text]').show();
       
       if(txt){
         jQuery('.acf_box_widgets_content').append('<input type="hidden" name="txt_widgets_acf" value="'+txt+'">');
