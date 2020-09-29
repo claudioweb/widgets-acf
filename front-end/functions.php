@@ -167,10 +167,10 @@ Class TemplatesWidgets {
 				if(!empty($sub_fields)){
 					foreach($sub_fields as $key_sub => $sub){
 						foreach($fields[$name['name']] as $key_f => $f){
-							if($fields[$name['name']][$key_f][$sub['key']]){
+							if(!empty($fields[$name['name']][$key_f][$sub['key']])){
 								$sub_f = $fields[$name['name']][$key_f][$sub['key']];
+								$fields[$name['name']][$sub['name']] = $fields[$name['name']][$key_f][$sub['key']];
 								unset($fields[$name['name']][$key_f][$sub['key']]);
-								$fields[$name['name']][$sub['name']] = $sub_f;
 							}
 						}
 					}
