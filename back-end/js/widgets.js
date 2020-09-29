@@ -315,7 +315,7 @@ function set_widget_light_box(){
     values_input.find('.select2-container').remove();
 
     jQuery('body').append('<div id="widget_acf_box_light"></div>');
-    jQuery('#widget_acf_box_light').html('<div class="acf_box_widgets_content"></div>');
+    jQuery('#widget_acf_box_light').html('<div class="acf_box_widgets_content acf-fields"></div>');
     jQuery('.acf_box_widgets_content')
     .html('<div class="fixed_box_light"><h1>'+
      this_click.find('.acf-fc-layout-handle').text()+
@@ -485,7 +485,7 @@ function set_layout_light_box(){
       values_input.find('.select2-container').remove();
 
       jQuery('body').append('<div id="widget_acf_box_light" class="light_s"></div>');
-      jQuery('#widget_acf_box_light').html('<div class="acf_box_widgets_content"></div>');
+      jQuery('#widget_acf_box_light').html('<div class="acf_box_widgets_content acf-fields"></div>');
       jQuery('.acf_box_widgets_content')
       .html('<div class="fixed_box_light"><h1>Ajustes de Layout</h1><div class="close button">Concluir</div></div>'+values_input.html()
        );

@@ -150,10 +150,14 @@ Class TemplatesWidgets {
 			return $location->fopen_r($dir_widget . $script);
 			
 		}
-
-		static function sub_fields($fields){
+		
+		static function sub_fields($fields, $sub_fields=null){
+			
 			foreach($fields as $key_field => $field){
 				$name = get_field_object($key_field);
+				if(empty($name)){
+					$name = get_sub_field_object($key_field);
+				}
 				if(!empty($name['name'])){
 					$fields[$name['name']] = $field;
 					unset($fields[$key_field]);
@@ -162,24 +166,35 @@ Class TemplatesWidgets {
 						$fields[$name['name']] = TemplatesWidgets::sub_fields($fields[$name['name']]);
 					}
 				}
-
-				$sub_fields = $name['sub_fields'];
+				if(empty($sub_fields)){
+					$sub_fields = $name['sub_fields'];
+				}
 				if(!empty($sub_fields)){
 					foreach($sub_fields as $key_sub => $sub){
-						foreach($fields[$name['name']] as $key_f => $f){
-							if(!empty($fields[$name['name']][$key_f][$sub['key']])){
-								$fields[$name['name']][$key_f][$sub['name']] = $fields[$name['name']][$key_f][$sub['key']];
-								unset($fields[$name['name']][$key_f][$sub['key']]);
+						if(!empty($fields[$name['name']])){
+							foreach($fields[$name['name']] as $key_f => $f){
+								if(!empty($fields[$name['name']][$key_f][$sub['key']])){
+									$fields[$name['name']][$key_f][$sub['name']] = $fields[$name['name']][$key_f][$sub['key']];
+									unset($fields[$name['name']][$key_f][$sub['key']]);
+								}
+							}
+						}else{
+							foreach($field as $f_k => $f){
+								if(!empty($field[$sub['key']])){
+									$fields[$key_field][$sub['name']] = $field[$sub['key']];
+									unset($fields[$key_field][$sub['key']]);
+								}
 							}
 						}
 					}
 				}
 			}
-
+			
 			return $fields;
 		}
 		
 		static function get_image($fields){
+			
 			$name_fields = array();
 			
 			foreach ($fields as $field_key => $field) {
@@ -189,31 +204,39 @@ Class TemplatesWidgets {
 				if($name){
 					
 					$name_fields[$name['name']] = $field;
-
+					
 					$sub_fields = $name['sub_fields'];
 					
 					foreach($name_fields[$name['name']] as $f_key => $f){
-
+						
 						$name_parent = get_field_object($f_key);
-
+						
 						if($name_parent['name']){
+							
+							if(empty($name_fields[$name['name']][$name_parent['name']])){
 
-							$name_fields[$name['name']][$name_parent['name']] = $f;
-
+								$name_fields[$name['name']][$name_parent['name']] = $f;
+							}
+							
 							unset($name_fields[$name['name']][$f_key]);
-
+								
 							$f_key = $name_parent['name'];
 						}
 						
 						if(!empty($sub_fields)){
 							foreach ($sub_fields as $key_sub => $sub) {
+								
 								if(!$sub['key']){
 									$sub['key'] = $key_sub;
 								}
 								if(!empty($name_fields[$name['name']][$f_key][$sub['key']])){
 									
 									$name_fields[$name['name']][$f_key][$sub['name']] = TemplatesWidgets::sub_fields($name_fields[$name['name']][$f_key][$sub['key']]);
+								}else if(!empty($name_fields[$name['name']][$sub['key']])){
+									
+									$name_fields[$name['name']][$sub['name']] = TemplatesWidgets::sub_fields($name_fields[$name['name']][$sub['key']], $sub['sub_fields']);
 								}
+								
 							}
 						}
 					}
@@ -223,6 +246,7 @@ Class TemplatesWidgets {
 					$name_fields[$field_key] = $field;
 				}
 			}
+			
 			
 			return $name_fields;
 		}

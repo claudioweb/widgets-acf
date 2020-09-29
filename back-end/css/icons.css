@@ -277,6 +277,7 @@
 
 #widget_acf_box_light .acf_box_widgets_content .acf-field select {
 	display: block;
+	max-width: 100% !important;
 	width: 100% !important;
 }
 
