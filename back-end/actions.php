@@ -161,8 +161,14 @@ Class AcfAction {
 
 	public function set_mobile_fields($sub_fields,$prefixed_widget=null){
 
+		$sb = $sub_fields;
+
+		$sub_fields = array();
+
 		include "fixed_fields/mobile.php";
 		include "fixed_fields/layouts.php";
+
+		$sub_fields = array_merge($sub_fields, $sb);
 
 		return $sub_fields;
 	}
