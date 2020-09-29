@@ -153,13 +153,21 @@ Class TemplatesWidgets {
 
 		static function sub_fields($fields){
 			foreach($fields as $key_field => $field){
-				$name = get_field_object($key_field)['name'];
-				if(!empty($name)){
-					$fields[$name] = $field;
+				$name = get_field_object($key_field);
+				if(!empty($name['name'])){
+					$fields[$name['name']] = $field;
 					unset($fields[$key_field]);
+					
+					if(count($fieds[$name['name']])>1){
+						$fields[$name['name']] = TemplatesWidgets::sub_fields($fields[$name['name']]);
+					}
+				}
 
-					if(count($fieds[$name])>1){
-						$fields[$name] = TemplatesWidgets::sub_fields($fields[$name]);
+				$sub_fields = $name['sub_fields'];
+				if(!empty($sub_fields)){
+					foreach($sub_fields as $key_sub => $sub){
+						$fields[$name['name']][$sub['name']] = $fields[$name['name']][$sub['key']];
+						unset($fields[$name['name']][$sub['key']]);
 					}
 				}
 			}
