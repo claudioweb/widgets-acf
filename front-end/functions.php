@@ -161,22 +161,50 @@ Class TemplatesWidgets {
 				if($name){
 					
 					$name_fields[$name['name']] = $field;
-					
+
 					$sub_fields = $name['sub_fields'];
 					
 					foreach($name_fields[$name['name']] as $f_key => $f){
+
+						$name_parent = get_field_object($f_key);
+
+						if($name_parent['name']){
+
+							$name_fields[$name['name']][$name_parent['name']] = $f;
+
+							unset($name_fields[$name['name']][$f_key]);
+
+							$f_key = $name_parent['name'];
+						}
 						
 						if(!empty($sub_fields)){
 							foreach ($sub_fields as $key_sub => $sub) {
+								if(!$sub['key']){
+									$sub['key'] = $key_sub;
+								}
+								if(!empty($name_fields[$name['name']][$f_key][$sub['key']])){
 
-								$name_fields[$name['name']][$f_key][$sub['name']] = $name_fields[$name['name']][$f_key][$sub['key']];
-								unset($name_fields[$name['name']][$f_key][$sub['key']]);
+									$name_fields[$name['name']][$f_key][$sub['name']] = $name_fields[$name['name']][$f_key][$sub['key']];
+									unset($name_fields[$name['name']][$f_key][$sub['key']]);
 
-								foreach($name_fields[$name['name']][$f_key][$sub['name']] as $key_ff => $ff){
-									$name_sub = get_field_object($key_ff)['name'];
-									$name_fields[$name['name']][$f_key][$sub['name']][$name_sub] = $ff;
-									unset($name_fields[$name['name']][$f_key][$sub['name']][$key_ff]);
+									foreach($name_fields[$name['name']][$f_key][$sub['name']] as $key_ff => $ff){
+										$name_sub = get_field_object($key_ff)['name'];
+										if(!empty($name_sub)){
+											
+											$name_fields[$name['name']][$f_key][$sub['name']][$name_sub] = $ff;
+											unset($name_fields[$name['name']][$f_key][$sub['name']][$key_ff]);
 
+											foreach($name_fields[$name['name']][$f_key][$sub['name']][$name_sub] as $key_fff => $fff){
+												$name_sub_sub = get_field_object($key_fff)['name'];
+												if(!empty(!$name_sub_sub)){
+
+													$name_fields[$name['name']][$f_key][$sub['name']][$name_sub][$name_sub_sub] = $fff;
+													unset($name_fields[$name['name']][$f_key][$sub['name']][$name_sub][$key_fff]);
+												}
+											}
+										}
+
+									}
 								}
 							}
 						}
