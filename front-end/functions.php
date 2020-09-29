@@ -150,7 +150,7 @@ Class TemplatesWidgets {
 			return $location->fopen_r($dir_widget . $script);
 			
 		}
-		
+
 		static function sub_fields($fields){
 			foreach($fields as $key_field => $field){
 				$name = get_field_object($key_field);
@@ -162,14 +162,11 @@ Class TemplatesWidgets {
 						$fields[$name['name']] = TemplatesWidgets::sub_fields($fields[$name['name']]);
 					}
 				}
-				
+
 				$sub_fields = $name['sub_fields'];
 				if(!empty($sub_fields)){
-					foreach($fields[$name['name']] as $key_f => $f){
-						foreach($sub_fields as $key_sub => $sub){
-							if(!$sub['key']){
-								$sub['key'] = $key_sub;
-							}
+					foreach($sub_fields as $key_sub => $sub){
+						foreach($fields[$name['name']] as $key_f => $f){
 							if(!empty($fields[$name['name']][$key_f][$sub['key']])){
 								$fields[$name['name']][$key_f][$sub['name']] = $fields[$name['name']][$key_f][$sub['key']];
 								unset($fields[$name['name']][$key_f][$sub['key']]);
@@ -178,7 +175,7 @@ Class TemplatesWidgets {
 					}
 				}
 			}
-			
+
 			return $fields;
 		}
 		
@@ -192,19 +189,19 @@ Class TemplatesWidgets {
 				if($name){
 					
 					$name_fields[$name['name']] = $field;
-					
+
 					$sub_fields = $name['sub_fields'];
 					
 					foreach($name_fields[$name['name']] as $f_key => $f){
-						
+
 						$name_parent = get_field_object($f_key);
-						
+
 						if($name_parent['name']){
-							
+
 							$name_fields[$name['name']][$name_parent['name']] = $f;
-							
+
 							unset($name_fields[$name['name']][$f_key]);
-							
+
 							$f_key = $name_parent['name'];
 						}
 						
