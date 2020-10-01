@@ -24,8 +24,8 @@ Class TemplatesWidgets {
 			else
 			$html .= '<div class="container-fluid" style="padding: 0;">';
 
-			$align = ' align-items-' . $layout['attr']['align_layout_setting']['vertical'];
-			$align .= ' justify-content-' . $layout['attr']['align_layout_setting']['horizontal'];
+			$align = ' align-items-' . $layout['attr']['align_layout_setting']['align_layout_setting_vertical'];
+			$align .= ' justify-content-' . $layout['attr']['align_layout_setting']['align_layout_setting_horizontal'];
 			
 			$html .= '<div class="row' . $align . '">';
 			

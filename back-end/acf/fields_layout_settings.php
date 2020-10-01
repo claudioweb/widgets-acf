@@ -231,7 +231,7 @@ $fields_layout_settings = array (
 			'layout' => 'block',
 			'sub_fields' => array (
 				array (
-					'key' => 'horizontal',
+					'key' => 'align_layout_setting_horizontal',
 					'label' => 'Horizontal',
 					'name' => 'horizontal',
 					'type' => 'radio',
@@ -246,7 +246,7 @@ $fields_layout_settings = array (
 					'default_value' => 'start',
 				),
 				array (
-					'key' => 'vertical',
+					'key' => 'align_layout_setting_vertical',
 					'label' => 'Vertical',
 					'name' => 'vertical',
 					'type' => 'radio',
