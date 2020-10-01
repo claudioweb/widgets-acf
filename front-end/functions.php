@@ -23,8 +23,11 @@ Class TemplatesWidgets {
 			$html .= '<div class="container">';
 			else
 			$html .= '<div class="container-fluid" style="padding: 0;">';
+
+			$align = ' align-items-' . $layout['attr']['align_layout_setting']['vertical'];
+			$align .= ' justify-content-' . $layout['attr']['align_layout_setting']['horizontal'];
 			
-			$html .= '<div class="row">';
+			$html .= '<div class="row' . $align . '">';
 			
 			$count_column = 0;
 			$widget_count = 1;
