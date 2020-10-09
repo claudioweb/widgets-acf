@@ -2,17 +2,9 @@
 
 $fields_layout_settings = array (
 	'key' => 'fields_layout_settings',
-	'label' => ' AJUSTES DE LAYOUT',
+	'label' => '<span class="dashicons dashicons-admin-generic acf-js-tooltip" title="Ajustes de layout"></span>',
 	'name' => 'ajustes_de_layout',
 	'type' => 'group',
-	'instructions' => '',
-	'required' => 0,
-	'conditional_logic' => 0,
-	'wrapper' => array (
-		'width' => '',
-		'class' => '',
-		'id' => '',
-		),
 	'layout' => 'block',
 	'sub_fields' => array (
 		array (
