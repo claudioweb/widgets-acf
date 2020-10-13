@@ -61,7 +61,9 @@ Class TemplatesWidgets {
 				if($count_column > count($w_content['columns']) - 1)
 				$count_column = 0;
 				
-				$columns = $w_content['content']['field_tamanho_grid_desktop_' . $layout_widget . '_widget_acf_key'];				
+				$columns = $w_content['content']['field_grid_columns_mobile_' . $layout_widget . '_widget_acf_key'];
+				$columns .= ' ' . $w_content['content']['field_grid_columns_tablet_' . $layout_widget . '_widget_acf_key'];
+				$columns .= ' ' . $w_content['content']['field_grid_columns_desktop_' . $layout_widget . '_widget_acf_key'];
 				$style = '';
 				
 				if($columns == 'full-widget-acf')

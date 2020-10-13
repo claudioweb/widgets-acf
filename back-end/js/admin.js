@@ -194,7 +194,7 @@ function load_new_column(){
 
 	jQuery('.acf-field-the-contents .layout').each(function(){
 
-		var colunagem = jQuery(this).find('.grid_widget_settings select').val();
+		var colunagem = jQuery(this).find('.grid-widget-settings select').val();
 
 		jQuery(this).attr("data-widget",colunagem);
 
@@ -203,7 +203,7 @@ function load_new_column(){
 
 function change_new_column(){
 
-	jQuery('.grid_widget_settings select').change(function(){
+	jQuery('.grid-widget-settings--desktop select').change(function(){
 		var colunagem = jQuery(this).val();
 
 		jQuery(this).find('option[selected="selected"]').removeAttr("selected");

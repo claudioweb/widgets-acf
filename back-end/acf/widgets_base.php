@@ -75,7 +75,7 @@ Class AcfWidget {
 								'class' => '',
 								'id' => '',
 								),
-							'button_label' => 'Adicionar Widget',
+							'button_label' => '<span class="dashicons dashicons-plus-alt2 acf-js-tooltip" title="Adicionar Widget"></span>',
 							'min' => '',
 							'max' => '',
 							'layouts' => array (),//Layout widgets
