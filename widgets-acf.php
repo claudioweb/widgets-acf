@@ -103,113 +103,115 @@ class WidgetsWidgets {
 	
 	public function editor_external(){
 		
-		$path =
-		function_exists('\App\template') || function_exists('\Roots\view') ? 
-		get_template_directory() . '/views/widgets-templates' :
-		get_template_directory() . '/widgets-templates';
-		
-		
-		if(!is_dir($path)){
+		if($_POST){
+			$path =
+			function_exists('\App\template') || function_exists('\Roots\view') ? 
+			get_template_directory() . '/views/widgets-templates' :
+			get_template_directory() . '/widgets-templates';
 			
-			mkdir($path, 0777, true);
-		}
-		
-		$widgets = $_POST['acf'];
-		
-		if(!empty($widgets['field_salvar_widget_acf'])){
 			
-			$dir_widget = $path."/".sanitize_title($widgets['field_salvar_widget_acf']);
-			mkdir($dir_widget, 0777, true);
-			
-			// index.php
-			$new_widget = $dir_widget."/index.php";
-			$title_widget = $widgets['field_salvar_widget_acf'];
-			$file_default = '<?php var_dump($widget); ?>';
-			if(function_exists('\App\template') || function_exists('\Roots\view')){
-				$new_widget = $dir_widget."/index.blade.php";
-				$file_default = '@php var_dump($widget); @endphp';
+			if(!is_dir($path)){
+				
+				mkdir($path, 0777, true);
 			}
-			$this->fwrite_widget($new_widget, $file_default);
 			
-			// app.js
-			$new_widget = $dir_widget."/app.js";
-			$title_widget = $widgets['field_salvar_widget_acf'];
-			$file_default = '';
-			$this->fwrite_widget($new_widget, $file_default);
+			$widgets = $_POST['acf'];
 			
-			// functions.php
-			$new_widget = $dir_widget."/functions.php";
-			$title_widget = $widgets['field_salvar_widget_acf'];
-			$file_default = '<?php //... ?>';
-			$this->fwrite_widget($new_widget, $file_default);
-			
-			// style.scss
-			$new_widget = $dir_widget."/style.scss";
-			$title_widget = $widgets['field_salvar_widget_acf'];
-			$file_default = '.widget-acf.'.sanitize_title($title_widget).' {}';
-			$this->fwrite_widget($new_widget, $file_default);
-		}
-		
-		unset($widgets['field_salvar_widget_acf']);
-		delete_field('field_salvar_widget_acf', 'option');
-		
-		unset($widgets['field_button_salvar_widget_acf']);
-		delete_field('field_button_salvar_widget_acf', 'option');
-		
-		foreach($widgets as $key => $widget){
-			
-			delete_field($key, 'option');
-			
-			if(!$alert){
+			if(!empty($widgets['field_salvar_widget_acf'])){
 				
-				$dir_widget = $path.'/'.str_replace('_','-',str_replace('field_group_','',$key));
-				$key = str_replace('field_group_','',$key);
+				$dir_widget = $path."/".sanitize_title($widgets['field_salvar_widget_acf']);
+				mkdir($dir_widget, 0777, true);
 				
-				// style.scss
-				$style = $dir_widget."/style.scss";
-				$this->fwrite_widget($style, stripslashes($widget['field_style_'.$key]) );
-				
-				// index.blade.php
-				$index = glob("{$dir_widget}/index.*");
+				// index.php
+				$new_widget = $dir_widget."/index.php";
+				$title_widget = $widgets['field_salvar_widget_acf'];
+				$file_default = '<?php var_dump($widget); ?>';
 				if(function_exists('\App\template') || function_exists('\Roots\view')){
-					
-					$index = $dir_widget."/index.blade.php";
-				}else{
-					
-					$index = $dir_widget."/index.php";
+					$new_widget = $dir_widget."/index.blade.php";
+					$file_default = '@php var_dump($widget); @endphp';
 				}
-				
-				$this->fwrite_widget($index, stripslashes($widget['field_index_'.$key]) );
+				$this->fwrite_widget($new_widget, $file_default);
 				
 				// app.js
-				$js = $dir_widget."/app.js";
-				$this->fwrite_widget($js, stripslashes($widget['field_javascript_'.$key]) );
+				$new_widget = $dir_widget."/app.js";
+				$title_widget = $widgets['field_salvar_widget_acf'];
+				$file_default = '';
+				$this->fwrite_widget($new_widget, $file_default);
 				
 				// functions.php
-				$functions = $dir_widget."/functions.php";
-				$this->fwrite_widget($functions, stripslashes($widget['field_functions_'.$key]) );
+				$new_widget = $dir_widget."/functions.php";
+				$title_widget = $widgets['field_salvar_widget_acf'];
+				$file_default = '<?php //... ?>';
+				$this->fwrite_widget($new_widget, $file_default);
 				
-				// capa.png
-				$capa = $dir_widget."/main.png";
-				$url_capa = wp_get_attachment_image_src($widget['field_capa_'.$key], 'full');
-				if(!empty($url_capa)){
-					$capa_img = $this->fopen_widget($url_capa[0]);
+				// style.scss
+				$new_widget = $dir_widget."/style.scss";
+				$title_widget = $widgets['field_salvar_widget_acf'];
+				$file_default = '.widget-acf.'.sanitize_title($title_widget).' {}';
+				$this->fwrite_widget($new_widget, $file_default);
+			}
+			
+			unset($widgets['field_salvar_widget_acf']);
+			delete_field('field_salvar_widget_acf', 'option');
+			
+			unset($widgets['field_button_salvar_widget_acf']);
+			delete_field('field_button_salvar_widget_acf', 'option');
+			
+			foreach($widgets as $key => $widget){
+				
+				delete_field($key, 'option');
+				
+				if(!$alert){
 					
-					$this->fwrite_widget($capa, $capa_img);
+					$dir_widget = $path.'/'.str_replace('_','-',str_replace('field_group_','',$key));
+					$key = str_replace('field_group_','',$key);
+					
+					// style.scss
+					$style = $dir_widget."/style.scss";
+					$this->fwrite_widget($style, stripslashes($widget['field_style_'.$key]) );
+					
+					// index.blade.php
+					$index = glob("{$dir_widget}/index.*");
+					if(function_exists('\App\template') || function_exists('\Roots\view')){
+						
+						$index = $dir_widget."/index.blade.php";
+					}else{
+						
+						$index = $dir_widget."/index.php";
+					}
+					
+					$this->fwrite_widget($index, stripslashes($widget['field_index_'.$key]) );
+					
+					// app.js
+					$js = $dir_widget."/app.js";
+					$this->fwrite_widget($js, stripslashes($widget['field_javascript_'.$key]) );
+					
+					// functions.php
+					$functions = $dir_widget."/functions.php";
+					$this->fwrite_widget($functions, stripslashes($widget['field_functions_'.$key]) );
+					
+					// capa.png
+					$capa = $dir_widget."/main.png";
+					$url_capa = wp_get_attachment_image_src($widget['field_capa_'.$key], 'full');
+					if(!empty($url_capa)){
+						$capa_img = $this->fopen_widget($url_capa[0]);
+						
+						$this->fwrite_widget($capa, $capa_img);
+					}
+					
+					// name
+					$name = $widget['field_name_'.$key];
+					rename($dir_widget, $path.'/'.sanitize_title($name) );
+					
+					$alert = 'Widgets atualizados com sucesso!';
+					
 				}
-				
-				// name
-				$name = $widget['field_name_'.$key];
-				rename($dir_widget, $path.'/'.sanitize_title($name) );
-				
-				$alert = 'Widgets atualizados com sucesso!';
 				
 			}
 			
+			echo '<script>alert("'.$alert.'");window.location="'.admin_url('admin.php?page=acf-options-todos-os-widgets').'";</script>';
+			die();
 		}
-		
-		echo '<script>alert("'.$alert.'");window.location="'.admin_url('admin.php?page=acf-options-todos-os-widgets').'";</script>';
-		die();
 	}
 	
 	public function fwrite_widget($file, $text){
